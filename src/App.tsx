@@ -1,10 +1,11 @@
-function App() {
+import React from 'react';
+import { PageCatalog } from './pages/PageCatalog/PageCatalog';
+
+const App: React.FC = () => {
   return (
-    <>
-      {/* Header com Nav Links */}
-      {/* Router das pages */}
-      {/* Footer */}
-    </>
+    <div>
+      <PageCatalog />
+    </div>
   )
 }
 
