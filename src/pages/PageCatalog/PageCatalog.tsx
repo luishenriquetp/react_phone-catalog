@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, CardContent, CardTitle, StyledPageCatalog, ListCard, TopSection, Title, Subtitle, SelectContainer, SelectLabel, Select, BottomSection, PaginationButton } from './StylePageCatalog';
+import { Card, SelectWrapper, StyledPageCatalog, ListCard, TopSection, Title, Subtitle, SelectContainer, SelectLabel, Select, BottomSection, PaginationButton } from './StylePageCatalog';
 
 // Definição de tipos
 export type CardData = {
@@ -34,26 +34,25 @@ export const PageCatalog: React.FC = () => {
       <TopSection>
         <Title>Mobile Phones</Title>
         <Subtitle>95 models</Subtitle>
-        <SelectContainer>
+      </TopSection>
+      <SelectContainer>
+        <SelectWrapper>
           <SelectLabel>Sort By</SelectLabel>
           <Select></Select>
-        </SelectContainer>
-        <SelectContainer>
+        </SelectWrapper>
+        <SelectWrapper>
           <SelectLabel>Items on page</SelectLabel>
           <Select></Select>
-        </SelectContainer>
-      </TopSection>
+        </SelectWrapper>
+      </SelectContainer>
       <ListCard>
         {data.map(item => (
-          <Card key={item.id}>
-            <CardTitle>{item.title}</CardTitle>
-            <CardContent>{item.content}</CardContent>
-          </Card>
+          <Card key={item.id}></Card>
         ))}
       </ListCard>
       <BottomSection>
         <PaginationButton>&lt;</PaginationButton>
-        <PaginationButton filled>1</PaginationButton>
+        <PaginationButton>1</PaginationButton>
         <PaginationButton filled>2</PaginationButton>
         <PaginationButton>3</PaginationButton>
         <PaginationButton>4</PaginationButton>
