@@ -1,14 +1,16 @@
 import React from 'react';
-import Router from './routes/Router.tsx';
+import Router from './routes/Router';
+import NavBar from './components/NavBar/NavBar';
+import Footer from './components/Footer/Footer';
 
-function App() {
+export function App() {
   return (
     <>
-      {/* Header com Nav Links */}
+      <NavBar />
       <Router />
-      {/* Footer */}
+      <Footer />
     </>
   );
-}
+};
 
 export default App;
