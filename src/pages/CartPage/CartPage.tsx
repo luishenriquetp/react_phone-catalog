@@ -10,11 +10,11 @@ import CartItems from '../../components/CartItems/CartItems.tsx';
 function CartPage() {
   return (
     <StyledCartPage className="cart-page">
-      <StyledBackHomeButton>
+      <StyledBackHomeButton className="cart-page__back-home-btn">
         <img src="public/img/icons/arrow-left.svg" alt="arrow-left" />
-        <StyledSpan>Back</StyledSpan>
+        <StyledSpan className="cart-page__btn-description">Back</StyledSpan>
       </StyledBackHomeButton>
-      <StyledH1Title>Cart</StyledH1Title>
+      <StyledH1Title className="cart-page__title">Cart</StyledH1Title>
       <CartItems />
     </StyledCartPage>
   );

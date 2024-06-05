@@ -10,19 +10,22 @@ export const StyledCartPage = styled.div`
   }
 `;
 export const StyledBackHomeButton = styled.button`
+  width: 66px;
   background-color: transparent;
   border: none;
   display: flex;
   flex-direction: row;
   align-items: center;
-  padding: 24px 16px;
+  justify-content: center;
+  margin: 24px 16px;
+  padding: 0;
 
   @media (min-width: 640px) and (max-width: 1199px) {
-    padding: 40px 24px 16px;
+    margin: 40px 0 16px 24px;
   }
 
   @media (min-width: 1200px) {
-    padding: 40px 32px 16px;
+    margin: 40px 0 16px 32px;
   }
 `;
 export const StyledSpan = styled.span`
