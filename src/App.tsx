@@ -5,7 +5,9 @@ function App() {
   return (
     <>
       {/* Header com Nav Links */}
-      <Router />
+      <div className="container">
+        <Router />
+      </div>
       {/* Footer */}
     </>
   );
