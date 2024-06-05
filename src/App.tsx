@@ -1,12 +1,14 @@
 import React from 'react';
-import { PageCatalog } from './pages/PageCatalog/PageCatalog';
+import Router from './routes/Router.tsx';
 
-const App: React.FC = () => {
+function App() {
   return (
-    <div>
-      <PageCatalog />
-    </div>
-  )
+    <>
+      {/* Header com Nav Links */}
+      <Router />
+      {/* Footer */}
+    </>
+  );
 }
 
 export default App;
