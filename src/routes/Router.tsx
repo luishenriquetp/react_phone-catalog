@@ -1,13 +1,14 @@
-import React from "react";
-import { Route, Routes } from "react-router-dom";
+import React from 'react';
+import { Route, Routes } from 'react-router-dom';
+import PageTemplate from '../pages/PageTemplate/PageTemplate.tsx';
 
-
-export const Router: React.FC = () => {
-
+function Router() {
   return (
     <Routes>
-      <Route path="/" />
+      <Route path="/" element={<PageTemplate />} />
       {/* Add all Routes here */}
     </Routes>
   );
 }
+
+export default Router;
