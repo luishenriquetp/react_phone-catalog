@@ -27,10 +27,26 @@ const StyledPageBurgerMenu = styled.div`
 
     &__link {
       cursor: pointer;
+      position: relative;
+      padding-bottom: 8px;
 
       &:hover {
         color: #313237;
-        border-bottom: #313237;
+      }
+
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background-color: #313237;
+        transition: width 0.3s ease;
+      }
+
+      &:hover::after {
+        width: 100%;
       }
     }
 
@@ -48,13 +64,29 @@ const StyledPageBurgerMenu = styled.div`
       &-icon {
         display: flex;
         height: 100%;
-        width: 100%;
+        width: 50%;
         justify-content: center;
         align-items: center;
         padding: 24px 0;
+        position: relative;
 
         &:first-child {
           border-right: 1px solid #e2e6e9;
+        }
+
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #313237;
+          transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+          width: 100%;
         }
       }
     }

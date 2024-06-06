@@ -1,12 +1,6 @@
 import React from 'react';
 import StyledPageBurgerMenu from './StyledPageBurgerMenu.ts';
 
-export type IconsData = {
-  id: number;
-  title: string;
-  content: string;
-};
-
 // as próximas 2 funções (LogoIcon, CloseIcon, HeartIcon e BagIcon são dados mockados)
 
 export function HeartIcon() {
