@@ -179,6 +179,9 @@ const StyledPageCatalog = styled.div`
       &:hover {
         border: 1px solid #0f0f11;
       }
+      &--hidden{
+        visibility: hidden;
+      }
     }
   }
 `;

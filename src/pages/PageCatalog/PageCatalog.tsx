@@ -1,11 +1,14 @@
-import React from 'react';
+import { useEffect, useRef, useState } from 'react';
 import StyledPageCatalog from './StyledPageCatalog.ts';
+import SelectItensPerPage from './components/SelectItensPerPage/SelectItensPerPage.tsx';
 
 export type CardData = {
   id: number;
   title: string;
   content: string;
 };
+
+export type SelectOptions = '4' | '8' | '16' | 'all';
 
 const data: CardData[] = [
   { id: 1, title: 'Card 1', content: 'Content for card 1' },
@@ -23,10 +26,49 @@ const data: CardData[] = [
   { id: 13, title: 'Card 13', content: 'Content for card 13' },
   { id: 14, title: 'Card 14', content: 'Content for card 14' },
   { id: 15, title: 'Card 15', content: 'Content for card 15' },
-  { id: 16, title: 'Card 16', content: 'Content for card 16' },
 ];
 
 function PageCatalog() {
+  const [quantityPerPage, setQuantityPerPage] = useState<SelectOptions | string>('4');
+  const [contentPage, setContentPage] = useState<CardData[]>([]);
+  const [buttonsNumber, setButtonsNumber] = useState<number[]>([]);
+  const [pageNumber, setPageNumber] = useState<number>(1);
+  const useEffectExecuted = useRef(false);
+
+
+  useEffect(() => {
+    setPageNumber(1);
+  }, [quantityPerPage]);
+
+  useEffect(() => {
+    setButtonsNumber([]);
+
+    if (!useEffectExecuted.current) {
+      useEffectExecuted.current = true;
+      return;
+    }
+
+    const tryToChangeToNumber = Number(quantityPerPage);
+    if (!isNaN(tryToChangeToNumber)) {
+      const possiblePerPage = Math.ceil(data.length / Number(quantityPerPage));
+
+      const newArr = [];
+      let cont = 0;
+
+      for (let i = 0; i < possiblePerPage; i++) {
+        newArr.push(data.slice(cont, Number(quantityPerPage) + cont));
+        cont = cont + Number(quantityPerPage);
+
+        setButtonsNumber(state => [...state, i + 1]);
+      }
+      console.log(newArr);
+
+      setContentPage(newArr[pageNumber - 1]);
+    } else {
+      setContentPage(data);
+    }
+  }, [quantityPerPage, pageNumber]);
+
   return (
     <StyledPageCatalog className="page-catalog">
       <div className="top-section">
@@ -38,37 +80,48 @@ function PageCatalog() {
           <h1 className="select__label">Sort By</h1>
           <select className="select__box select__box--selected">
             <option>Newest</option>
+            <option>Alphabetically</option>
+            <option>Cheapest</option>
           </select>
         </div>
         <div className="select__wrapper">
           <h1 className="select__label">Items on page</h1>
-          <select className="select__box">
-            <option>16</option>
-          </select>
+
+          <SelectItensPerPage
+            quantityPerPage={quantityPerPage}
+            setQuantityPerPage={setQuantityPerPage}
+          />
         </div>
       </div>
       <div className="list">
-        {data.map(item => (
-          <div className="list__card" key={item.id} />
-        ))}
+        {contentPage && contentPage.map(item => <div className="list__card" key={item.id} />)}
       </div>
+
       <div className="pagination">
-        <button type="button" className="pagination__button pagination__button--isarrow">
+        <button
+          type="button"
+          className={`pagination__button pagination__button--isarrow ${pageNumber === 1 || quantityPerPage === 'all' ? 'pagination__button--hidden' : ''}`}
+          onClick={() => setPageNumber(state => state - 1)}
+        >
           &lt;
         </button>
-        <button type="button" className="pagination__button">
-          1
-        </button>
-        <button type="button" className="pagination__button pagination__button--filled">
-          2
-        </button>
-        <button type="button" className="pagination__button">
-          3
-        </button>
-        <button type="button" className="pagination__button">
-          4
-        </button>
-        <button type="button" className="pagination__button pagination__button--isarrow">
+
+        {buttonsNumber.map(number => (
+          <button
+            key={number}
+            type="button"
+            className={`pagination__button ${pageNumber === number ? 'pagination__button--filled' : ''}`}
+            onClick={() => setPageNumber(number)}
+          >
+            {number}
+          </button>
+        ))}
+
+        <button
+          type="button"
+          className={`pagination__button pagination__button--isarrow ${pageNumber === buttonsNumber.length || quantityPerPage === 'all' ? 'pagination__button--hidden' : ''}`}
+          onClick={() => setPageNumber(state => state + 1)}
+        >
           &gt;
         </button>
       </div>
