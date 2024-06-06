@@ -7,7 +7,9 @@ export function App() {
   return (
     <>
       <NavBar />
-      <Router />
+      <div className="container">
+        <Router />
+      </div>
       <Footer />
     </>
   );

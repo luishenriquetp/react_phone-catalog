@@ -16,9 +16,10 @@ export const StyledBackHomeButton = styled.button`
   display: flex;
   flex-direction: row;
   align-items: flex-end;
-  justify-content: center;
-  margin: 24px 16px;
+  margin-top: 24px;
+  margin-bottom: 16px;
   padding: 0;
+  cursor: pointer;
 
   @media (min-width: 640px) and (max-width: 1199px) {
     margin: 40px 0 16px 24px;
