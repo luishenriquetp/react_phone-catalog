@@ -33,26 +33,18 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    margin-top:64px;
   }
 
   body {
     background-color: var(--dark-black);
   }
-
-  a {
-    margin: 0;
-    padding: 0;
-  }
-
-  img {
-    margin: 0;
-    padding: 0;
-  }
-
-  
 `;
 
 export const letterStyleH1DesktoAndTable = css`
