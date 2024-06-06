@@ -31,9 +31,9 @@ export const StyledTopContent = styled.div`
   gap: 24px;
 `;
 
-export const StyledDeleteProductButton = styled.img`
-  filter: invert(86%) sepia(10%) saturate(193%) hue-rotate(161deg) brightness(87%) contrast(90%);
-  z-index: 2;
+export const StyledDeleteProductButton = styled.button`
+  background-color: transparent;
+  border: none;
 
   &:hover {
     cursor: pointer;
