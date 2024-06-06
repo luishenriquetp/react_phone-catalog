@@ -15,7 +15,7 @@ export const StyledBackHomeButton = styled.button`
   border: none;
   display: flex;
   flex-direction: row;
-  align-items: center;
+  align-items: flex-end;
   justify-content: center;
   margin: 24px 16px;
   padding: 0;
