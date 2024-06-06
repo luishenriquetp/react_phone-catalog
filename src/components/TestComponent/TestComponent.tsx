@@ -6,7 +6,7 @@ function TestComponent() {
   return (
     <div>
       <h1>Test Component</h1>
-      <IconComponent icon={IconType.FILLED_HEARTLIKE} size={120} />
+      <IconComponent icon={IconType.FILLED_HEARTLIKE} />
     </div>
   );
 }
