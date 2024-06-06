@@ -19,7 +19,7 @@ const Header: React.FC = () => {
 						Rights
 					</a>
 				</div>
-				<a href="home" className="footer-item icons">
+				<a href="#home" className="footer-item icons">
 					<span>Back to top</span>
 					<img src={'img/icons/back_to_top_button.png'} alt="Back to top" />
 				</a>

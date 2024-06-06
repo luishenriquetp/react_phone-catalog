@@ -84,6 +84,7 @@ const FooterContainer = styled.header`
 			height: auto;
 			position: relative;
 			line-height: normal;
+			justify-content: center;
 		}
 
 		.icons span {

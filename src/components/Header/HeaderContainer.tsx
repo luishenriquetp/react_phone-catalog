@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const HeaderContainer = styled.header`
+const HeaderContainer = styled.header<{ $fav_count?: string }>`
 	.navbar {
 		top: 0;
 		background-color: #fff;
@@ -69,6 +69,12 @@ const HeaderContainer = styled.header`
 		border-left: 2px solid #e2e6e9;
 		width: 64px;
 		height: 64px;
+		/* like::after {
+			content: {(props) => props.$fav_count};
+			background-color: blue;
+			color: #fff;
+			border-radius: 50%;
+		} */
 	}
 
 	.icon img {

@@ -1,8 +1,11 @@
 import React from 'react';
 import HeaderContainer from './HeaderContainer';
 
+//const mockFav = '5';
+
 const Header: React.FC = () => {
 	return (
+		//<HeaderContainer className="header" $fav_count={mockFav}>
 		<HeaderContainer className="header">
 			<nav id="nav_bar" className="navbar">
 				<div className="nav_logo">
@@ -21,7 +24,7 @@ const Header: React.FC = () => {
 					</a>
 				</div>
 				<div className="nav_icons">
-					<a className="icon" href="">
+					<a className="icon icon--like" href="">
 						<img src={'img/icons/favourites_black.png'} alt="Like" />
 					</a>
 					<a className="icon" href="">
