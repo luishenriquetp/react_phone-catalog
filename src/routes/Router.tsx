@@ -1,11 +1,11 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import BurgerMenu from '../components/BurgerMenu/BurgerMenu.tsx';
+import PageTemplate from '../pages/PageTemplate/PageTemplate.tsx';
 
 function Router() {
   return (
     <Routes>
-      <Route path="/" element={<BurgerMenu />} />
+      <Route path="/" element={<PageTemplate />} />
       {/* Add all Routes here */}
     </Routes>
   );
