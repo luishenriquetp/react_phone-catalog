@@ -14,7 +14,7 @@ const Header: React.FC = () => {
 				<div className="nav_links">
 					<a className="nav_link active">Home</a>
 					<a className="nav_link" href="">
-						Downloads
+						Phones
 					</a>
 					<a className="nav_link" href="">
 						Tablets
