@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import SelectItensPerPage from './components/SelectItensPerPage/SelectItensPerPage.tsx';
 
@@ -35,7 +35,6 @@ function PageCatalog() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const useEffectExecuted = useRef(false);
 
-
   useEffect(() => {
     setPageNumber(1);
   }, [quantityPerPage]);
@@ -49,19 +48,18 @@ function PageCatalog() {
     }
 
     const tryToChangeToNumber = Number(quantityPerPage);
-    if (!isNaN(tryToChangeToNumber)) {
+    if (!Number.isNaN(tryToChangeToNumber)) {
       const possiblePerPage = Math.ceil(data.length / Number(quantityPerPage));
 
       const newArr = [];
       let cont = 0;
 
-      for (let i = 0; i < possiblePerPage; i++) {
+      for (let i = 0; i < possiblePerPage; i += 1) {
         newArr.push(data.slice(cont, Number(quantityPerPage) + cont));
-        cont = cont + Number(quantityPerPage);
+        cont += Number(quantityPerPage);
 
         setButtonsNumber(state => [...state, i + 1]);
       }
-      console.log(newArr);
 
       setContentPage(newArr[pageNumber - 1]);
     } else {

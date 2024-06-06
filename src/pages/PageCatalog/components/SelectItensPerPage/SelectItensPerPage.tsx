@@ -1,6 +1,6 @@
 import React from 'react';
-import { StyledSelectItensPerPage } from './StyledSelectItensPerPage';
-import { SelectOptions } from '../../PageCatalog';
+import { SelectOptions } from '../../PageCatalog.tsx';
+import StyledSelectItensPerPage from './StyledSelectItensPerPage.ts';
 
 type Props = {
   quantityPerPage: string | number;

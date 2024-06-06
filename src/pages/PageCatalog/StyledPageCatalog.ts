@@ -81,10 +81,19 @@ const StyledPageCatalog = styled.div`
       width: 136px;
       height: 40px;
       ${letterStyleButtonsDesktoAndTable};
-      padding: 4px;
+      padding-inline: 12px;
       border-radius: 8px;
       border: 1px solid #b4bdc3;
       box-sizing: border-box;
+      appearance: none;
+
+      &:hover {
+        border: 1px solid #89939a;
+      }
+
+      &:focus-visible {
+        outline-color: #0f0f11;
+      }
     }
 
     &__box--selected {
@@ -179,7 +188,7 @@ const StyledPageCatalog = styled.div`
       &:hover {
         border: 1px solid #0f0f11;
       }
-      &--hidden{
+      &--hidden {
         visibility: hidden;
       }
     }

@@ -1,7 +1,7 @@
 import styled from 'styled-components';
-import { letterStyleButtonsDesktoAndTable } from '../../../../styles/GlobalStyles';
+import { letterStyleButtonsDesktoAndTable } from '../../../../styles/GlobalStyles.ts';
 
-export const StyledSelectItensPerPage = styled.select`
+const StyledSelectItensPerPage = styled.select`
   width: 136px;
   height: 40px;
   ${letterStyleButtonsDesktoAndTable};
@@ -10,3 +10,5 @@ export const StyledSelectItensPerPage = styled.select`
   border: 1px solid #b4bdc3;
   box-sizing: border-box;
 `;
+
+export default StyledSelectItensPerPage;
