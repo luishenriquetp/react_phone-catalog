@@ -23,30 +23,30 @@ const StyledPageBurgerMenu = styled.div`
       width: 100%;
       height: calc(100vh - 112px);
       top: 48px;
-    }
 
-    &__link {
-      cursor: pointer;
-      position: relative;
-      padding-bottom: 8px;
+      &-link {
+        cursor: pointer;
+        position: relative;
+        padding-bottom: 8px;
 
-      &:hover {
-        color: #313237;
-      }
+        &:hover {
+          color: #313237;
+        }
 
-      &::after {
-        content: '';
-        position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 0;
-        height: 2px;
-        background-color: #313237;
-        transition: width 0.3s ease;
-      }
+        &::after {
+          content: '';
+          position: absolute;
+          bottom: 0;
+          left: 0;
+          width: 0;
+          height: 2px;
+          background-color: #313237;
+          transition: width 0.3s ease;
+        }
 
-      &:hover::after {
-        width: 100%;
+        &:hover::after {
+          width: 100%;
+        }
       }
     }
 
@@ -62,6 +62,7 @@ const StyledPageBurgerMenu = styled.div`
       align-items: center;
 
       &-icon {
+        cursor: pointer;
         display: flex;
         height: 100%;
         width: 50%;

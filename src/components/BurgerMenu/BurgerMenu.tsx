@@ -23,10 +23,10 @@ export function BurgerMenu() {
   return (
     <StyledPageBurgerMenu className="burger-menu">
       <div className="burger-menu__nav">
-        <div className="burger-menu__link">HOME</div>
-        <div className="burger-menu__link">PHONES</div>
-        <div className="burger-menu__link">TABLETS</div>
-        <div className="burger-menu__link">ACCESSORIES</div>
+        <div className="burger-menu__nav-link">HOME</div>
+        <div className="burger-menu__nav-link">PHONES</div>
+        <div className="burger-menu__nav-link">TABLETS</div>
+        <div className="burger-menu__nav-link">ACCESSORIES</div>
       </div>
       <div className="burger-menu__footer">
         <div className="burger-menu__footer-icon">
