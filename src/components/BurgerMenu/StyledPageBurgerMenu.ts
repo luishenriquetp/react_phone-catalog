@@ -10,6 +10,11 @@ const StyledPageBurgerMenu = styled.div`
     position: absolute;
     overflow: hidden;
 
+    &__header {
+      width: 100vw;
+      height: 100px;
+    }
+
     &__nav {
       display: flex;
       flex-direction: column;
@@ -17,7 +22,7 @@ const StyledPageBurgerMenu = styled.div`
       padding-top: 24px;
       gap: 16px;
       ${letterStyleUpperCase};
-      color: #89939a;
+      color: var(--rstyle1-gray-secondary);
 
       position: absolute;
       width: 100%;
@@ -72,7 +77,7 @@ const StyledPageBurgerMenu = styled.div`
         position: relative;
 
         &:first-child {
-          border-right: 1px solid #e2e6e9;
+          border-right: 1px solid var(--rstyle1-gray-elements);
         }
 
         &::after {

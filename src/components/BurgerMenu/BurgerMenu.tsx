@@ -22,6 +22,7 @@ export function BagIcon() {
 export function BurgerMenu() {
   return (
     <StyledPageBurgerMenu className="burger-menu">
+      <div className="burger-menu__header"> </div>
       <div className="burger-menu__nav">
         <div className="burger-menu__nav-link">HOME</div>
         <div className="burger-menu__nav-link">PHONES</div>
