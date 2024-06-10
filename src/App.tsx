@@ -77,32 +77,9 @@ export const App: React.FC = () => {
 
   return (
     <>
-      <div style={{ display: "flex" }}>
-        <ToastContainer />
-        <div style={{ flex: 1 }}>
-          <h1>Phones</h1>
-          {phones.length > 0 ? <PhonesList phones={phones} /> : <Loader />}
-        </div>
-        <div style={{ flex: 1 }}>
-          <h1>Accessories</h1>
-          {accessories.length > 0 ? (
-            <AccessoriesList accessories={accessories} />
-          ) : (
-            <Loader />
-          )}
-        </div>
-        <div style={{ flex: 1 }}>
-          <h1>Products</h1>
-          {accessories.length > 0 ? (
-            <ProductsList products={products} />
-          ) : (
-            <Loader />
-          )}
-        </div>
-        <div style={{ flex: 1 }}>
-          <h1>Tablets</h1>
-          {tablets.length > 0 ? <TabletsList tablets={tablets} /> : <Loader />}
-        </div>
+      {/* Header com Nav Links */}
+      <div className="container">
+        <Router />
       </div>
     </>
   );

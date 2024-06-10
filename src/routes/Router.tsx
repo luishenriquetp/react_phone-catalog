@@ -1,4 +1,5 @@
-import React from "react";
+import React from 'react';
+import PageCatalog from '../pages/PageCatalog/PageCatalog.tsx';
 import { Route, Routes } from "react-router-dom";
 
 export const Router: React.FC = () => {
@@ -6,7 +7,7 @@ export const Router: React.FC = () => {
     <>
       <Routes>
         <Route path="/" />
-        <Route path="/phones" element={/* Phone Comp */} />
+        <Route path="/phones" element={<PageCatalog />} />
       </Routes>
     </>
   );
