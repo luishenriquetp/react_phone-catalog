@@ -1,21 +1,21 @@
 import React from 'react';
-import FooterContainer from './FooterContainer';
+import StyledFooter from './StyledFooter.ts';
 
-const Header: React.FC = () => {
+function Footer(): React.ReactNode {
 	return (
-		<FooterContainer className="header">
+		<StyledFooter className="footer">
 			<footer id="footer_bar" className="footerlinks">
 				<div className="footer-item">
 					<img id="logo" src={'img/icons/logo.png'} alt="Logo" />
 				</div>
 				<div className="center-links">
-					<a href="" className="footer-item">
+					<a href="/" className="footer-item">
 						GitHub
 					</a>
-					<a href="" className="footer-item">
+					<a href="/" className="footer-item">
 						Contacts
 					</a>
-					<a href="" className="footer-item">
+					<a href="/" className="footer-item">
 						Rights
 					</a>
 				</div>
@@ -24,8 +24,8 @@ const Header: React.FC = () => {
 					<img src={'img/icons/back_to_top_button.png'} alt="Back to top" />
 				</a>
 			</footer>
-		</FooterContainer>
+		</StyledFooter>
 	);
-};
+}
 
-export default Header;
+export default Footer;

@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const FooterContainer = styled.header`
+const StyledFooter = styled.div`
 	.footerlinks {
 		bottom: 0;
 		background-color: #fff;
@@ -94,4 +94,4 @@ const FooterContainer = styled.header`
 	}
 `;
 
-export default FooterContainer;
+export default StyledFooter;
