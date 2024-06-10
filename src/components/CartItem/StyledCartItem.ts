@@ -80,6 +80,10 @@ const StyledCartItem = styled.div`
     gap: 14px;
   }
 
+  .bottom-content__quantity {
+    ${letterStyleBodyTextDesktoAndTable};
+  }
+
   .bottom-content__counter-btn {
     width: 32px;
     height: 32px;
