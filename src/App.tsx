@@ -1,16 +1,8 @@
 import React from 'react';
-import Router from './routes/Router';
-import NavBar from './components/NavBar/NavBar';
-import Footer from './components/Footer/Footer';
+import Router from './routes/Router.tsx';
 
 export function App() {
-  return (
-    <>
-      <NavBar />
-      <Router />
-      <Footer />
-    </>
-  );
-};
+  return <Router />;
+}
 
 export default App;
