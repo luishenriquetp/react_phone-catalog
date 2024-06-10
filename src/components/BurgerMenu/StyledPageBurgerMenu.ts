@@ -13,13 +13,36 @@ const StyledPageBurgerMenu = styled.div`
     &__header {
       width: 100vw;
       height: 100px;
+
+      &-navbar {
+        top: 0;
+        background-color: #fff;
+        height: 64px;
+        width: 100%;
+        position: fixed;
+        border-bottom: 2px solid #e2e6e9;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0px;
+
+        &-logo {
+          margin-left: 16px;
+        }
+
+        &-icon {
+          display: flex;
+          margin-right: 16px;
+          color: #000000;
+        }
+      }
     }
 
     &__nav {
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 24px;
+      padding-top: 72px;
       gap: 16px;
       ${letterStyleUpperCase};
       color: var(--rstyle1-gray-secondary);
