@@ -1,14 +1,14 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
-import PageTemplate from '../pages/PageTemplate/PageTemplate.tsx';
+import PageCatalog from '../pages/PageCatalog/PageCatalog.tsx';
+import { Route, Routes } from "react-router-dom";
 
-function Router() {
+export const Router: React.FC = () => {
   return (
-    <Routes>
-      <Route path="/" element={<PageTemplate />} />
-      {/* Add all Routes here */}
-    </Routes>
+    <>
+      <Routes>
+        <Route path="/" />
+        <Route path="/phones" element={<PageCatalog />} />
+      </Routes>
+    </>
   );
-}
-
-export default Router;
+};
