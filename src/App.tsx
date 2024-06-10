@@ -1,14 +1,21 @@
 import React from 'react';
-import Router from './routes/Router.tsx';
+import Header from './components/Header/Header';
+import Content from './components/Content/Content';
+import { Route, Routes } from 'react-router-dom';
+import PageCatalog from './pages/PageCatalog/PageCatalog';
 
-function App() {
-  return (
-    <>
-      {/* Header com Nav Links */}
-      <Router />
-      {/* Footer */}
-    </>
-  );
-}
+const App: React.FC = () => (
+	<>
+		<Header />
+		<div className='container' >
+			<Routes>
+				<Route path="/" />
+				<Route path="/phones" element={<PageCatalog />} />
+			</Routes>
+		</div>
+		<Content />
+	</>
+);
 
 export default App;
+
