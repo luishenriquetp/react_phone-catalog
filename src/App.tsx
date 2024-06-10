@@ -1,6 +1,5 @@
 import React from 'react';
 import Header from './components/Header/Header';
-import Content from './components/Content/Content';
 import { Route, Routes } from 'react-router-dom';
 import PageCatalog from './pages/PageCatalog/PageCatalog';
 
@@ -11,9 +10,9 @@ const App: React.FC = () => (
 			<Routes>
 				<Route path="/" />
 				<Route path="/phones" element={<PageCatalog />} />
+				<Route path='/cart' element={<PageCatalog />} /> {/*Colocar o page CartItems */}
 			</Routes>
 		</div>
-		<Content />
 	</>
 );
 

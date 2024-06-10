@@ -1,5 +1,6 @@
 import React from 'react';
 import StyledHeader from './StyledHeader.ts';
+import { NavLink } from 'react-router-dom';
 
 function Header(): React.ReactNode {
   return (
@@ -9,12 +10,12 @@ function Header(): React.ReactNode {
           <img id="logo" src="img/icons/logo.png" alt="Logo" />
         </div>
         <div className="nav_links">
-          <a href="/" className="nav_link active">
+          <a href="/" className="nav_link"> {/*exist a active class in this class adjust  */}
             Home
           </a>
-          <a className="nav_link" href="/">
+          <NavLink className="nav_link" to="/phones">
             Phones
-          </a>
+          </NavLink>
           <a className="nav_link" href="/">
             Tablets
           </a>
@@ -26,9 +27,9 @@ function Header(): React.ReactNode {
           <a className="icon icon--like" href="/">
             <img src="img/icons/favourites_black.png" alt="Like" />
           </a>
-          <a className="icon" href="/">
+          <NavLink className="icon" to="/cart">
             <img src="img/icons/shopping_bag_black.png" alt="Cart" />
-          </a>
+          </NavLink>
         </div>
         <a className="icon burger_menu" href="/">
           <img src="img/icons/burger_menu.png" alt="Burger Menu" />
