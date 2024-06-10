@@ -1,14 +1,12 @@
 import React from 'react';
-import Router from './routes/Router.tsx';
+import Header from './components/Header/Header';
+import Content from './components/Content/Content';
 
-function App() {
-  return (
-    <>
-      {/* Header com Nav Links */}
-      <Router />
-      {/* Footer */}
-    </>
-  );
-}
+const App: React.FC = () => (
+	<>
+		<Header />
+		<Content />
+	</>
+);
 
 export default App;
