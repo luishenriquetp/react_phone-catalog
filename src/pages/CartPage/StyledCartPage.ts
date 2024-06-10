@@ -19,14 +19,19 @@ export const StyledBackHomeButton = styled.button`
   margin-top: 24px;
   margin-bottom: 16px;
   padding: 0;
+
   cursor: pointer;
 
-  @media (min-width: 640px) and (max-width: 1199px) {
-    margin: 40px 0 16px 24px;
+  & span {
+    transition-duration: 0.25s;
   }
 
-  @media (min-width: 1200px) {
-    margin: 40px 0 16px 32px;
+  &:hover span {
+    color: var(--rstyle1-primary);
+  }
+
+  @media (min-width: 640px) {
+    margin-top: 40px;
   }
 `;
 export const StyledSpan = styled.span`
