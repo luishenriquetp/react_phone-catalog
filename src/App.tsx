@@ -1,12 +1,20 @@
 import React from 'react';
-import Footer from './components/Footer/Footer';
-import Content from './components/Content/Content';
+import Header from './components/Header/Header';
+import { Route, Routes } from 'react-router-dom';
+import PageCatalog from './pages/PageCatalog/PageCatalog';
 
 const App: React.FC = () => (
 	<>
-		<Content />
-		<Footer />
+		<Header />
+		<div className='container' >
+			<Routes>
+				<Route path="/" />
+				<Route path="/phones" element={<PageCatalog />} />
+				<Route path='/cart' element={<PageCatalog />} /> {/*Colocar o page CartItems */}
+			</Routes>
+		</div>
 	</>
 );
 
 export default App;
+
