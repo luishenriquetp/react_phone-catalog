@@ -2,6 +2,7 @@ import React from 'react';
 import Header from './components/Header/Header';
 import { Route, Routes } from 'react-router-dom';
 import PageCatalog from './pages/PageCatalog/PageCatalog';
+import Footer from './components/Footer/Footer';
 
 const App: React.FC = () => (
 	<>
@@ -13,6 +14,7 @@ const App: React.FC = () => (
 				<Route path='/cart' element={<PageCatalog />} /> {/*Colocar o page CartItems */}
 			</Routes>
 		</div>
+		<Footer />
 	</>
 );
 
