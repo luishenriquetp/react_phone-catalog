@@ -1,3 +1,8 @@
+type Description = {
+  title: string;
+  text: string[];
+};
+
 export type Phone = {
   id: string;
   category: string;
@@ -10,7 +15,7 @@ export type Phone = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: { title: string; text: string[]; }[];
+  description: Description[];
   screen: string;
   resolution: string;
   processor: string;
@@ -18,8 +23,7 @@ export type Phone = {
   camera: string;
   zoom: string;
   cell: string[];
-}
-
+};
 export type Accessorie = {
   id: string;
   category: string;
@@ -32,13 +36,13 @@ export type Accessorie = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: { title: string; text: string[]; }[];
+  description: { title: string; text: string[] }[];
   screen: string;
   resolution: string;
   processor: string;
   ram: string;
   cell: string[];
-}
+};
 
 export type Product = {
   id: number;
@@ -53,7 +57,7 @@ export type Product = {
   ram: string;
   year: number;
   image: string;
-}
+};
 
 export type Tablet = {
   id: string;
@@ -67,10 +71,10 @@ export type Tablet = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: { title: string; text: string[]; }[];
+  description: { title: string; text: string[] }[];
   screen: string;
   resolution: string;
   processor: string;
   ram: string;
   cell: string[];
-}
+};

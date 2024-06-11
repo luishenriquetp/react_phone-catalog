@@ -1,6 +1,5 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
 import { iconMap, IconProps } from './IconComponent.types.ts';
 
 const fallBack = () => <></>;

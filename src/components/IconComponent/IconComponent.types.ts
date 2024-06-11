@@ -1,20 +1,20 @@
 /* eslint-disable no-shadow */
 import React, { SVGProps } from 'react';
-import ArrowDown from '../../assets/Arrow-down.svg';
-import ArrowUp from '../../assets/Arrow-up.svg';
-import ArrowRight from '../../assets/Arrow-right.svg';
-import ArrowLeft from '../../assets/Arrow-left.svg';
-import Close from '../../assets/Close.svg';
-import EmptyHeartlike from '../../assets/HeartLike-empty.svg';
-import CounterHeartlike from '../../assets/HeartLike-count.svg';
-import FilledHeartlike from '../../assets/HearLike-filled.svg';
-import Home from '../../assets/Home.svg';
-import Menu from '../../assets/Menu.svg';
-import Minus from '../../assets/Minus.svg';
-import Plus from '../../assets/Plus.svg';
-import Search from '../../assets/Search.svg';
-import EmptyCart from '../../assets/Empty-cart.svg';
-import CounterCart from '../../assets/Counter-cart.svg';
+import ArrowDown from '../../IconAssets/Arrow-down.svg';
+import ArrowUp from '../../IconAssets/Arrow-up.svg';
+import ArrowRight from '../../IconAssets/Arrow-right.svg';
+import ArrowLeft from '../../IconAssets/Arrow-left.svg';
+import Close from '../../IconAssets/Close.svg';
+import EmptyHeartlike from '../../IconAssets/HeartLike-empty.svg';
+import CounterHeartlike from '../../IconAssets/HeartLike-count.svg';
+import FilledHeartlike from '../../IconAssets/HearLike-filled.svg';
+import Home from '../../IconAssets/Home.svg';
+import Menu from '../../IconAssets/Menu.svg';
+import Minus from '../../IconAssets/Minus.svg';
+import Plus from '../../IconAssets/Plus.svg';
+import Search from '../../IconAssets/Search.svg';
+import EmptyCart from '../../IconAssets/Empty-cart.svg';
+import CounterCart from '../../IconAssets/Counter-cart.svg';
 
 export enum IconType {
   ARROW_DOWN = 'arrow-down-icon',

@@ -1,4 +1,3 @@
-import React from 'react';
 import StyledPageBurgerMenu from './StyledPageBurgerMenu.ts';
 
 export function BurgerMenu() {
