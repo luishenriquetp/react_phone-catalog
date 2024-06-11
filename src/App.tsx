@@ -1,24 +1,27 @@
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-import NavBar from './components/NavBar/NavBar.tsx';
-import Footer from './components/Footer/Footer.tsx';
-import CartPage from './pages/CartPage/CartPage.tsx';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage.tsx';
+import Header from './components/Header/Header.tsx';
+import PageCatalog from './pages/PageCatalog/PageCatalog.tsx';
+import Footer from './components/Footer/Footer.tsx';
+import PageCart from './pages/CartPage/PageCart.tsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
 
-export function App() {
+function App(): React.ReactNode {
   return (
     <>
-      <NavBar />
+      <Header />
       <div className="container">
         <Routes>
           <Route path="/">
-            <Route path=":category">
-              <Route path=":categoryId" element={<ProductDetailsPage />}/>
+            <Route path="/phones">
+              <Route index element={<PageCatalog />} />
+              <Route path=":phoneId" element={<ProductDetailsPage />} />
             </Route>
-            <Route path="cart" element={<CartPage />} />
+            <Route path="*" element={<NotFoundPage />} />
           </Route>
-
-          {/* Add all Routes here */}
+          <Route path="/cart" element={<PageCart />} />
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
       <Footer />

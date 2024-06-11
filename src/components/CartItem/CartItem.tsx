@@ -1,57 +1,74 @@
-import React, { useState } from 'react';
-import {
-  StyledBottomContent,
-  StyledCartItem,
-  StyledCountButton,
-  StyledCountNumber,
-  StyledCountWrapper,
-  StyledDeleteProductButton,
-  StyledDescription,
-  StyledProductImage,
-  StyledTopContent,
-  StyledTotalPrice,
-} from './StyledCartItem.ts';
+import { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
+import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
+import StyledCartItem from './StyledCartItem.ts';
 import Icon from '../Icon/Icon.tsx';
-import { IconType } from '../Icon/Icon.types.ts';
+import { IconType } from '../Icon/Icon.ts';
+import { Phone } from '../../types/types.ts';
+import {
+  decreaseTotalPrice,
+  incrementTotalPrice,
+  removeProduct,
+} from '../../context/cartContext/cartSlice.ts';
 
-function CartItem() {
-  const [count, setCount] = useState(1);
-  const totalPrice = 999;
+interface Prop {
+  phone: Phone;
+  quantity: number;
+}
+
+function CartItem(prop: Prop) {
+  const { phone, quantity } = prop;
+  const dispatch: Dispatch<UnknownAction> = useDispatch();
+
+  const handleDeleteClicekButton = useCallback(() => {
+    dispatch(removeProduct(phone));
+  }, [phone, dispatch]);
+
+  const handleClickDecreaseQuantityItem = () => {
+    dispatch(decreaseTotalPrice(phone));
+  };
+
+  const handleClickIncrementQuantityItem = () => {
+    dispatch(incrementTotalPrice(phone));
+  };
 
   return (
     <StyledCartItem className="cart-item">
-      <StyledTopContent className="cart-item__top-content">
-        <StyledDeleteProductButton>
+      <div className="cart-item__top-content">
+        <button
+          type="button"
+          className="cart-item__remove-btn"
+          aria-label="remove item cart"
+          onClick={handleDeleteClicekButton}
+        >
           <Icon icon={IconType.CLOSE} />
-        </StyledDeleteProductButton>
-        <StyledProductImage
-          className="top-content__product-image"
-          src="public/img/phones/apple-iphone-7/black/00.webp"
-          alt="iphone 7 black"
-        />
-        <StyledDescription className="top-content__product-title">
-          Apple iPhone 14 Pro 128GB Silver (MQ023)
-        </StyledDescription>
-      </StyledTopContent>
-      <StyledBottomContent className="cart-item__bottom-content">
-        <StyledCountWrapper className="bottom-content__wrapper">
-          <StyledCountButton
-            className="bottom-content__minus-btn"
-            onClick={() => setCount(state => state - 1)}
-            disabled={count <= 1}
+        </button>
+        <img className="top-content__product-image" src={phone.images[0]} alt={phone.name} />
+        <span className="top-content__product-title">{phone.name}</span>
+      </div>
+      <div className="cart-item__bottom-content">
+        <div className="bottom-content__wrapper">
+          <button
+            type="button"
+            className="bottom-content__counter-btn"
+            aria-label="decrease this item from cart"
+            onClick={handleClickDecreaseQuantityItem}
+            disabled={quantity <= 1}
           >
-            -
-          </StyledCountButton>
-          <StyledCountNumber className="bottom-content__quantity">{count}</StyledCountNumber>
-          <StyledCountButton
-            className="bottom-plus-btn"
-            onClick={() => setCount(state => state + 1)}
+            <Icon icon={IconType.MINUS} fill="black" />
+          </button>
+          <span className="bottom-content__quantity">{quantity}</span>
+          <button
+            type="button"
+            aria-label="add this item to cart"
+            className="bottom-content__counter-btn"
+            onClick={handleClickIncrementQuantityItem}
           >
-            <Icon icon={IconType.PLUS} />
-          </StyledCountButton>
-        </StyledCountWrapper>
-        <StyledTotalPrice className="bottom-content__total-price">{`$${totalPrice * count}`}</StyledTotalPrice>
-      </StyledBottomContent>
+            <Icon icon={IconType.PLUS} fill="black" />
+          </button>
+        </div>
+        <span className="bottom-content__total-price">{`$${phone.priceDiscount * quantity}`}</span>
+      </div>
     </StyledCartItem>
   );
 }

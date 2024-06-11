@@ -17,7 +17,7 @@ export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Mont';
     font-weight: 800;
-    src: url('fonts/Mont-Bold.otf') format('opentype');
+    src: url('fonts/Mont-Bold-otf') format('opentype');
   }
 
   @font-face {
@@ -32,15 +32,16 @@ export const GlobalStyles = createGlobalStyle`
     src: url('fonts/Mont-Regular.otf') format('opentype');
   }
 
-  body {
-    background-color: var(--dark-black);
-    margin: 0;
-    padding: 0;
+  * {
+    box-sizing: border-box;
   }
 
-  a {
-    margin: 0;
-    padding: 0;
+html {
+    margin-top:64px;
+  }
+
+  body {
+    background-color: var(--dark-black);
   }
 
   p {
