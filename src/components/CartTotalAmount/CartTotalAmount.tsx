@@ -1,9 +1,8 @@
-import React from 'react';
 import StyledCartTotalAmount from './StyledCartTotalAmount.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 
 function CartTotalAmount() {
-  const { totalPrice, quantity } = useAppSelector(state => state.cart)
+  const { totalPrice, quantity } = useAppSelector(state => state.cart);
 
   return (
     <StyledCartTotalAmount className="cart-total__wrapper">

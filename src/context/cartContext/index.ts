@@ -1,2 +1,2 @@
-export { default as cartReducer } from './cartSlice';
-export * from './cartSlice';
+export { default as cartReducer } from './cartSlice.ts';
+export * from './cartSlice.ts';

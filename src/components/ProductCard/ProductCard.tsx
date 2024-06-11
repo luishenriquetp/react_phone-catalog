@@ -1,20 +1,29 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import React, { useState } from 'react';
+import { useState } from 'react';
+import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
+import { useDispatch } from 'react-redux';
 import { StyledProductCard } from './StyledProductCard.ts';
 import Icon from '../IconComponent/IconComponent.tsx';
 import { IconType } from '../IconComponent/IconComponent.types.ts';
 import { Phone } from '../../types/types.ts';
 import { useAppSelector } from '../../context/hooks.ts';
+import { addProduct } from '../../context/cartContext/cartSlice.ts';
 
 interface Prop {
   phone: Phone;
 }
 
 function ProductCard({ phone }: Prop) {
-  const {phones} = useAppSelector(state => state.cart);
+  const { phones } = useAppSelector(state => state.cart);
+  const dispatch: Dispatch<UnknownAction> = useDispatch();
   const [favorite, setFavorite] = useState(false);
-  const [addToCard, setAddToCard] = useState(() => phones.some(e => e.id === phone.id) ? true : false);
+  const [addToCard, setAddToCard] = useState(() => !!phones.some(e => e.id === phone.id));
+
+  const handleAddProductToCartClickButton = () => {
+    dispatch(addProduct(phone));
+    setAddToCard(true);
+  };
 
   const handleFavoriteClick = () => {
     setFavorite(!favorite);
@@ -55,9 +64,10 @@ function ProductCard({ phone }: Prop) {
               <button
                 type="button"
                 className={`product-card__btn${addToCard ? '--clicked' : ''}`}
-                onClick={() => setAddToCard(state => !state)}
+                onClick={handleAddProductToCartClickButton}
+                disabled={addToCard}
               >
-                {addToCard ? 'Add to cart' : 'Added'}
+                {addToCard ? 'Added' : 'Add to cart'}
               </button>
               <button
                 type="button"

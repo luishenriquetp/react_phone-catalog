@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import SelectItensPerPage from './components/SelectItensPerPage/SelectItensPerPage.tsx';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
@@ -5844,7 +5844,7 @@ const data: Phone[] = [
 
 function PageCatalog() {
   const [quantityPerPage, setQuantityPerPage] = useState<SelectOptions | string>('4');
-  const [contentPage, setContentPage] = useState<Phone[]>([]);
+  const [contentPage, setContentPage] = useState<Phone[]>(data);
   const [buttonsNumber, setButtonsNumber] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const useEffectExecuted = useRef(false);

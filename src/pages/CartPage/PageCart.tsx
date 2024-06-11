@@ -1,12 +1,10 @@
-import React from 'react';
 import CartItem from '../../components/CartItem/CartItem.tsx';
 import CartTotalAmount from '../../components/CartTotalAmount/CartTotalAmount.tsx';
 import Icon from '../../components/Icon/Icon.tsx';
 import { IconType } from '../../components/Icon/Icon.ts';
 import StyledCartPage from './StyledCartPage.ts';
 import { Phone } from '../../types/types.ts';
-import { useAppDispatch, useAppSelector } from '../../context/hooks.ts';
-import { incrementTotalPrice } from '../../context/cartContext/cartSlice.ts';
+import { useAppSelector } from '../../context/hooks.ts';
 
 export const nada: Phone[] = [
   {
@@ -155,8 +153,7 @@ export const nada: Phone[] = [
 ];
 
 function PageCart() {
-
-  const {phones: productsData, quantity } = useAppSelector(state => state.cart);
+  const { phones: productsData, quantity } = useAppSelector(state => state.cart);
 
   return (
     <StyledCartPage className="cart-items">
