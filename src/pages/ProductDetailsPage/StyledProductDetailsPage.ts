@@ -295,6 +295,16 @@ const StyledProductDetailsPage = styled.div`
             &:hover {
               box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
             }
+
+            &--selected {
+              background-color: white;
+              color: var(--rstyle1-accent);
+
+              &:hover {
+                box-shadow: none;
+                border: 1px solid var(--rstyle1-accent);
+              }
+            }
           }
 
           &-favorite {

@@ -10,10 +10,8 @@ import StyledProductDetailsPage from './StyledProductDetailsPage.ts';
 import data from '../../../public/api/phones.json';
 
 /*
-  StyledBackHomeButton - Line 18 to 21 - probably will be a global component
+  StyledBackHomeButton - Line 130 to 133 - probably will be a global component
 */
-
-type Props = {};
 
 export type CardData = {
   id: string;
@@ -40,34 +38,90 @@ export type CardData = {
   cell: string[];
 };
 
-const phones = data.filter(el => el.id.includes('apple-iphone-11-pro-max-64gb'));
-const colors = phones.find(el => el.colorsAvailable)?.colorsAvailable;
+type Favorites = {
+  id: string;
+  isFavorite: boolean;
+};
 
-function ProductDetailsPage({}: Props) {
+type Selected = {
+  id: string;
+  isSelected: boolean;
+};
+
+function ProductDetailsPage() {
   const [selectImg, SetSelectImg] = useState<string>('');
   const [phone, SetPhone] = useState<CardData | null>(null);
   const [color, SetColor] = useState<string>('');
-
-  console.log(phone);
+  const [capacity, SetCapacity] = useState<string>('');
+  const [favorites, SetFavorites] = useState<Favorites[]>([]);
+  const [selected, Setselected] = useState<Selected[]>([]);
 
   useEffect(() => {
-    if (color === '' && colors) {
-      SetColor(colors[0]);
+    const clickedPhone = data.find(el => el.id.includes('apple-iphone-11-pro-max-64gb-gold'));
+    if (clickedPhone) {
+      SetPhone(clickedPhone);
+      SetCapacity(clickedPhone.capacity);
+      SetColor(clickedPhone.color);
+      SetSelectImg(clickedPhone.images[0]);
     }
-    if (colors && phones) {
-      const selectedPhone = phones.find(el => el.color === color);
-      if (selectedPhone) {
-        SetPhone(selectedPhone);
+  }, []);
+
+  useEffect(() => {
+    if (phone) {
+      const allPhones = data.filter(el => el.id.includes('apple-iphone-11-pro-max'));
+
+      const findPhone = allPhones.find(
+        el => el.id === `apple-iphone-11-pro-max-${capacity.toLowerCase()}-${color}`,
+      );
+
+      if (findPhone) {
+        SetPhone(findPhone);
+
         if (selectImg === '') {
-          SetSelectImg(selectedPhone.images[0]);
+          SetSelectImg(findPhone.images[0]);
         }
       }
     }
-  }, [color, selectImg]);
+  }, [capacity, color, phone, selectImg]);
 
   function handleSetColor(col: string) {
     SetSelectImg('');
     SetColor(col);
+  }
+
+  function handlesSetCapacity(capac: string): void {
+    SetSelectImg('');
+    SetCapacity(capac);
+  }
+
+  function handleFavorites(id: string | undefined): void {
+    if (id) {
+      SetFavorites(state => {
+        const itemIndex = state.findIndex(el => el.id === id);
+
+        if (itemIndex !== -1) {
+          return state.map((item, index) =>
+            index === itemIndex ? { ...item, isFavorite: !item.isFavorite } : item,
+          );
+        }
+        return [...state, { id, isFavorite: true }];
+      });
+    }
+  }
+
+  function handleSelected(id: string | undefined): void {
+    if (id) {
+      Setselected(state => {
+        const itemIndex = state.findIndex(el => el.id === id);
+
+        if (itemIndex !== -1) {
+          return state.map((item, index) =>
+            index === itemIndex ? { ...item, isSelected: !item.isSelected } : item,
+          );
+        }
+        return [...state, { id, isSelected: true }];
+      });
+    }
   }
 
   return (
@@ -123,26 +177,48 @@ function ProductDetailsPage({}: Props) {
           <div className="product-details-page__variants-capacity">
             <p className="product-details-page__variants-capacity-title">Select capacity</p>
             <div className="product-details-page__variants-capacity-memo">
-              <div className="product-details-page__variants-capacity-memo-option product-details-page__variants-capacity-memo-option--selected">
-                64 GB
-              </div>
-              <div className="product-details-page__variants-capacity-memo-option">256 GB</div>
-              <div className="product-details-page__variants-capacity-memo-option">512 GB</div>
+              {phone?.capacityAvailable.map(capacit => (
+                <div
+                  key={capacit}
+                  className={`product-details-page__variants-capacity-memo-option ${capacity === capacit ? 'product-details-page__variants-capacity-memo-option--selected' : ''}`}
+                  onClick={() => handlesSetCapacity(capacit)}
+                >
+                  {capacit}
+                </div>
+              ))}
             </div>
           </div>
 
           <div className="product-details-page__variants-shopping">
             <div className="product-details-page__variants-shopping-price">
-              <p className="product-details-page__variants-shopping-price-new">$799</p>
-              <p className="product-details-page__variants-shopping-price-old">$1199</p>
+              <p className="product-details-page__variants-shopping-price-new">
+                {phone?.priceDiscount}
+              </p>
+              <p className="product-details-page__variants-shopping-price-old">
+                {phone?.priceRegular}
+              </p>
             </div>
 
             <div className="product-details-page__variants-shopping-add">
-              <button className="product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-cart">
-                Add to cart
+              <button
+                className={`product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-cart ${selected.find(el => el.id === phone?.id && el.isSelected) ? 'product-details-page__variants-shopping-add-cart--selected' : ''}`}
+                onClick={() => handleSelected(phone?.id)}
+              >
+                {selected.find(el => el.id === phone?.id && el.isSelected) ? (
+                  <>Added to cart</>
+                ) : (
+                  <>Add to cart</>
+                )}
               </button>
-              <button className="product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-favorite">
-                <Icon icon={IconType.EMPTY_HEARTLIKE} fill="#0F0F11" />
+              <button
+                className="product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-favorite"
+                onClick={() => handleFavorites(phone?.id)}
+              >
+                {favorites.find(el => el.id === phone?.id && el.isFavorite) ? (
+                  <Icon icon={IconType.FILLED_HEARTLIKE} fill="#F4BA47" />
+                ) : (
+                  <Icon icon={IconType.EMPTY_HEARTLIKE} fill="#0F0F11" />
+                )}
               </button>
             </div>
           </div>
@@ -152,25 +228,29 @@ function ProductDetailsPage({}: Props) {
               <p className="product-details-page__variants-informations-card-especification">
                 Screen
               </p>
-              <p className="product-details-page__variants-informations-card-value">6.5” OLED</p>
+              <p className="product-details-page__variants-informations-card-value">
+                {phone?.screen}
+              </p>
             </div>
             <div className="product-details-page__variants-informations-card">
               <p className="product-details-page__variants-informations-card-especification">
                 Resolution
               </p>
-              <p className="product-details-page__variants-informations-card-value">2688x1242</p>
+              <p className="product-details-page__variants-informations-card-value">
+                {phone?.resolution}
+              </p>
             </div>
             <div className="product-details-page__variants-informations-card">
               <p className="product-details-page__variants-informations-card-especification">
                 Processor
               </p>
               <p className="product-details-page__variants-informations-card-value">
-                Apple A12 Bionic
+                {phone?.processor}
               </p>
             </div>
             <div className="product-details-page__variants-informations-card">
               <p className="product-details-page__variants-informations-card-especification">RAM</p>
-              <p className="product-details-page__variants-informations-card-value">3 GB</p>
+              <p className="product-details-page__variants-informations-card-value">{phone?.ram}</p>
             </div>
           </div>
         </article>
@@ -180,41 +260,14 @@ function ProductDetailsPage({}: Props) {
         <article className="product-details-page__details-about">
           <h3 className="product-details-page__details-about-title">About</h3>
           <div className="product-details-page__details-about-contents">
-            <div className="product-details-page__details-about-content">
-              <h4 className="product-details-page__details-about-header">And then there was Pro</h4>
-              <p className="product-details-page__details-about-description">
-                A transformative triple‑camera system that adds tons of capability without
-                complexity.
-              </p>
-
-              <p className="product-details-page__details-about-description">
-                An unprecedented leap in battery life. And a mind‑blowing chip that doubles down on
-                machine learning and pushes the boundaries of what a smartphone can do. Welcome to
-                the first iPhone powerful enough to be called Pro.
-              </p>
-            </div>
-            <div className="product-details-page__details-about-content">
-              <h4 className="product-details-page__details-about-header">Camera</h4>
-              <p className="product-details-page__details-about-description">
-                Meet the first triple‑camera system to combine cutting‑edge technology with the
-                legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful
-                images in drastically lower light. Shoot the highest‑quality video in a smartphone —
-                then edit with the same tools you love for photos. You’ve never shot with anything
-                like it.
-              </p>
-            </div>
-            <div className="product-details-page__details-about-content">
-              <h4 className="product-details-page__details-about-header">
-                Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.
-              </h4>
-              <p className="product-details-page__details-about-description">
-                iPhone 11 Pro lets you capture videos that are beautifully true to life, with
-                greater detail and smoother motion. Epic processing power means it can shoot 4K
-                video with extended dynamic range and cinematic video stabilization — all at 60 fps.
-                You get more creative control, too, with four times more scene and powerful new
-                editing tools to play with.
-              </p>
-            </div>
+            {phone?.description?.map(desc => (
+              <div key={desc.title} className="product-details-page__details-about-content">
+                <h4 className="product-details-page__details-about-header">{desc.title}</h4>
+                {desc.text.map(txt => (
+                  <p className="product-details-page__details-about-description">{txt}</p>
+                ))}
+              </div>
+            ))}
           </div>
         </article>
         <article className="product-details-page__details-techs">
@@ -223,47 +276,51 @@ function ProductDetailsPage({}: Props) {
             <p className="product-details-page__details-techs-information-especifications">
               Screen
             </p>
-            <p className="product-details-page__details-techs-information-value">6.5” OLED</p>
+            <p className="product-details-page__details-techs-information-value">{phone?.screen}</p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Resolution
             </p>
-            <p className="product-details-page__details-techs-information-value">2688x1242</p>
+            <p className="product-details-page__details-techs-information-value">
+              {phone?.resolution}
+            </p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Processor
             </p>
             <p className="product-details-page__details-techs-information-value">
-              Apple A12 Bionic
+              {phone?.processor}
             </p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">RAM</p>
-            <p className="product-details-page__details-techs-information-value">3 GB</p>
+            <p className="product-details-page__details-techs-information-value">{phone?.ram}</p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Built in memory
             </p>
-            <p className="product-details-page__details-techs-information-value">64 GB</p>
+            <p className="product-details-page__details-techs-information-value">
+              {phone?.capacity}
+            </p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Camera
             </p>
-            <p className="product-details-page__details-techs-information-value">
-              12 Mp + 12 Mp + 12 Mp (Triple)
-            </p>
+            <p className="product-details-page__details-techs-information-value">{phone?.camera}</p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">Zoom</p>
-            <p className="product-details-page__details-techs-information-value">Optical, 2x</p>
+            <p className="product-details-page__details-techs-information-value">{phone?.zoom}</p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">Cell</p>
-            <p className="product-details-page__details-techs-information-value">GSM, LTE, UMTS</p>
+            <p className="product-details-page__details-techs-information-value">
+              {phone?.cell.join(', ')}
+            </p>
           </div>
         </article>
       </section>
