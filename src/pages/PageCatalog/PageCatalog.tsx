@@ -1,37 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import SelectItensPerPage from './components/SelectItensPerPage/SelectItensPerPage.tsx';
-
-export type CardData = {
-  id: string;
-  category: string;
-  namespaceId: string;
-  name: string;
-  capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
-  colorsAvailable: string[];
-  color: string;
-  images: string[];
-  description: [
-    { title: string; text: string[] },
-    { title: string; text: string[] },
-    { title: string; text: string[] },
-    { title: string; text: string[] }?,
-  ];
-  screen: string;
-  resolution: string;
-  processor: string;
-  ram: string;
-  camera: string;
-  zoom: string;
-  cell: string[];
-};
+import ProductCard from '../../components/ProductCard/ProductCard.tsx';
+import { Phone } from '../../types/types.ts';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
-const data: CardData[] = [
+const data: Phone[] = [
   {
     "id": "apple-iphone-11-128gb-black",
     "category": "phones",
@@ -5870,7 +5845,7 @@ const data: CardData[] = [
 
 function PageCatalog() {
   const [quantityPerPage, setQuantityPerPage] = useState<SelectOptions | string>('4');
-  const [contentPage, setContentPage] = useState<CardData[]>([]);
+  const [contentPage, setContentPage] = useState<Phone[]>([]);
   const [buttonsNumber, setButtonsNumber] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
   const useEffectExecuted = useRef(false);
@@ -5932,7 +5907,7 @@ function PageCatalog() {
         </div>
       </div>
       <div className="list">
-        {contentPage && contentPage.map(item => <div className="list__card" key={item.id} />)}
+        {contentPage && contentPage.map(item => <ProductCard phone={item} />)}
       </div>
 
       <div className="pagination">
