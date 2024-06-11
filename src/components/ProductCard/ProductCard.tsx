@@ -5,14 +5,16 @@ import { StyledProductCard } from './StyledProductCard.ts';
 import Icon from '../IconComponent/IconComponent.tsx';
 import { IconType } from '../IconComponent/IconComponent.types.ts';
 import { Phone } from '../../types/types.ts';
+import { useAppSelector } from '../../context/hooks.ts';
 
 interface Prop {
   phone: Phone;
 }
 
 function ProductCard({ phone }: Prop) {
+  const {phones} = useAppSelector(state => state.cart);
   const [favorite, setFavorite] = useState(false);
-  const [addToCard, setAddToCard] = useState(false);
+  const [addToCard, setAddToCard] = useState(() => phones.some(e => e.id === phone.id) ? true : false);
 
   const handleFavoriteClick = () => {
     setFavorite(!favorite);
@@ -55,7 +57,7 @@ function ProductCard({ phone }: Prop) {
                 className={`product-card__btn${addToCard ? '--clicked' : ''}`}
                 onClick={() => setAddToCard(state => !state)}
               >
-                {!addToCard ? 'Add to cart' : 'Added'}
+                {addToCard ? 'Add to cart' : 'Added'}
               </button>
               <button
                 type="button"

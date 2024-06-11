@@ -6,16 +6,18 @@ import { Phone } from '../../types/types.ts';
 
 interface Prop {
   phone: Phone;
+  quantity: number;
 }
 
 function CartItem(prop: Prop) {
-  const [count, setCount] = useState<number>(0);
-  const {phone} = prop;
+  const { phone, quantity } = prop;
+  const [count, setCount] = useState<number>(quantity);
+
 
   return (
     <StyledCartItem className="cart-item">
       <div className="cart-item__top-content">
-        <button type="button" className="cart-item__remove-btn">
+        <button type="button" className="cart-item__remove-btn" aria-label="remove item cart">
           <Icon icon={IconType.CLOSE} />
         </button>
         <img className="top-content__product-image" src={phone.images[0]} alt={phone.name} />
@@ -26,7 +28,8 @@ function CartItem(prop: Prop) {
           <button
             type="button"
             className="bottom-content__counter-btn"
-            onClick={() => setCount(state => state - 1 < -1 ? 0 : state - 1)}
+            aria-label="decrease this item from cart"
+            onClick={() => setCount(state => (state - 1 < -1 ? 0 : state - 1))}
             disabled={count <= 0}
           >
             <Icon icon={IconType.MINUS} fill="black" />
@@ -34,6 +37,7 @@ function CartItem(prop: Prop) {
           <span className="bottom-content__quantity">{count}</span>
           <button
             type="button"
+            aria-label="add this item to cart"
             className="bottom-content__counter-btn"
             onClick={() => setCount(state => state + 1)}
           >
