@@ -9,8 +9,11 @@ import { IconType } from '../Icon/Icon.ts';
 function Breadcrumb() {
   const location = useLocation();
 
-  // Split the location path into breadcrumb segments
   const pathnames = location.pathname.split('/').filter(x => x);
+
+  if (pathnames.length === 0) {
+    return null;
+  }
 
   return (
     <StyledBreadcrumb className="breadcrumb-nav">
