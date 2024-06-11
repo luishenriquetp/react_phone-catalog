@@ -3,6 +3,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable react/button-has-type */
 import React, { useEffect, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 import { StyledBackHomeButton, StyledSpan } from '../CartPage/StyledCartPage.ts';
 import Icon from '../../components/Icon/Icon.tsx';
 import { IconType } from '../../components/Icon/Icon.types.ts';
@@ -56,15 +57,22 @@ function ProductDetailsPage() {
   const [favorites, SetFavorites] = useState<Favorites[]>([]);
   const [selected, Setselected] = useState<Selected[]>([]);
 
+  const { phoneId } = useParams();
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const clickedPhone = data.find(el => el.id.includes('apple-iphone-11-pro-max-64gb-gold'));
-    if (clickedPhone) {
-      SetPhone(clickedPhone);
-      SetCapacity(clickedPhone.capacity);
-      SetColor(clickedPhone.color);
-      SetSelectImg(clickedPhone.images[0]);
+    if (phoneId) {
+      const clickedPhone = data.find(el => el.id === phoneId);
+      if (clickedPhone) {
+        SetPhone(clickedPhone);
+        SetCapacity(clickedPhone.capacity);
+        SetColor(clickedPhone.color);
+        SetSelectImg(clickedPhone.images[0]);
+      } else {
+        navigate('/not-found', { replace: true });
+      }
     }
-  }, []);
+  }, [navigate, phoneId]);
 
   useEffect(() => {
     if (phone) {
@@ -74,6 +82,8 @@ function ProductDetailsPage() {
         el => el.id === `apple-iphone-11-pro-max-${capacity.toLowerCase()}-${color}`,
       );
 
+      navigate(`/phones/${findPhone?.id}`);
+
       if (findPhone) {
         SetPhone(findPhone);
 
@@ -82,7 +92,7 @@ function ProductDetailsPage() {
         }
       }
     }
-  }, [capacity, color, phone, selectImg]);
+  }, [capacity, color, navigate, phone, selectImg]);
 
   function handleSetColor(col: string) {
     SetSelectImg('');
@@ -264,7 +274,9 @@ function ProductDetailsPage() {
               <div key={desc.title} className="product-details-page__details-about-content">
                 <h4 className="product-details-page__details-about-header">{desc.title}</h4>
                 {desc.text.map(txt => (
-                  <p className="product-details-page__details-about-description">{txt}</p>
+                  <p key={txt} className="product-details-page__details-about-description">
+                    {txt}
+                  </p>
                 ))}
               </div>
             ))}
