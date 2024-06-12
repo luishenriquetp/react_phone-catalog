@@ -86,7 +86,10 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
           );
           overflow: clip;
           background-color: red;
-          margin-inline: 19px;
+
+          @media (min-width: 640px) {
+            margin-inline: 19px;
+          }
 
           &-image {
             flex: 0 0 100%;
