@@ -34,8 +34,8 @@ function ProductCard({ product, category }: Prop) {
     <>
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
-        <a className="product-card__link" href={`/${category}/${product.itemId}`}>
-          <div className="product-card__wrapper">
+        <div className="product-card__wrapper">
+          <a className="product-card__link" href={`/${category}/${product.itemId}`}>
             <img className="product-card__image" src={product.image} alt={product.name} />
             <div className="product-card__description">
               <h4 className="product-card__description-title">{product.name}</h4>
@@ -61,25 +61,25 @@ function ProductCard({ product, category }: Prop) {
                 </div>
               </div>
             </div>
-            <div className="product-card__btn-container">
-              <button
-                type="button"
-                className={`product-card__btn${addToCard ? '--clicked' : ''}`}
-                onClick={handleAddProductToCartClickButton}
-                disabled={addToCard}
-              >
-                {addToCard ? 'Added' : 'Add to cart'}
-              </button>
-              <button
-                type="button"
-                className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
-                onClick={handleFavoriteClick}
-              >
-                <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
-              </button>
-            </div>
+          </a>
+          <div className="product-card__btn-container">
+            <button
+              type="button"
+              className={`product-card__btn${addToCard ? '--clicked' : ''}`}
+              onClick={handleAddProductToCartClickButton}
+              disabled={addToCard}
+            >
+              {addToCard ? 'Added' : 'Add to cart'}
+            </button>
+            <button
+              type="button"
+              className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
+              onClick={handleFavoriteClick}
+            >
+              <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
+            </button>
           </div>
-        </a>
+        </div>
       </StyledProductCard>
     </>
   );
