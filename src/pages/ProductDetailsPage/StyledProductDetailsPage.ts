@@ -198,11 +198,56 @@ const StyledProductDetailsPage = styled.div`
         &--midnightgreen {
           background-color: #5f7170;
         }
+        &--midnight {
+          background-color: #1d242d;
+        }
         &--spacegray {
           background-color: #4c4c4c;
         }
         &--silver {
           background-color: #f0f0f0;
+        }
+        &--black {
+          background-color: black;
+        }
+        &--green {
+          background-color: green;
+        }
+        &--yellow {
+          background-color: yellow;
+        }
+        &--white {
+          background-color: white;
+        }
+        &--purple {
+          background-color: purple;
+        }
+        &--red {
+          background-color: red;
+        }
+        &--starlight {
+          background-color: #e8e3d9;
+        }
+        &--pink {
+          background-color: pink;
+        }
+        &--rosegold {
+          background-color: #fbd2c9;
+        }
+        &--coral {
+          background-color: #fe6b5b;
+        }
+        &--blue {
+          background-color: blue;
+        }
+        &--sierrablue {
+          background-color: #9db9d2;
+        }
+        &--graphite {
+          background-color: #666460;
+        }
+        &--spaceblack {
+          background-color: #3e3c3b;
         }
       }
 

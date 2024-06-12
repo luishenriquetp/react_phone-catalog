@@ -8,36 +8,12 @@ import { StyledBackHomeButton, StyledSpan } from '../CartPage/StyledCartPage.ts'
 import Icon from '../../components/Icon/Icon.tsx';
 import { IconType } from '../../components/Icon/Icon.types.ts';
 import StyledProductDetailsPage from './StyledProductDetailsPage.ts';
-import data from '../../../public/api/phones.json';
+import { FullProduct } from '../../types/types.ts';
+import { getProductByID } from '../../api/getAll.ts';
 
 /*
   StyledBackHomeButton - Line 130 to 133 - probably will be a global component
 */
-
-export type CardData = {
-  id: string;
-  category: string;
-  namespaceId: string;
-  name: string;
-  capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
-  colorsAvailable: string[];
-  color: string;
-  images: string[];
-  description?: {
-    title: string;
-    text: string[];
-  }[];
-  screen: string;
-  resolution: string;
-  processor: string;
-  ram: string;
-  camera: string;
-  zoom: string;
-  cell: string[];
-};
 
 type Favorites = {
   id: string;
@@ -51,57 +27,79 @@ type Selected = {
 
 function ProductDetailsPage() {
   const [selectImg, SetSelectImg] = useState<string>('');
-  const [phone, SetPhone] = useState<CardData | null>(null);
+  const [product, SetProduct] = useState<FullProduct | null>(null);
   const [color, SetColor] = useState<string>('');
   const [capacity, SetCapacity] = useState<string>('');
   const [favorites, SetFavorites] = useState<Favorites[]>([]);
   const [selected, Setselected] = useState<Selected[]>([]);
 
-  const { phoneId } = useParams();
+  const { categoryId } = useParams();
+  const { category } = useParams();
   const navigate = useNavigate();
 
-  useEffect(() => {
-    if (phoneId) {
-      const clickedPhone = data.find(el => el.id === phoneId);
-      if (clickedPhone) {
-        SetPhone(clickedPhone);
-        SetCapacity(clickedPhone.capacity);
-        SetColor(clickedPhone.color);
-        SetSelectImg(clickedPhone.images[0]);
-      } else {
-        navigate('/not-found', { replace: true });
+  function handleCategoryId(categoryID: string | undefined, element: FullProduct | null) {
+    const splitedCategory = categoryID?.split('-');
+
+    if (splitedCategory && element) {
+      const indexOfCapacity = splitedCategory.indexOf(element.capacity.toLowerCase());
+
+      const numberToDelete = splitedCategory.length - indexOfCapacity;
+
+      for (let i = 0; i < numberToDelete; i += 1) {
+        splitedCategory.pop();
       }
+
+      const joinCategoryId = splitedCategory.join('-');
+
+      return joinCategoryId;
     }
-  }, [navigate, phoneId]);
+
+    return '';
+  }
 
   useEffect(() => {
-    if (phone) {
-      const allPhones = data.filter(el => el.id.includes('apple-iphone-11-pro-max'));
+    if (!product) {
+      getProductByID(categoryId).then(res => {
+        SetProduct(res);
+        SetCapacity(res.capacity);
+        SetColor(res.color);
+        SetSelectImg(res.images[0]);
 
-      const findPhone = allPhones.find(
-        el => el.id === `apple-iphone-11-pro-max-${capacity.toLowerCase()}-${color}`,
-      );
-
-      navigate(`/phones/${findPhone?.id}`);
-
-      if (findPhone) {
-        SetPhone(findPhone);
-
-        if (selectImg === '') {
-          SetSelectImg(findPhone.images[0]);
-        }
-      }
+        navigate(`/shop/${category}/${res.id}`, { replace: true });
+      });
     }
-  }, [capacity, color, navigate, phone, selectImg]);
+  }, [category, categoryId, navigate, product]);
 
   function handleSetColor(col: string) {
     SetSelectImg('');
     SetColor(col);
+
+    getProductByID(
+      `${handleCategoryId(categoryId, product)}-${capacity.toLowerCase()}-${col}`,
+    ).then(res => {
+      SetProduct(res);
+      SetCapacity(res.capacity);
+      SetColor(res.color);
+      SetSelectImg(res.images[0]);
+
+      navigate(`/shop/${category}/${res.id}`, { replace: true });
+    });
   }
 
   function handlesSetCapacity(capac: string): void {
     SetSelectImg('');
     SetCapacity(capac);
+
+    getProductByID(`${handleCategoryId(categoryId, product)}-${capac.toLowerCase()}-${color}`).then(
+      res => {
+        SetProduct(res);
+        SetCapacity(res.capacity);
+        SetColor(res.color);
+        SetSelectImg(res.images[0]);
+
+        navigate(`/shop/${category}/${res.id}`, { replace: true });
+      },
+    );
   }
 
   function handleFavorites(id: string | undefined): void {
@@ -141,7 +139,7 @@ function ProductDetailsPage() {
         <StyledSpan className="cart-page__btn-description">Back</StyledSpan>
       </StyledBackHomeButton>
 
-      <h1 className="product-details-page__title">{phone?.name}</h1>
+      <h1 className="product-details-page__title">{product?.name}</h1>
 
       <section className="product-details-page__select-phone-grid">
         <article className="product-details-page__images">
@@ -152,7 +150,7 @@ function ProductDetailsPage() {
           />
 
           <div className="product-details-page__images-minis">
-            {phone?.images.map(el => (
+            {product?.images.map(el => (
               <div
                 key={el}
                 className={`product-details-page__images-minis-container ${el === selectImg ? 'product-details-page__images-minis-container--selected' : ''}`}
@@ -175,7 +173,7 @@ function ProductDetailsPage() {
           </div>
 
           <div className="product-details-page__variants-colors">
-            {phone?.colorsAvailable.map(col => (
+            {product?.colorsAvailable.map(col => (
               <span
                 key={col}
                 className={`product-details-page__variants-color product-details-page__variants-color--${col} ${col === color ? 'product-details-page__variants-color--selected' : ''}`}
@@ -187,7 +185,7 @@ function ProductDetailsPage() {
           <div className="product-details-page__variants-capacity">
             <p className="product-details-page__variants-capacity-title">Select capacity</p>
             <div className="product-details-page__variants-capacity-memo">
-              {phone?.capacityAvailable.map(capacit => (
+              {product?.capacityAvailable.map(capacit => (
                 <div
                   key={capacit}
                   className={`product-details-page__variants-capacity-memo-option ${capacity === capacit ? 'product-details-page__variants-capacity-memo-option--selected' : ''}`}
@@ -202,19 +200,19 @@ function ProductDetailsPage() {
           <div className="product-details-page__variants-shopping">
             <div className="product-details-page__variants-shopping-price">
               <p className="product-details-page__variants-shopping-price-new">
-                {phone?.priceDiscount}
+                {product?.priceDiscount}
               </p>
               <p className="product-details-page__variants-shopping-price-old">
-                {phone?.priceRegular}
+                {product?.priceRegular}
               </p>
             </div>
 
             <div className="product-details-page__variants-shopping-add">
               <button
-                className={`product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-cart ${selected.find(el => el.id === phone?.id && el.isSelected) ? 'product-details-page__variants-shopping-add-cart--selected' : ''}`}
-                onClick={() => handleSelected(phone?.id)}
+                className={`product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-cart ${selected.find(el => el.id === product?.id && el.isSelected) ? 'product-details-page__variants-shopping-add-cart--selected' : ''}`}
+                onClick={() => handleSelected(product?.id)}
               >
-                {selected.find(el => el.id === phone?.id && el.isSelected) ? (
+                {selected.find(el => el.id === product?.id && el.isSelected) ? (
                   <>Added to cart</>
                 ) : (
                   <>Add to cart</>
@@ -222,9 +220,9 @@ function ProductDetailsPage() {
               </button>
               <button
                 className="product-details-page__variants-shopping-add-btn product-details-page__variants-shopping-add-favorite"
-                onClick={() => handleFavorites(phone?.id)}
+                onClick={() => handleFavorites(product?.id)}
               >
-                {favorites.find(el => el.id === phone?.id && el.isFavorite) ? (
+                {favorites.find(el => el.id === product?.id && el.isFavorite) ? (
                   <Icon icon={IconType.FILLED_HEARTLIKE} fill="#F4BA47" />
                 ) : (
                   <Icon icon={IconType.EMPTY_HEARTLIKE} fill="#0F0F11" />
@@ -239,7 +237,7 @@ function ProductDetailsPage() {
                 Screen
               </p>
               <p className="product-details-page__variants-informations-card-value">
-                {phone?.screen}
+                {product?.screen}
               </p>
             </div>
             <div className="product-details-page__variants-informations-card">
@@ -247,7 +245,7 @@ function ProductDetailsPage() {
                 Resolution
               </p>
               <p className="product-details-page__variants-informations-card-value">
-                {phone?.resolution}
+                {product?.resolution}
               </p>
             </div>
             <div className="product-details-page__variants-informations-card">
@@ -255,12 +253,14 @@ function ProductDetailsPage() {
                 Processor
               </p>
               <p className="product-details-page__variants-informations-card-value">
-                {phone?.processor}
+                {product?.processor}
               </p>
             </div>
             <div className="product-details-page__variants-informations-card">
               <p className="product-details-page__variants-informations-card-especification">RAM</p>
-              <p className="product-details-page__variants-informations-card-value">{phone?.ram}</p>
+              <p className="product-details-page__variants-informations-card-value">
+                {product?.ram}
+              </p>
             </div>
           </div>
         </article>
@@ -270,7 +270,7 @@ function ProductDetailsPage() {
         <article className="product-details-page__details-about">
           <h3 className="product-details-page__details-about-title">About</h3>
           <div className="product-details-page__details-about-contents">
-            {phone?.description?.map(desc => (
+            {product?.description?.map(desc => (
               <div key={desc.title} className="product-details-page__details-about-content">
                 <h4 className="product-details-page__details-about-header">{desc.title}</h4>
                 {desc.text.map(txt => (
@@ -288,14 +288,16 @@ function ProductDetailsPage() {
             <p className="product-details-page__details-techs-information-especifications">
               Screen
             </p>
-            <p className="product-details-page__details-techs-information-value">{phone?.screen}</p>
+            <p className="product-details-page__details-techs-information-value">
+              {product?.screen}
+            </p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Resolution
             </p>
             <p className="product-details-page__details-techs-information-value">
-              {phone?.resolution}
+              {product?.resolution}
             </p>
           </div>
           <div className="product-details-page__details-techs-information">
@@ -303,35 +305,47 @@ function ProductDetailsPage() {
               Processor
             </p>
             <p className="product-details-page__details-techs-information-value">
-              {phone?.processor}
+              {product?.processor}
             </p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">RAM</p>
-            <p className="product-details-page__details-techs-information-value">{phone?.ram}</p>
+            <p className="product-details-page__details-techs-information-value">{product?.ram}</p>
           </div>
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">
               Built in memory
             </p>
             <p className="product-details-page__details-techs-information-value">
-              {phone?.capacity}
+              {product?.capacity}
             </p>
           </div>
-          <div className="product-details-page__details-techs-information">
-            <p className="product-details-page__details-techs-information-especifications">
-              Camera
-            </p>
-            <p className="product-details-page__details-techs-information-value">{phone?.camera}</p>
-          </div>
-          <div className="product-details-page__details-techs-information">
-            <p className="product-details-page__details-techs-information-especifications">Zoom</p>
-            <p className="product-details-page__details-techs-information-value">{phone?.zoom}</p>
-          </div>
+          {product?.camera && (
+            <div className="product-details-page__details-techs-information">
+              <p className="product-details-page__details-techs-information-especifications">
+                Camera
+              </p>
+              <p className="product-details-page__details-techs-information-value">
+                {product?.camera}
+              </p>
+            </div>
+          )}
+
+          {product?.zoom && (
+            <div className="product-details-page__details-techs-information">
+              <p className="product-details-page__details-techs-information-especifications">
+                Zoom
+              </p>
+              <p className="product-details-page__details-techs-information-value">
+                {product?.zoom}
+              </p>
+            </div>
+          )}
+
           <div className="product-details-page__details-techs-information">
             <p className="product-details-page__details-techs-information-especifications">Cell</p>
             <p className="product-details-page__details-techs-information-value">
-              {phone?.cell.join(', ')}
+              {product?.cell.join(', ')}
             </p>
           </div>
         </article>

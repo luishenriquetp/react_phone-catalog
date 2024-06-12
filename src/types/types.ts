@@ -3,7 +3,7 @@ type Description = {
   text: string[];
 };
 
-export type Phone = {
+export type FullProduct = {
   id: string;
   category: string;
   namespaceId: string;
@@ -15,32 +15,13 @@ export type Phone = {
   colorsAvailable: string[];
   color: string;
   images: string[];
-  description: Description[];
+  description?: Description[];
   screen: string;
   resolution: string;
   processor: string;
   ram: string;
-  camera: string;
-  zoom: string;
-  cell: string[];
-};
-export type Accessorie = {
-  id: string;
-  category: string;
-  namespaceId: string;
-  name: string;
-  capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
-  colorsAvailable: string[];
-  color: string;
-  images: string[];
-  description: { title: string; text: string[] }[];
-  screen: string;
-  resolution: string;
-  processor: string;
-  ram: string;
+  camera?: string;
+  zoom?: string;
   cell: string[];
 };
 
@@ -57,24 +38,4 @@ export type Product = {
   ram: string;
   year: number;
   image: string;
-};
-
-export type Tablet = {
-  id: string;
-  category: string;
-  namespaceId: string;
-  name: string;
-  capacityAvailable: string[];
-  capacity: string;
-  priceRegular: number;
-  priceDiscount: number;
-  colorsAvailable: string[];
-  color: string;
-  images: string[];
-  description: { title: string; text: string[] }[];
-  screen: string;
-  resolution: string;
-  processor: string;
-  ram: string;
-  cell: string[];
 };

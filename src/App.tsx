@@ -14,9 +14,9 @@ function App(): React.ReactNode {
       <div className="container">
         <Routes>
           <Route path="/">
-            <Route path="/phones">
+            <Route path="shop/:category">
               <Route index element={<PageCatalog />} />
-              <Route path=":phoneId" element={<ProductDetailsPage />} />
+              <Route path=":categoryId" element={<ProductDetailsPage />} />
             </Route>
             <Route path="*" element={<NotFoundPage />} />
           </Route>
