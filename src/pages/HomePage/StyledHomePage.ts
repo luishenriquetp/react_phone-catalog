@@ -38,19 +38,15 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: 100vw;
+      width: 100%;
       gap: 18px;
       margin-bottom: 56px;
 
       @media (min-width: 640px) {
-        margin-left: 24px;
-        margin-right: 24px;
         margin-bottom: 64px;
       }
 
       @media (min-width: 1199px) {
-        margin-left: 32px;
-        margin-right: 32px;
         margin-bottom: 80px;
       }
 
@@ -90,6 +86,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
           );
           overflow: clip;
           background-color: red;
+          margin-inline: 19px;
 
           &-image {
             flex: 0 0 100%;
@@ -104,6 +101,10 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
               height: 189px;
               border-radius: 8px 0px 0px 0px;
               cursor: pointer;
+            }
+            @media (min-width: 1200px) {
+              width: 1040px;
+              height: 400px;
             }
           }
         }
@@ -190,6 +191,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
         display: flex;
         flex-direction: column;
         gap: 20px;
+        overflow: hidden;
 
         @media (min-width: 640px) {
           flex-direction: row;
