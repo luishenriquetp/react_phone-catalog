@@ -15,6 +15,10 @@ function Breadcrumb() {
     return null;
   }
 
+  if (pathnames.includes('cart')) {
+    return null;
+  }
+
   return (
     <StyledBreadcrumb className="breadcrumb-nav">
       <ol className="breadcrumb-nav__list">
@@ -26,10 +30,14 @@ function Breadcrumb() {
         {pathnames.map((value, index) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
+          const isCategory = index === 0;
           const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
 
           return (
-            <li key={to} className="breadcrumb-nav__list-item">
+            <li
+              key={to}
+              className={`breadcrumb-nav__list-item ${isCategory ? 'category' : ''} ${isLast ? 'product' : ''}`}
+            >
               <Icon icon={IconType.ARROW_RIGHT} />
               {isLast ? <span>{capitalizedValue}</span> : <Link to={to}>{capitalizedValue}</Link>}
             </li>

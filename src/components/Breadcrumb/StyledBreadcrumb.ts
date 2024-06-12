@@ -25,6 +25,11 @@ const StyledBreadcrumb = styled.nav`
     text-align: left;
     color: var(--rstyle1-gray-secondary);
   }
+
+  a {
+    text-decoration: none;
+    color: var(--rstyle1-gray-secondary);
+  }
 `;
 
 export default StyledBreadcrumb;
