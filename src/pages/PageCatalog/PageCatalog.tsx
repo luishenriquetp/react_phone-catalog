@@ -89,7 +89,8 @@ function PageCatalog() {
         </div>
       </div>
       <div className="list">
-        {contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)}
+        {contentPage &&
+          contentPage.map(item => <ProductCard key={item.id} product={item} category={category} />)}
       </div>
 
       <div className="pagination">

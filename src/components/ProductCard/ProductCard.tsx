@@ -12,9 +12,10 @@ import { addProduct } from '../../context/cartContext/cartSlice.ts';
 
 interface Prop {
   product: Product;
+  category: string | undefined;
 }
 
-function ProductCard({ product }: Prop) {
+function ProductCard({ product, category }: Prop) {
   const { products } = useAppSelector(state => state.cart);
   const dispatch: Dispatch<UnknownAction> = useDispatch();
   const [favorite, setFavorite] = useState(false);
@@ -33,7 +34,7 @@ function ProductCard({ product }: Prop) {
     <>
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
-        <a className="product-card__link">
+        <a className="product-card__link" href={`/${category}/${product.itemId}`}>
           <div className="product-card__wrapper">
             <img className="product-card__image" src={product.image} alt={product.name} />
             <div className="product-card__description">
