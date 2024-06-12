@@ -14,14 +14,10 @@ const StyledSelectCategory = styled.div`
   .category {
     display: flex;
     flex-direction: column;
-    margin-right: 16px;
-    margin-left: 16px;
 
     &__image {
       width: 288px;
       height: 288px;
-      top: 1223px;
-      left: 16px;
       border-radius: 8px 0px 0px 0px;
       margin-bottom: 24px;
     }

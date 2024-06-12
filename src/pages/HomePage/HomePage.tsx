@@ -99,7 +99,7 @@ function HomePage() {
           <SelectCategory />
         </div>
       </div>
-      <div className="home-page__sliders-container">
+      <div className="home-page__sliders-container--second-child">
         <h2 className="home-page__sliders-container-title">Hot prices</h2>
         <div className="home-page__sliders-container-content">Slider</div>
       </div>

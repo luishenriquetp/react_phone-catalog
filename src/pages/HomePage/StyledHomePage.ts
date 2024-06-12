@@ -1,5 +1,10 @@
 import styled from 'styled-components';
-import { letterStyleH1Mobile, letterStyleH2Mobile } from '../../styles/GlobalStyles.ts';
+import {
+  letterStyleH1DesktoAndTable,
+  letterStyleH1Mobile,
+  letterStyleH2DesktoAndTable,
+  letterStyleH2Mobile,
+} from '../../styles/GlobalStyles.ts';
 
 interface StyledHomePageProps {
   'data-current-index': number;
@@ -7,16 +12,26 @@ interface StyledHomePageProps {
 
 const StyledHomePage = styled.div<StyledHomePageProps>`
   .home-page {
-    width: 100vw;
-    height: 100vh;
-    margin-bottom: 64px;
-
     &__title {
       ${letterStyleH1Mobile};
       padding-top: 24px;
       margin-bottom: 24px;
       margin-left: 16px;
       margin-right: 16px;
+
+      @media (min-width: 640px) {
+        ${letterStyleH1DesktoAndTable};
+        margin-bottom: 32px;
+        padding-top: 32px;
+        margin-left: 24px;
+        margin-right: 0;
+      }
+
+      @media (min-width: 1199px) {
+        margin-bottom: 56px;
+        padding-top: 56px;
+        margin-left: 32px;
+      }
     }
 
     &__banner {
@@ -30,11 +45,13 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
       @media (min-width: 640px) {
         margin-left: 24px;
         margin-right: 24px;
+        margin-bottom: 64px;
       }
 
       @media (min-width: 1199px) {
         margin-left: 32px;
         margin-right: 32px;
+        margin-bottom: 80px;
       }
 
       &-structure {
@@ -71,6 +88,8 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
           transform: translateX(
             ${({ 'data-current-index': currentIndex }) => `-${currentIndex * 100}%`}
           );
+          overflow: clip;
+          background-color: red;
 
           &-image {
             flex: 0 0 100%;
@@ -109,32 +128,73 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
 
     &__sliders-container {
       margin: 0;
+      margin-bottom: 56px;
+      margin-left: 16px;
+
+      @media (min-width: 640px) {
+        margin-bottom: 64px;
+        margin-left: 24px;
+      }
+
+      @media (min-width: 1199px) {
+        margin-bottom: 80px;
+        margin-left: 32px;
+      }
 
       &__sliders-container-title {
         ${letterStyleH2Mobile};
         margin-bottom: 24px;
+
+        @media (min-width: 640px) {
+          ${letterStyleH2DesktoAndTable};
+        }
       }
 
-      &__sliders-container-content {
-        margin-top: 10px;
+      &--second-child {
+        margin-bottom: 64px;
+
+        @media (min-width: 640px) {
+          margin-left: 24px;
+        }
+
+        @media (min-width: 1199px) {
+          margin-bottom: 80px;
+          margin-left: 32px;
+        }
       }
     }
 
     &__shop {
       margin-top: 56px;
       margin-bottom: 56px;
+      margin-left: 16px;
+
+      @media (min-width: 640px) {
+        margin-left: 24px;
+      }
+
+      @media (min-width: 1199px) {
+        margin-left: 32px;
+      }
 
       &-title {
         ${letterStyleH2Mobile};
         margin-bottom: 24px;
+
+        @media (min-width: 640px) {
+          ${letterStyleH2DesktoAndTable}
+        }
       }
 
       &-container {
         display: flex;
         flex-direction: column;
-        justify-content: center;
-        width: 100vw;
         gap: 20px;
+
+        @media (min-width: 640px) {
+          flex-direction: row;
+          gap: 16px;
+        }
       }
     }
   }
