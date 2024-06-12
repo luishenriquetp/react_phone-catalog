@@ -1,5 +1,6 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
+import { toast } from 'react-toastify';
 import { useParams } from 'react-router-dom';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
@@ -7,11 +8,12 @@ import { Product } from '../../types/types.ts';
 import { getProducts } from '../../api/getAll.ts';
 import { IconType } from '../../components/Icon/Icon.ts';
 import Dropdown from '../../components/Dropdown/Dropdown.tsx';
+import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
 const categoryMapping: { [key: string]: string } = {
-  'mobile-phones': 'Mobile phones',
+  phones: 'Mobile phones',
   accessories: 'Accessories',
   tablets: 'Tablets',
 };
@@ -24,6 +26,7 @@ function PageCatalog() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [renderedData, setRenderedData] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>('newest');
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   const useEffectExecuted = useRef(false);
 
   useEffect(() => {
@@ -87,21 +90,37 @@ function PageCatalog() {
   ];
 
   useEffect(() => {
-    function fetchProducts() {
-      getProducts()
-        .then(fetchedData => {
-          const filteredData = fetchedData.filter(e => e.category === category);
-          const sortedData = sortProducts(filteredData, sortOption);
-          setRenderedData(sortedData);
-        })
-        .catch(error => {
-          console.error('Error fetching products:', error);
+    setIsLoading(true);
+    getProducts()
+      .then(fetchedData => {
+        const filteredData = fetchedData.filter(e => e.category === category);
+        const sortedData = sortProducts(filteredData, sortOption);
+        setRenderedData(sortedData);
+
+        const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
+
+        toast.success(`${capitalizedCategory} loaded with success...`, {
+          position: 'top-right',
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeButton: false,
         });
-    }
-    fetchProducts();
+      })
+      .catch(error => {
+        toast.error(`Error loading ${category}...`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeButton: false,
+        });
+        console.error('Error fetching products:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
   }, [category, sortOption]);
 
-  if (renderedData.length === 0) {
+  if (renderedData.length === 0 && isLoading) {
     return <h1>Loading</h1>;
   }
 
@@ -109,6 +128,7 @@ function PageCatalog() {
 
   return (
     <StyledPageCatalog className="page-catalog">
+      <StyledToastContainer />
       <div className="top-section">
         <h1 className="top-section__title">{categoryTitle}</h1>
         <h2 className="top-section__subtitle">{renderedData.length} models</h2>

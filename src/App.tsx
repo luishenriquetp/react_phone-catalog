@@ -1,3 +1,4 @@
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import Header from './components/Header/Header.tsx';
