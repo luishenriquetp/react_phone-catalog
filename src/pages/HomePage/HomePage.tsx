@@ -1,7 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import StyledHomePage from './StyledHomePage.ts';
 import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
-import { Accessorie, Phone, Tablet } from '../../types/types.ts';
+import { getProducts } from '../../api/getAll.ts';
+
+interface Category {
+  name: string;
+  amount: number;
+  image: string;
+}
 
 interface Image {
   id: number;
@@ -20,53 +26,15 @@ const desktopImages: Image[] = [
   { id: 3, src: '/img/banner_640px_3.png' },
 ];
 
-export const getAccessories = (): Promise<Accessorie[]> => {
-  return fetch('api/accessories.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch accessories: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => data as Accessorie[])
-    .catch(error => {
-      throw error;
-    });
-};
-
-export const getPhones = (): Promise<Phone[]> => {
-  return fetch('api/phones.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch phones: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => data as Phone[])
-    .catch(error => {
-      throw error;
-    });
-};
-
-export const getTablets = (): Promise<Tablet[]> => {
-  return fetch('api/tablets.json')
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`Failed to fetch tablets: ${response.statusText}`);
-      }
-      return response.json();
-    })
-    .then(data => data as Tablet[])
-    .catch(error => {
-      throw error;
-    });
-};
-
 function HomePage() {
   const [currentIndex, setCurrentIndex] = useState(0);
+
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 639);
+
   const [touchStartX, setTouchStartX] = useState(0);
   const [touchEndX, setTouchEndX] = useState(0);
+
+  const [categories, setCategories] = useState<{ [key: string]: Category }>({});
 
   const images = isMobile ? mobileImages : desktopImages;
 
@@ -80,6 +48,27 @@ function HomePage() {
     return () => {
       window.removeEventListener('resize', handleResize);
     };
+  }, []);
+
+  useEffect(() => {
+    getProducts().then(products => {
+      const newCategories = products.reduce(
+        (acc, product) => {
+          if (!acc[product.category]) {
+            acc[product.category] = {
+              name: product.category,
+              amount: 0,
+              image: `/img/categories_images/${product.category}_category.png`,
+            };
+          }
+          acc[product.category].amount += 1;
+          return acc;
+        },
+        {} as { [key: string]: Category },
+      );
+
+      setCategories(newCategories);
+    });
   }, []);
 
   const handlePrev = () => {
@@ -100,10 +89,8 @@ function HomePage() {
 
   const handleTouchEnd = () => {
     if (touchStartX - touchEndX > 50) {
-      // Deslize para a esquerda (avançar)
       handleNext();
     } else if (touchEndX - touchStartX > 50) {
-      // Deslize para a direita (retroceder)
       handlePrev();
     }
   };
@@ -153,9 +140,14 @@ function HomePage() {
       <div className="home-page__shop">
         <div className="home-page__shop-title">Shop by category</div>
         <div className="home-page__shop-container">
-          <SelectCategory {...getPhones} />
-          <SelectCategory {...getTablets} />
-          <SelectCategory {...getAccessories} />
+          {Object.values(categories).map(category => (
+            <SelectCategory
+              key={category.name}
+              images={category.image}
+              name={category.name.charAt(0).toUpperCase() + category.name.slice(1)}
+              amount={category.amount}
+            />
+          ))}
         </div>
       </div>
       <div className="home-page__sliders-container--second-child">

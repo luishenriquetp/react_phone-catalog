@@ -8,18 +8,26 @@ const StyledSelectCategory = styled.div`
   margin: 0;
   display: flex;
   flex-direction: column;
-  margin-right: 16px;
-  margin-left: 16px;
+  cursor: pointer;
+
+  @media (min-width: 640px) {
+    width: 100%;
+  }
 
   .category {
-    display: flex;
-    flex-direction: column;
-
     &__image {
-      width: 288px;
-      height: 288px;
-      border-radius: 8px 0px 0px 0px;
+      border-radius: 8px;
       margin-bottom: 24px;
+
+      @media (min-width: 640px) {
+        width: 100%;
+        height: 100%;
+      }
+
+      @media (min-width: 1199px) {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     &__name {

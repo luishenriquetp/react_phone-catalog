@@ -69,16 +69,17 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
             display: block;
             width: 32px;
             height: 189px;
+            margin-left: 16px;
             background-color: var(--rstyle1-gray-white);
             border: 1px solid var(--rstyle1-gray-icons-placeholders);
             color: var(--rstyle1-primary);
             border-radius: 48px;
-            box-sizing: border-box;
             cursor: pointer;
           }
 
           @media (min-width: 1199px) {
             height: 400px;
+            margin-left: 32px;
           }
         }
 
@@ -89,7 +90,11 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
           position: relative;
 
           @media (min-width: 640px) {
-            margin-inline: 19px;
+            margin-left: 16px;
+          }
+
+          @media (min-width: 640px) {
+            margin-left: 32px;
           }
 
           &-image {
@@ -143,7 +148,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
         margin-left: 32px;
       }
 
-      &__sliders-container-title {
+      &-title {
         ${letterStyleH2Mobile};
         margin-bottom: 24px;
 
@@ -154,6 +159,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
 
       &--second-child {
         margin-bottom: 64px;
+        margin-left: 16px;
 
         @media (min-width: 640px) {
           margin-left: 24px;
@@ -191,6 +197,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
       &-container {
         display: flex;
         flex-direction: column;
+        width: 100%;
         gap: 20px;
         overflow: hidden;
 
