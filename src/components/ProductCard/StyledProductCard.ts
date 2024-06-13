@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import {
+  letterStyleBodyTextDesktoAndTable,
   letterStyleH3DesktoAndTable,
-  letterStyleH4DesktoAndTable,
   letterStyleSmallTextDesktoAndTable,
 } from '../../styles/GlobalStyles.ts';
 
@@ -15,14 +15,21 @@ export const StyledProductCard = styled.div`
   border-radius: 8px;
   width: 287px;
   height: 440px;
+  padding-bottom: 32px;
 
-  @media (min-width: 640px) and (max-width: 1199px) {
+  @media (min-width: 768px) {
     width: 229px;
     height: 506px;
   }
 
+  @media (min-width: 1200px) {
+    width: 272px;
+  }
+
   .product-card__link {
     text-decoration: none;
+    padding-inline: 32px;
+    padding-top: 32px;
     color: var(--rstyle1-gray-primary);
     &:hover {
       cursor: pointer;
@@ -32,13 +39,12 @@ export const StyledProductCard = styled.div`
   .product-card__wrapper {
     flex-direction: column;
     display: flex;
-    align-items: center;
     justify-content: center;
   }
 
   .product-card__image {
-    width: 223px;
-    height: 130px;
+    width: 100%;
+    height: 150px;
     object-fit: contain;
     transition: transform 500ms;
 
@@ -46,9 +52,8 @@ export const StyledProductCard = styled.div`
       transform: scale(1.2);
     }
 
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
-      height: 196px;
+    @media (min-width: 768px) {
+      height: 190px;
     }
   }
 
@@ -58,16 +63,11 @@ export const StyledProductCard = styled.div`
   }
 
   .product-card__description-title {
-    ${letterStyleH4DesktoAndTable}
-    margin: 24px 0 8px;
-    width: 223px;
+    ${letterStyleBodyTextDesktoAndTable}
+    margin: 0;
+    margin-bottom: 8px;
 
     color: var(--rstyle1-gray-primary);
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
-      margin: 8px 0;
-    }
   }
 
   .product-card__description-price-wrapper {
@@ -100,22 +100,7 @@ export const StyledProductCard = styled.div`
 
   .product-card__custom-line {
     border: 1px solid var(--rstyle1-gray-elements);
-    width: 228px;
     margin: 8px 0;
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
-    }
-  }
-
-  .product-card__details {
-    display: flex;
-    gap: 100px;
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      gap: 10px;
-      justify-content: space-between;
-    }
   }
 
   .product-card__details-container {
@@ -128,36 +113,20 @@ export const StyledProductCard = styled.div`
 
   .product-card__details-screen {
     display: flex;
-    width: 228px;
     justify-content: space-between;
 
     @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
     }
   }
 
   .product-card__details-capacity {
     display: flex;
-    width: 228px;
     justify-content: space-between;
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
-    }
   }
 
   .product-card__details-ram {
     display: flex;
-    width: 228px;
     justify-content: space-between;
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 165px;
-    }
-
-    @media (min-width: 1200px) {
-      width: 228px;
-    }
   }
 
   .product-card__details-title {
@@ -184,12 +153,14 @@ export const StyledProductCard = styled.div`
     display: flex;
     align-items: center;
     gap: 8px;
+    padding-inline: 32px;
+    justify-content: space-between;
   }
 
   .product-card__btn {
     // theres no typo on figma
-    width: 175px;
     height: 40px;
+    width: 100%;
     border-radius: 48px;
     background-color: var(--rstyle1-accent);
     border: none;
@@ -208,7 +179,6 @@ export const StyledProductCard = styled.div`
     &--clicked {
       background-color: transparent;
       color: var(--rstyle1-accent);
-      width: 175px;
       height: 40px;
       border-radius: 48px;
       border: 1px solid var(--rstyle1-gray-elements);
@@ -227,10 +197,6 @@ export const StyledProductCard = styled.div`
         cursor: pointer;
         box-shadow: 0px 3px 13px 0px #17203166;
       }
-    }
-
-    @media (min-width: 640px) and (max-width: 1199px) {
-      width: 117px;
     }
 
     &:hover {

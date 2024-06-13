@@ -9,7 +9,8 @@ import { IconType } from '../Icon/Icon.ts';
 function Breadcrumb() {
   const location = useLocation();
 
-  const pathnames = location.pathname.split('/').filter(x => x);
+  const splitedLocation = location.pathname.split('/').filter(el => el !== 'shop');
+  const pathnames = splitedLocation.filter(x => x);
 
   if (pathnames.length === 0) {
     return null;
@@ -28,7 +29,7 @@ function Breadcrumb() {
           </Link>
         </li>
         {pathnames.map((value, index) => {
-          const to = `/${pathnames.slice(0, index + 1).join('/')}`;
+          const to = `/shop/${pathnames.slice(0, index + 1).join('/')}`;
           const isLast = index === pathnames.length - 1;
           const isCategory = index === 0;
           const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);

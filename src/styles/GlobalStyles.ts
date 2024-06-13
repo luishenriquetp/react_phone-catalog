@@ -18,19 +18,19 @@ export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Mont';
     font-weight: 800;
-    src: url('fonts/Mont-Bold-otf') format('opentype');
+    src: url('/fonts/Mont-Bold.otf') format('opentype');
   }
 
   @font-face {
     font-family: 'Mont';
     font-weight: 700;
-    src: url('fonts/Mont-SemiBold.otf') format('opentype');
+    src: url('/fonts/Mont-SemiBold.otf') format('opentype');
   }
 
   @font-face {
     font-family: 'Mont';
     font-weight: 600;
-    src: url('fonts/Mont-Regular.otf') format('opentype');
+    src: url('/fonts/Mont-Regular.otf') format('opentype');
   }
 
   * {
@@ -42,7 +42,8 @@ html {
   }
 
   body {
-    background-color: var(--dark-black);
+    background-color: var(--rstyle1-gray-background);
+    margin: 0;
   }
 
   p {

@@ -107,18 +107,9 @@ const StyledPageCatalog = styled.div`
     display: flex;
     flex-wrap: wrap;
     gap: 40px;
-    padding-left: 16px;
-    padding-right: 16px;
 
     @media (min-width: 640px) {
-      padding-right: 24px;
-      padding-left: 24px;
       gap: 16px;
-    }
-
-    @media (min-width: 1200px) {
-      padding-right: 32px;
-      padding-left: 32px;
     }
 
     &__card {

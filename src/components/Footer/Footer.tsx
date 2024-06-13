@@ -6,7 +6,7 @@ function Footer(): React.ReactNode {
     <StyledFooter className="footer">
       <footer id="footer_bar" className="footerlinks">
         <div className="footer-item">
-          <img id="logo" src="img/icons/logo.png" alt="Logo" />
+          <img id="logo" src="/img/icons/logo.png" alt="Logo" />
         </div>
         <div className="center-links">
           <a href="/" className="footer-item">
@@ -21,7 +21,7 @@ function Footer(): React.ReactNode {
         </div>
         <a href="#header" className="footer-item icons">
           <span>Back to top</span>
-          <img src="img/icons/back_to_top_button.png" alt="Back to top" />
+          <img src="/img/icons/back_to_top_button.png" alt="Back to top" />
         </a>
       </footer>
     </StyledFooter>

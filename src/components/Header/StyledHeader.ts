@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-const StyledHeader = styled.header<{ $fav_count?: string }>`
+const StyledHeader = styled.header`
   .navbar {
     top: 0;
     background-color: #fff;
@@ -70,12 +70,6 @@ const StyledHeader = styled.header<{ $fav_count?: string }>`
     border-left: 2px solid #e2e6e9;
     width: 64px;
     height: 64px;
-    /* like::after {
-			content: {(props) => props.$fav_count};
-			background-color: blue;
-			color: #fff;
-			border-radius: 50%;
-		} */
   }
 
   .icon img {
@@ -116,6 +110,11 @@ const StyledHeader = styled.header<{ $fav_count?: string }>`
       display: flex;
       margin-left: auto;
     }
+  }
+
+  .header__burguer-menu {
+    width: 100vw;
+    height: 100vh;
   }
 `;
 

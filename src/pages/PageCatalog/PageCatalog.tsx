@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
@@ -24,14 +24,64 @@ function PageCatalog() {
   const [contentPage, setContentPage] = useState<Product[]>([]);
   const [buttonsNumber, setButtonsNumber] = useState<number[]>([]);
   const [pageNumber, setPageNumber] = useState<number>(1);
+  const [fourButtons, setFourButtons] = useState<number[]>([]);
   const [renderedData, setRenderedData] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>('newest');
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const useEffectExecuted = useRef(false);
 
+  const navigate = useNavigate();
+
   useEffect(() => {
     setPageNumber(1);
-  }, []);
+    setButtonsNumber([]);
+  }, [quantityPerPage]);
+
+  useEffect(() => {
+    if (buttonsNumber.length < 4) {
+      const count = 1;
+      const arr = [];
+
+      for (let i = count; i < buttonsNumber.length; i += 1) {
+        arr.push(i);
+      }
+      setFourButtons(arr);
+
+      return;
+    }
+
+    if (buttonsNumber.length > 4) {
+      let count = 1;
+      const arr = [];
+
+      if (pageNumber === buttonsNumber[buttonsNumber.length - 1]) {
+        return;
+      }
+
+      if (fourButtons[0] === 1 && pageNumber === 1) {
+        return;
+      }
+
+      if (fourButtons[1] === pageNumber || fourButtons[2] === pageNumber) {
+        count = pageNumber;
+        return;
+      }
+
+      if (fourButtons[3] === pageNumber) {
+        count = pageNumber - 2;
+      }
+
+      if (fourButtons[0] === pageNumber) {
+        count = pageNumber - 1;
+      }
+
+      for (let i = count; i < count + 4; i += 1) {
+        arr.push(i);
+      }
+      setFourButtons(arr);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [buttonsNumber, buttonsNumber.length, pageNumber]);
 
   useEffect(() => {
     if (renderedData.length !== 0) {
@@ -63,6 +113,10 @@ function PageCatalog() {
       }
     }
   }, [pageNumber, quantityPerPage, renderedData]);
+
+  if (category !== 'phones' && category !== 'tablets' && category !== 'accessories') {
+    navigate(`/not-found`, { replace: true });
+  }
 
   function sortProducts(products: Product[], sortBy: string): Product[] {
     switch (sortBy) {
@@ -166,7 +220,7 @@ function PageCatalog() {
           &lt;
         </button>
 
-        {buttonsNumber.map(number => (
+        {fourButtons.map(number => (
           <button
             key={number}
             type="button"
