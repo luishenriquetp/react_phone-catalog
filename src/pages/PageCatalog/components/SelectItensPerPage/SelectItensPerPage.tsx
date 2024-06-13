@@ -1,6 +1,8 @@
 import React from 'react';
 import { SelectOptions } from '../../PageCatalog.tsx';
 import StyledSelectItensPerPage from './StyledSelectItensPerPage.ts';
+import { IconType } from '../../../../components/Icon/Icon.ts';
+import Icon from '../../../../components/Icon/Icon.tsx';
 
 type Props = {
   quantityPerPage: string | number;
@@ -18,6 +20,9 @@ function SelectItensPerPage({ quantityPerPage, setQuantityPerPage }: Props) {
       <option value={8}>8</option>
       <option value={16}>16</option>
       <option value="all">All</option>
+      <div className="icon-container">
+        <Icon icon={IconType.ARROW_DOWN} />
+      </div>
     </StyledSelectItensPerPage>
   );
 }

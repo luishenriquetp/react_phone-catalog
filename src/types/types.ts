@@ -3,6 +3,11 @@ type Description = {
   text: string[];
 };
 
+export type Category = {
+  title: string;
+  id: string;
+};
+
 export type Phone = {
   id: string;
   category: string;

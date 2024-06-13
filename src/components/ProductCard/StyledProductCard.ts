@@ -22,6 +22,8 @@ export const StyledProductCard = styled.div`
   }
 
   .product-card__link {
+    text-decoration: none;
+    color: var(--rstyle1-gray-primary);
     &:hover {
       cursor: pointer;
     }

@@ -18,17 +18,17 @@ function Header(): React.ReactNode {
           <NavLink className="nav_link" to="/phones">
             Phones
           </NavLink>
-          <a className="nav_link" href="/">
+          <NavLink className="nav_link" to="/tablets">
             Tablets
-          </a>
-          <a className="nav_link" href="/">
+          </NavLink>
+          <NavLink className="nav_link" to="/accessories">
             Accessories
-          </a>
+          </NavLink>
         </div>
         <div className="nav_icons">
-          <a className="icon icon--like" href="/">
+          <NavLink className="icon icon--like" to="/favorites">
             <img src="img/icons/favourites_black.png" alt="Like" />
-          </a>
+          </NavLink>
           <NavLink className="icon" to="/cart">
             <img src="img/icons/shopping_bag_black.png" alt="Cart" />
           </NavLink>
