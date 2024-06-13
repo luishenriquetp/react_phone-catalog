@@ -11,6 +11,7 @@ const StyledHeader = styled.header<{ $fav_count?: string }>`
     display: flex;
     align-items: center;
     padding: 0px;
+    z-index: 99;
   }
 
   .nav_logo {

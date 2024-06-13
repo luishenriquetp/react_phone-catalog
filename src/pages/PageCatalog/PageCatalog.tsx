@@ -1,7 +1,6 @@
 /* eslint-disable react/react-in-jsx-scope */
 import { useEffect, useRef, useState } from 'react';
 import StyledPageCatalog from './StyledPageCatalog.ts';
-import SelectItensPerPage from './components/SelectItensPerPage/SelectItensPerPage.tsx';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import { Phone } from '../../types/types.ts';
 import data from '../../../public/api/phones.json';
@@ -68,59 +67,127 @@ function PageCatalog() {
   }, [buttonsNumber, buttonsNumber.length, pageNumber]);
 
   useEffect(() => {
-    setButtonsNumber([]);
+    if (renderedData.length !== 0) {
+      setButtonsNumber([]);
 
-    if (!useEffectExecuted.current) {
-      useEffectExecuted.current = true;
-      return;
-    }
-
-    const tryToChangeToNumber = Number(quantityPerPage);
-    if (!Number.isNaN(tryToChangeToNumber)) {
-      const possiblePerPage = Math.ceil(data.length / Number(quantityPerPage));
-
-      const newArr = [];
-      let cont = 0;
-
-      for (let i = 0; i < possiblePerPage; i += 1) {
-        newArr.push(data.slice(cont, Number(quantityPerPage) + cont));
-        cont += Number(quantityPerPage);
-
-        setButtonsNumber(state => [...state, i + 1]);
+      if (!useEffectExecuted.current) {
+        useEffectExecuted.current = true;
+        return;
       }
 
-      setContentPage(newArr[pageNumber - 1]);
-    } else {
-      setContentPage(data);
+      const tryToChangeToNumber = Number(quantityPerPage);
+
+      if (!Number.isNaN(tryToChangeToNumber)) {
+        const possiblePerPage = Math.ceil(renderedData.length / Number(quantityPerPage));
+
+        const newArr = [];
+        let cont = 0;
+
+        for (let i = 0; i < possiblePerPage; i += 1) {
+          newArr.push(renderedData.slice(cont, Number(quantityPerPage) + cont));
+          cont += Number(quantityPerPage);
+
+          setButtonsNumber(state => [...state, i + 1]);
+        }
+
+        setContentPage(newArr[pageNumber - 1]);
+      } else {
+        setContentPage(renderedData);
+      }
     }
-  }, [quantityPerPage, pageNumber]);
+  }, [pageNumber, quantityPerPage, renderedData]);
+
+  function sortProducts(products: Product[], sortBy: string): Product[] {
+    switch (sortBy) {
+      case 'newest':
+        return products.sort((a, b) => new Date(b.year).getTime() - new Date(a.year).getTime());
+      case 'alphabetically':
+        return products.sort((a, b) => a.name.localeCompare(b.name));
+      case 'cheapest':
+        return products.sort((a, b) => a.price - b.price);
+      default:
+        return products;
+    }
+  }
+  const sortOptions = [
+    { label: 'Newest', value: 'newest', icon: IconType.ARROW_DOWN },
+    { label: 'Alphabetically', value: 'alphabetically', icon: IconType.ARROW_DOWN },
+    { label: 'Cheapest', value: 'cheapest', icon: IconType.ARROW_DOWN },
+  ];
+
+  const itemsPerPageOptions = [
+    { label: '4', value: '4' },
+    { label: '8', value: '8' },
+    { label: '16', value: '16' },
+    { label: 'All', value: 'all' },
+  ];
+
+  useEffect(() => {
+    setIsLoading(true);
+    getProducts()
+      .then(fetchedData => {
+        const filteredData = fetchedData.filter(e => e.category === category);
+        const sortedData = sortProducts(filteredData, sortOption);
+        setRenderedData(sortedData);
+
+        const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
+
+        toast.success(`${capitalizedCategory} loaded with success...`, {
+          position: 'top-right',
+          autoClose: 1000,
+          hideProgressBar: false,
+          closeButton: false,
+        });
+      })
+      .catch(error => {
+        toast.error(`Error loading ${category}...`, {
+          position: 'top-right',
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeButton: false,
+        });
+        console.error('Error fetching products:', error);
+      })
+      .finally(() => {
+        setIsLoading(false);
+      });
+  }, [category, sortOption]);
+
+  if (renderedData.length === 0 && isLoading) {
+    return <h1>Loading</h1>;
+  }
+
+  const categoryTitle = categoryMapping[category ?? ''] || 'Products';
 
   return (
     <StyledPageCatalog className="page-catalog">
+      <StyledToastContainer />
       <div className="top-section">
-        <h1 className="top-section__title">Mobile Phones</h1>
-        <h2 className="top-section__subtitle">95 models</h2>
+        <h1 className="top-section__title">{categoryTitle}</h1>
+        <h2 className="top-section__subtitle">{renderedData.length} models</h2>
       </div>
       <div className="select">
         <div className="select__wrapper">
           <h1 className="select__label">Sort By</h1>
-          <select className="select__box select__box--selected">
-            <option>Newest</option>
-            <option>Alphabetically</option>
-            <option>Cheapest</option>
-          </select>
+          <Dropdown
+            options={sortOptions}
+            onChange={value => setSortOption(value)}
+            defaultValue="newest"
+          />
         </div>
         <div className="select__wrapper">
           <h1 className="select__label">Items on page</h1>
 
-          <SelectItensPerPage
-            quantityPerPage={quantityPerPage}
-            setQuantityPerPage={setQuantityPerPage}
+          <Dropdown
+            options={itemsPerPageOptions}
+            onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
+            defaultValue={4}
           />
         </div>
       </div>
       <div className="list">
-        {contentPage && contentPage.map(item => <ProductCard phone={item} />)}
+        {contentPage &&
+          contentPage.map(item => <ProductCard key={item.id} product={item} category={category} />)}
       </div>
 
       <div className="pagination">

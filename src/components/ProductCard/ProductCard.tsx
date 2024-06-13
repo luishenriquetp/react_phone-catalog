@@ -1,27 +1,28 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { StyledProductCard } from './StyledProductCard.ts';
 import Icon from '../IconComponent/IconComponent.tsx';
 import { IconType } from '../IconComponent/IconComponent.types.ts';
-import { Phone } from '../../types/types.ts';
+import { Product } from '../../types/types.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 import { addProduct } from '../../context/cartContext/cartSlice.ts';
 
 interface Prop {
-  phone: Phone;
+  product: Product;
+  category: string | undefined;
 }
 
-function ProductCard({ phone }: Prop) {
-  const { phones } = useAppSelector(state => state.cart);
+function ProductCard({ product, category }: Prop) {
+  const { products } = useAppSelector(state => state.cart);
   const dispatch: Dispatch<UnknownAction> = useDispatch();
   const [favorite, setFavorite] = useState(false);
-  const [addToCard, setAddToCard] = useState(() => !!phones.some(e => e.id === phone.id));
+  const [addToCard, setAddToCard] = useState(() => products.some(e => e.itemId === product.itemId));
 
   const handleAddProductToCartClickButton = () => {
-    dispatch(addProduct(phone));
+    dispatch(addProduct(product));
     setAddToCard(true);
   };
 
@@ -33,14 +34,14 @@ function ProductCard({ phone }: Prop) {
     <>
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
-        <a className="product-card__link">
-          <div className="product-card__wrapper">
-            <img className="product-card__image" src={phone.images[0]} alt={phone.name} />
+        <div className="product-card__wrapper">
+          <a className="product-card__link" href={`/${category}/${product.itemId}`}>
+            <img className="product-card__image" src={product.image} alt={product.name} />
             <div className="product-card__description">
-              <h4 className="product-card__description-title">{phone.name}</h4>
+              <h4 className="product-card__description-title">{product.name}</h4>
               <div className="product-card__description-price-wrapper">
-                <h3 className="product-card__description-price-discount">{`$${phone.priceDiscount}`}</h3>
-                <h3 className="product-card__description-price">{`$${phone.priceRegular}`}</h3>
+                <h3 className="product-card__description-price-discount">{`$${product.price}`}</h3>
+                <h3 className="product-card__description-price">{`$${product.fullPrice}`}</h3>
               </div>
             </div>
             <hr className="product-card__custom-line" />
@@ -48,37 +49,37 @@ function ProductCard({ phone }: Prop) {
               <div className="product-card__details-container">
                 <div className="product-card__details-screen">
                   <span className="product-card__details-title">Screen</span>
-                  <span className="product-card__details-description">{phone.screen}</span>
+                  <span className="product-card__details-description">{product.screen}</span>
                 </div>
                 <div className="product-card__details-capacity">
                   <span className="product-card__details-title">Capacity</span>
-                  <span className="product-card__details-description">{phone.capacity}</span>
+                  <span className="product-card__details-description">{product.capacity}</span>
                 </div>
                 <div className="product-card__details-ram">
                   <span className="product-card__details-title">RAM</span>
-                  <span className="product-card__details-description">{phone.ram}</span>
+                  <span className="product-card__details-description">{product.ram}</span>
                 </div>
               </div>
             </div>
-            <div className="product-card__btn-container">
-              <button
-                type="button"
-                className={`product-card__btn${addToCard ? '--clicked' : ''}`}
-                onClick={handleAddProductToCartClickButton}
-                disabled={addToCard}
-              >
-                {addToCard ? 'Added' : 'Add to cart'}
-              </button>
-              <button
-                type="button"
-                className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
-                onClick={handleFavoriteClick}
-              >
-                <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
-              </button>
-            </div>
+          </a>
+          <div className="product-card__btn-container">
+            <button
+              type="button"
+              className={`product-card__btn${addToCard ? '--clicked' : ''}`}
+              onClick={handleAddProductToCartClickButton}
+              disabled={addToCard}
+            >
+              {addToCard ? 'Added' : 'Add to cart'}
+            </button>
+            <button
+              type="button"
+              className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
+              onClick={handleFavoriteClick}
+            >
+              <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
+            </button>
           </div>
-        </a>
+        </div>
       </StyledProductCard>
     </>
   );

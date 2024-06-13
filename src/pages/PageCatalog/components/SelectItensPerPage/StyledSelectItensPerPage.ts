@@ -10,5 +10,4 @@ const StyledSelectItensPerPage = styled.select`
   border: 1px solid #b4bdc3;
   box-sizing: border-box;
 `;
-
 export default StyledSelectItensPerPage;
