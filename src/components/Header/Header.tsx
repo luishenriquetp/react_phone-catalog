@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import StyledHeader from './StyledHeader.ts';
 
 function Header(): React.ReactNode {
@@ -10,20 +10,20 @@ function Header(): React.ReactNode {
           <img id="logo" src="img/icons/logo.png" alt="Logo" />
         </div>
         <div className="nav_links">
-          <a href="/" className="nav_link">
+          <Link to="/home" className="nav_link">
             {' '}
             {/* exist a active class in this class adjust  */}
             Home
-          </a>
+          </Link>
           <NavLink className="nav_link" to="/phones">
             Phones
           </NavLink>
-          <NavLink className="nav_link" to="/tablets">
+          <Link className="nav_link" to="/tablets">
             Tablets
-          </NavLink>
-          <NavLink className="nav_link" to="/accessories">
+          </Link>
+          <Link className="nav_link" to="/accessories">
             Accessories
-          </NavLink>
+          </Link>
         </div>
         <div className="nav_icons">
           <NavLink className="icon icon--like" to="/favorites">
