@@ -26,9 +26,9 @@ function Header(): React.ReactNode {
           </Link>
         </div>
         <div className="nav_icons">
-          <a className="icon icon--like" href="/">
+          <NavLink className="icon icon--like" to="/favorites">
             <img src="img/icons/favourites_black.png" alt="Like" />
-          </a>
+          </NavLink>
           <NavLink className="icon" to="/cart">
             <img src="img/icons/shopping_bag_black.png" alt="Cart" />
           </NavLink>

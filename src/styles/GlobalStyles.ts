@@ -4,6 +4,7 @@ export const GlobalStyles = createGlobalStyle`
   :root {
     --rstyle1-primary:#0F0F11;
     --rstyle1-secondary-accent: #F4BA47;
+    --rstyle1-gray-primary: #0F0F11;
     --rstyle1-gray-secondary: #89939A;
     --rstyle1-gray-icons-placeholders: #B4BDC3;
     --rstyle1-gray-elements: #E2E6E9;
@@ -17,7 +18,7 @@ export const GlobalStyles = createGlobalStyle`
   @font-face {
     font-family: 'Mont';
     font-weight: 800;
-    src: url('fonts/Mont-Bold.otf') format('opentype');
+    src: url('fonts/Mont-Bold-otf') format('opentype');
   }
 
   @font-face {
@@ -44,21 +45,34 @@ html {
     background-color: var(--dark-black);
   }
 
+  p {
+    margin: 0;
+    padding: 0;
+  }
+
+  img {
+    margin: 0;
+    padding: 0;
+  }
+
   .container {
     max-width: min(100vw, 320px);
     margin: 0 auto;
+    padding-inline: 16px;
 
     @media (min-width: 640px) {
-        max-width: min(100vw, 640px);
-      }
+      max-width: min(100vw, 640px);
+      padding-inline: 24px;
+    }
 
-      @media (min-width: 768px) {
-        max-width:min(100vw, 768px)
-      }
+    @media (min-width: 768px) {
+      max-width:min(100vw, 768px);
+    }
 
-      @media (min-width: 1200px) {
-        max-width: min(100vw, 1200px);
-      }
+    @media (min-width: 1200px) {
+      max-width: min(100vw, 1200px);
+      padding-inline: 32px;
+    }
   } 
 `;
 
