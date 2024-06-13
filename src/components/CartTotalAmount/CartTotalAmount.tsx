@@ -1,3 +1,4 @@
+/* eslint-disable react/react-in-jsx-scope */
 import StyledCartTotalAmount from './StyledCartTotalAmount.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 
