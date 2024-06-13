@@ -1,17 +1,20 @@
+import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
 import { Route, Routes } from 'react-router-dom';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage.tsx';
 import Header from './components/Header/Header.tsx';
-import PageCatalog from './pages/PageCatalog/PageCatalog.tsx';
 import Footer from './components/Footer/Footer.tsx';
 import PageCart from './pages/CartPage/PageCart.tsx';
 import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
+import Breadcrumb from './components/Breadcrumb/Breadcrumb.tsx';
+import PageCatalog from './pages/PageCatalog/PageCatalog.tsx';
 
 function App(): React.ReactNode {
   return (
     <>
       <Header />
       <div className="container">
+        <Breadcrumb />
         <Routes>
           <Route path="/">
             <Route path="shop/:category">

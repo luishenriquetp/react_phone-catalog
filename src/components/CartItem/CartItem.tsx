@@ -1,10 +1,10 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import StyledCartItem from './StyledCartItem.ts';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
-import { Phone } from '../../types/types.ts';
+import { Product } from '../../types/types.ts';
 import {
   decreaseTotalPrice,
   incrementTotalPrice,
@@ -12,24 +12,24 @@ import {
 } from '../../context/cartContext/cartSlice.ts';
 
 interface Prop {
-  phone: Phone;
+  product: Product;
   quantity: number;
 }
 
 function CartItem(prop: Prop) {
-  const { phone, quantity } = prop;
+  const { product, quantity } = prop;
   const dispatch: Dispatch<UnknownAction> = useDispatch();
 
   const handleDeleteClicekButton = useCallback(() => {
-    dispatch(removeProduct(phone));
-  }, [phone, dispatch]);
+    dispatch(removeProduct(product));
+  }, [product, dispatch]);
 
   const handleClickDecreaseQuantityItem = () => {
-    dispatch(decreaseTotalPrice(phone));
+    dispatch(decreaseTotalPrice(product));
   };
 
   const handleClickIncrementQuantityItem = () => {
-    dispatch(incrementTotalPrice(phone));
+    dispatch(incrementTotalPrice(product));
   };
 
   return (
@@ -43,8 +43,8 @@ function CartItem(prop: Prop) {
         >
           <Icon icon={IconType.CLOSE} />
         </button>
-        <img className="top-content__product-image" src={phone.images[0]} alt={phone.name} />
-        <span className="top-content__product-title">{phone.name}</span>
+        <img className="top-content__product-image" src={product.image} alt={product.name} />
+        <span className="top-content__product-title">{product.name}</span>
       </div>
       <div className="cart-item__bottom-content">
         <div className="bottom-content__wrapper">
@@ -67,7 +67,7 @@ function CartItem(prop: Prop) {
             <Icon icon={IconType.PLUS} fill="black" />
           </button>
         </div>
-        <span className="bottom-content__total-price">{`$${phone.priceDiscount * quantity}`}</span>
+        <span className="bottom-content__total-price">{`$${product.price * quantity}`}</span>
       </div>
     </StyledCartItem>
   );
