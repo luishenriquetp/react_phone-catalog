@@ -52,10 +52,14 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
 
       &-structure {
         display: flex;
+        width: 100vw;
+        position: relative;
 
         @media (min-width: 640px) {
+          width: 100%;
           justify-content: space-between;
           align-items: center;
+          overflow: hidden;
         }
 
         &-button {
@@ -80,12 +84,9 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
 
         &-slider {
           display: flex;
-          transition: transform 0.5s ease-in-out;
-          transform: translateX(
-            ${({ 'data-current-index': currentIndex }) => `-${currentIndex * 100}%`}
-          );
-          overflow: clip;
-          background-color: red;
+          width: 100%;
+          overflow: hidden;
+          position: relative;
 
           @media (min-width: 640px) {
             margin-inline: 19px;
@@ -97,17 +98,14 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
             width: 100vw;
             height: 100vw;
             display: flex;
-            align-content: center;
+            justify-content: center;
+            align-items: center;
 
             @media (min-width: 640px) {
-              width: 490px;
-              height: 189px;
-              border-radius: 8px 0px 0px 0px;
+              width: 100%;
+              height: 100%;
+              border-radius: 8px;
               cursor: pointer;
-            }
-            @media (min-width: 1200px) {
-              width: 1040px;
-              height: 400px;
             }
           }
         }

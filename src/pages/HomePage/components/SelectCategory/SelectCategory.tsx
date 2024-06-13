@@ -1,18 +1,20 @@
 import React from 'react';
 import StyledSelectCategory from './StyledSelectCategory.ts';
 
-function SelectCategory(): React.ReactNode {
+interface CategoryProps {
+  images: string;
+  name: string;
+  amount: number;
+}
+
+function SelectCategory(props: CategoryProps): JSX.Element {
+  const { images, name, amount } = props;
+
   return (
     <StyledSelectCategory className="category">
-      <img
-        className="category__image"
-        id="phones"
-        // eslint-disable-next-line no-octal-escape
-        src="public\img\phones\apple-iphone-7\black\00.webp"
-        alt="Phones"
-      />
-      <div className="category__name">Mobile Phone</div>
-      <div className="category__amount">95 models</div>
+      <img className="category__image" src={images} alt={name} />
+      <div className="category__name">{name}</div>
+      <div className="category__amount">{`${amount} models`}</div>
     </StyledSelectCategory>
   );
 }
