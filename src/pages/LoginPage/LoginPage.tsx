@@ -82,6 +82,7 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
 
   return (
     <StyledLoginPage className="login">
+      <h1 className="login-title">Nice gadgets login</h1>
       <div className="login-container">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
@@ -91,6 +92,7 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
               id="username"
               value={username}
               onChange={handleUsernameChange}
+              placeholder="Enter you name here"
               required
             />
           </div>
@@ -102,6 +104,7 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
                 id="password"
                 value={password}
                 onChange={handlePasswordChange}
+                placeholder="Enter your password here"
                 required
               />
               <span className="password-toggle-icon" onClick={togglePasswordVisibility}>

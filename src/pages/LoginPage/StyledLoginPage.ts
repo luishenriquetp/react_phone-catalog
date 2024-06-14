@@ -1,6 +1,17 @@
 import styled from 'styled-components';
+import { letterStyleH1DesktoAndTable } from '../../styles/GlobalStyles.ts';
 
 const StyledLoginPage = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-height: 100vh;
+
+  .login-title {
+    ${letterStyleH1DesktoAndTable}
+  }
+
   .login-container {
     display: flex;
     flex-direction: column;
@@ -53,9 +64,24 @@ const StyledLoginPage = styled.div`
   }
 
   button {
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
+    width: 100%;
+    height: 48px;
+    border-radius: 48px;
+    background-color: var(--rstyle1-accent);
+    border: none;
+    color: #fff;
+    text-align: center;
+    padding: 0;
+    transition: box-shadow 300ms;
+
+    &:hover {
+      cursor: pointer;
+      box-shadow: 0px 3px 13px 0px #17203166;
+    }
+
+    &:active {
+      transform: scale(0.95);
+    }
   }
 
   .error {
