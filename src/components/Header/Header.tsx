@@ -46,9 +46,9 @@ function Header({ activeMenu, setActiveMenu }: Props): React.ReactNode {
             <img src="/img/icons/shopping_bag_black.png" alt="Cart" />
           </NavLink>
         </div>
-        <a className="icon burger_menu" href="/mobileMenu">
+        <Link className="icon burger_menu" to="/mobileMenu">
           <img src="/img/icons/burger_menu.png" alt="Burger Menu" />
-        </a>
+        </Link>
       </nav>
       {activeMenu && (
         <div className="header__burguer-menu">

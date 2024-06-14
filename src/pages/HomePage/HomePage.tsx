@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import StyledHomePage from './StyledHomePage.ts';
 import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 import { getProducts } from '../../api/getAll.ts';
+import ProductSlider from '../../components/ProductSlider/ProductSlider.tsx';
 
 interface Category {
   name: string;
@@ -134,8 +135,7 @@ function HomePage() {
         </div>
       </div>
       <div className="home-page__sliders-container">
-        <h2 className="home-page__sliders-container-title">Brand new models</h2>
-        <div className="home-page__sliders-container-content">Slider</div>
+        <ProductSlider title="Brand New Models" getProducts={getProducts} />
       </div>
       <div className="home-page__shop">
         <div className="home-page__shop-title">Shop by category</div>
@@ -151,8 +151,7 @@ function HomePage() {
         </div>
       </div>
       <div className="home-page__sliders-container--second-child">
-        <h2 className="home-page__sliders-container-title">Hot prices</h2>
-        <div className="home-page__sliders-container-content">Slider</div>
+        <ProductSlider title="Hot Prices" getProducts={getProducts} />
       </div>
     </StyledHomePage>
   );

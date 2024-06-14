@@ -1,38 +1,41 @@
+import { Link } from 'react-router-dom';
+import { useAppSelector } from '../../context/hooks.ts';
 import StyledPageBurgerMenu from './StyledPageBurgerMenu.ts';
 
 export function BurgerMenu() {
+  const qtdCart = useAppSelector(state => state.cart.quantity.reduce((acc, e) => {
+    acc += e;
+
+    return acc;
+  }, 0));
+  const qtdFav = useAppSelector(state => state.favourites.products.length);
+
   return (
-    <StyledPageBurgerMenu className="burger-menu">
-      <div className="burger-menu__header">
-        <nav id="nav_bar" className="burger-menu__header-navbar">
-          <div className="burger-menu__header-navbar-logo">
-            <img id="logo" src="public\img\icons\logo (1).png" alt="Logo" />
-          </div>
-          <div className="burger-menu__header-navbar-icon">
-            <img src="public\img\icons\Close.svg" alt="Icon Close" />
-          </div>
-        </nav>
-      </div>
+    <StyledPageBurgerMenu className="burger-menu" $cartQtd={qtdCart} $favQtd={qtdFav}>
       <div className="burger-menu__nav">
-        <div className="burger-menu__nav-link">HOME</div>
-        <div className="burger-menu__nav-link">PHONES</div>
-        <div className="burger-menu__nav-link">TABLETS</div>
-        <div className="burger-menu__nav-link">ACCESSORIES</div>
+        <Link className="burger-menu__nav-link" to='/home'>HOME</Link>
+        <Link className="burger-menu__nav-link" to='/shop/phones'>PHONES</Link>
+        <Link className="burger-menu__nav-link" to='/shop/tablets'>TABLETS</Link>
+        <Link className="burger-menu__nav-link" to='/shop/accessories'>ACCESSORIES</Link>
       </div>
       <div className="burger-menu__footer">
-        <div className="burger-menu__footer-icon">
-          <img
-            src="public/img/icons/Favourites (Heart Like).svg"
-            alt="heart-icon"
-            className="burger-menu__icon"
-          />
+        <div className="burger-menu__footer-icon burger-menu__footer--cart-indicator">
+          <Link to='/cart'>
+            <img
+              src="/img/icons/shopping_bag_black.png"
+              alt="heart-icon"
+              className="burger-menu__icon"
+            />
+          </Link>
         </div>
-        <div className="burger-menu__footer-icon">
-          <img
-            src="public/img/icons/Shopping bag (Cart).svg"
-            alt="logo"
-            className="burger-menu__icon"
-          />
+        <div className="burger-menu__footer-icon burger-menu__footer--fav-indicator">
+          <Link to='/favorites' >
+            <img
+              src="/img/icons/favourites_black.png"
+              alt="logo"
+              className="burger-menu__icon"
+            />
+          </Link>
         </div>
       </div>
     </StyledPageBurgerMenu>

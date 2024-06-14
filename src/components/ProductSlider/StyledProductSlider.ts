@@ -23,27 +23,23 @@ export const StyledProductSlider = styled.div`
   }
 
   .nav-buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background: transparent;
     position: absolute;
     top: 65px;
     right: 5px;
     padding: 5px;
-    display: flex;
     gap: 5px;
     button {
       width: 33px;
       height: 33px;
       border: none;
       color: transparent;
-      background-color: transparent;
-      background-repeat: no-repeat;
-      background-size: contain;
-      background-position: center;
-      background-size: 32px;
-      background-image: url('./src/IconAssets/ButtonDefault.svg');
-      &.left {
-        transform: rotate(180deg);
-      }
+      border-radius: 50%;
+      border: 1px gray solid;
+      
       &:hover {
         background-image: url('./src/IconAssets/ButtonHover.svg');
       }

@@ -1,25 +1,35 @@
 import styled from 'styled-components';
 import { letterStyleUpperCase } from '../../styles/GlobalStyles.ts';
 
-const StyledPageBurgerMenu = styled.div`
+interface Prop {
+  $favQtd: number;
+  $cartQtd: number;
+}
+
+const StyledPageBurgerMenu = styled.div<Prop>`
+  a {
+    text-decoration: none;
+    color: var(--rstyle1-gray-secondary);
+  }
+
   .burger-menu {
     width: 100vw;
     max-width: 100%;
     height: 100vh;
     background-color: #ffffff;
-    position: absolute;
     overflow: hidden;
+    display: flex;
+    flex-direction: row;
+
 
     &__header {
       width: 100vw;
       height: 100px;
 
       &-navbar {
-        top: 0;
         background-color: #fff;
         height: 64px;
         width: 100%;
-        position: fixed;
         border-bottom: 2px solid #e2e6e9;
         display: flex;
         align-items: center;
@@ -42,15 +52,11 @@ const StyledPageBurgerMenu = styled.div`
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding-top: 72px;
       gap: 16px;
       ${letterStyleUpperCase};
       color: var(--rstyle1-gray-secondary);
-
-      position: absolute;
       width: 100%;
-      height: calc(100vh - 112px);
-      top: 48px;
+      margin-bottom: 20px;
 
       &-link {
         cursor: pointer;
@@ -80,8 +86,6 @@ const StyledPageBurgerMenu = styled.div`
 
     &__footer {
       display: flex;
-      position: absolute;
-      bottom: 0;
       width: 100%;
       height: 64px;
       border-top: 1px solid #ccc;
@@ -103,20 +107,39 @@ const StyledPageBurgerMenu = styled.div`
           border-right: 1px solid var(--rstyle1-gray-elements);
         }
 
-        &::after {
-          content: '';
-          position: absolute;
-          bottom: 0;
-          left: 0;
-          width: 0;
-          height: 2px;
-          background-color: #313237;
-          transition: width 0.3s ease;
-        }
-
         &:hover::after {
           width: 100%;
         }
+      }
+
+      &--fav-indicator::after {
+        content: '${p => String(p.$favQtd)}';
+        display: ${p => !!p.$favQtd ? 'block' : 'none'};
+        color: wheat;
+        text-align: center;
+        position: absolute;
+        right: 30%;
+        bottom: 50%;
+        background-color: purple;
+        border-radius: 50%;
+        border: 3px solid white;
+        width: 20px;
+        height: 20px;
+      }
+
+      &--cart-indicator::after {
+        content: '${p => String(p.$cartQtd)}';
+        display: ${p => !!p.$cartQtd ? 'block' : 'none'};
+        color: wheat;
+        text-align: center;
+        position: absolute;
+        right: 30%;
+        bottom: 50%;
+        background-color: purple;
+        border-radius: 50%;
+        border: 3px solid white;
+        width: 20px;
+        height: 20px;
       }
     }
   }

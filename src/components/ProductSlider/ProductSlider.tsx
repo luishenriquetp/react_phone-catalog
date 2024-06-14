@@ -1,14 +1,18 @@
+
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
 import StyledProductSlider from './StyledProductSlider.ts';
+import Icon from '../Icon/Icon.tsx';
+import { IconType } from '../Icon/Icon.ts';
 
 interface ProductSliderProps {
   getProducts: () => Promise<Product[]>;
+  title: string;
 }
 
 function ProductSlider(prop: ProductSliderProps): React.ReactNode {
-  const { getProducts } = prop;
+  const { getProducts, title } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);
 
@@ -40,7 +44,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
   return (
     <StyledProductSlider>
       <div className="main-container">
-        <h1>Brand New Models</h1>
+        <h1>{title}</h1>
         <div className="nav-buttons">
           <button
             onClick={handlePrev}
@@ -48,7 +52,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
             className={isPrevDisabled ? 'disabled left' : 'left'}
             type="button"
           >
-            Prev
+            <Icon icon={IconType.ARROW_LEFT} fill='black' />
           </button>
           <button
             onClick={handleNext}
@@ -56,7 +60,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
             className={isNextDisabled ? 'disabled' : ''}
             type="button"
           >
-            Next
+             <Icon icon={IconType.ARROW_RIGHT} fill='black' />
           </button>
         </div>
         <div className="card-container">
@@ -66,7 +70,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
           >
             {products.map(item => (
               <div className="slider_slide">
-                <ProductCard key={item.id} product={item.name} />
+                <ProductCard key={item.id} product={item} />
               </div>
             ))}
           </div>
