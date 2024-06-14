@@ -1,0 +1,14 @@
+[
+  {
+    "userId": "user789ghi",
+    "data": {
+      "favorites": [],
+      "cartData": {
+        "productsInCart": [],
+        "quantityOfProducts": [],
+        "totalAmount": 0
+      }
+    }
+  }
+  
+]

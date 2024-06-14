@@ -9,24 +9,31 @@ import { IconType } from '../IconComponent/IconComponent.types.ts';
 import { Product } from '../../types/types.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 import { addProduct } from '../../context/cartContext/cartSlice.ts';
+import { addFavourite, removeFavourite } from '../../context/favoriteContext/favouriteSlice.ts';
 
 interface Prop {
   product: Product;
-  category: string | undefined;
 }
 
-function ProductCard({ product, category }: Prop) {
-  const { products } = useAppSelector(state => state.cart);
+function ProductCard({ product }: Prop) {
+  const productIsInCart = useAppSelector(state => state.cart.products.some(e => e.itemId === product.itemId));
+  const isFavoriteProduct = useAppSelector(state => state.favourites.products.some(e => e.itemId === product.itemId));
   const dispatch: Dispatch<UnknownAction> = useDispatch();
-  const [favorite, setFavorite] = useState(false);
-  const [addToCard, setAddToCard] = useState(() => products.some(e => e.itemId === product.itemId));
+  const [favorite, setFavorite] = useState(isFavoriteProduct);
+  const [addToCardOrNot, setAddToCardOrNot] = useState(productIsInCart);
 
   const handleAddProductToCartClickButton = () => {
     dispatch(addProduct(product));
-    setAddToCard(true);
+    setAddToCardOrNot(true);
   };
 
   const handleFavoriteClick = () => {
+    if (isFavoriteProduct) {
+      dispatch(removeFavourite(product))
+    } else {
+      dispatch(addFavourite(product));
+    }
+
     setFavorite(!favorite);
   };
 
@@ -35,7 +42,7 @@ function ProductCard({ product, category }: Prop) {
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
         <div className="product-card__wrapper">
-          <a className="product-card__link" href={`/shop/${category}/${product.itemId}`}>
+          <a className="product-card__link" href={`/shop/${product.category}/${product.itemId}`}>
             <img className="product-card__image" src={`/${product.image}`} alt={product.name} />
             <div className="product-card__description">
               <h4 className="product-card__description-title">{product.name}</h4>
@@ -65,11 +72,11 @@ function ProductCard({ product, category }: Prop) {
           <div className="product-card__btn-container">
             <button
               type="button"
-              className={`product-card__btn${addToCard ? '--clicked' : ''}`}
+              className={`product-card__btn${addToCardOrNot ? '--clicked' : ''}`}
               onClick={handleAddProductToCartClickButton}
-              disabled={addToCard}
+              disabled={addToCardOrNot}
             >
-              {addToCard ? 'Added' : 'Add to cart'}
+              {addToCardOrNot ? 'Added' : 'Add to cart'}
             </button>
             <button
               type="button"

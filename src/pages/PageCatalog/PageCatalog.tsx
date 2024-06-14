@@ -150,6 +150,7 @@ function PageCatalog() {
         const filteredData = fetchedData.filter(e => e.category === category);
         const sortedData = sortProducts(filteredData, sortOption);
         setRenderedData(sortedData);
+        setContentPage(sortedData);
 
         const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
 
@@ -208,7 +209,7 @@ function PageCatalog() {
       </div>
       <div className="list">
         {contentPage &&
-          contentPage.map(item => <ProductCard key={item.id} product={item} category={category} />)}
+          contentPage.map(item => <ProductCard key={item.id} product={item} />)}
       </div>
 
       <div className="pagination">

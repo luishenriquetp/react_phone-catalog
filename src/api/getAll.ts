@@ -1,4 +1,4 @@
-import { FullProduct, Product } from '../types/types.ts';
+import { FullProduct, Product, SessionData } from '../types/types.ts';
 
 export const getProducts = (): Promise<Product[]> => {
   return fetch('/api/products.json')
@@ -27,4 +27,16 @@ export const getProductByID = (_ID: string | undefined): Promise<FullProduct> =>
     .catch(error => {
       throw error;
     });
+};
+
+
+export const getSessionData = (idSession: string): Promise<SessionData> => {
+  return fetch(`/api/userSessions/${idSession}.json`)
+  .then(response => {
+    if (!response.ok) {
+      throw new Error(`Failed to fetch products: ${response.statusText}`);
+    }
+    return response.json();
+  })
+  .then(data => data[0] as SessionData);
 };

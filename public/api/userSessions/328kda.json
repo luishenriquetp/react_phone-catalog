@@ -1,0 +1,13 @@
+[
+  {
+    "userId": "user456def",
+    "data": {
+      "favorites": [],
+      "cartData": {
+        "productsInCart": [],
+        "quantityOfProducts": [],
+        "totalAmount": 0
+      }
+    }
+  }  
+]

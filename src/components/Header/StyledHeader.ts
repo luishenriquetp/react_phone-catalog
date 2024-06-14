@@ -1,6 +1,11 @@
 import styled from 'styled-components';
 
-const StyledHeader = styled.header`
+interface Props {
+  $qtdFav: number;
+  $cartQtd: number;
+}
+
+const StyledHeader = styled.header<Props>`
   .navbar {
     top: 0;
     background-color: #fff;
@@ -70,11 +75,42 @@ const StyledHeader = styled.header`
     border-left: 2px solid #e2e6e9;
     width: 64px;
     height: 64px;
+    position: relative;
   }
 
   .icon img {
     width: 16px;
     height: 16px;
+  }
+
+  .icon--like::after {
+    content: '${p => String(p.$qtdFav)}';
+    display: ${p => !!p.$qtdFav ? 'block' : 'none'};
+    color: wheat;
+    text-align: center;
+    position: absolute;
+    right: 20%;
+    top: 25%;
+    background-color: purple;
+    border-radius: 50%;
+    border: 3px solid white;
+    width: 25%;
+    height: 25%;
+  }
+
+  .icon--cart::after {
+    content: '${p => String(p.$cartQtd)}';
+    display: ${p => !!p.$cartQtd ? 'block' : 'none'};
+    color: wheat;
+    text-align: center;
+    position: absolute;
+    right: 20%;
+    top: 25%;
+    background-color: purple;
+    border-radius: 50%;
+    border: 3px solid white;
+    width: 25%;
+    height: 25%;
   }
 
   .burger_menu {

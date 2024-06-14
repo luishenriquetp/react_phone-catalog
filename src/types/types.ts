@@ -39,3 +39,24 @@ export type Product = {
   year: number;
   image: string;
 };
+
+interface CartData {
+  productsInCart: Product[];
+  quantityOfProducts: number[];
+  totalAmount: number;
+}
+
+interface UserData {
+  favorites: Product[];
+  cartData: CartData;
+}
+
+interface User {
+  userId: string;
+  data: UserData;
+}
+
+export interface SessionData {
+  userId: User;
+  data: UserData
+}

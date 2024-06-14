@@ -177,9 +177,10 @@ export const StyledProductCard = styled.div`
     transition: box-shadow 300ms;
 
     &--clicked {
+      height: 40px;
+      width: 100%;
       background-color: transparent;
       color: var(--rstyle1-accent);
-      height: 40px;
       border-radius: 48px;
       border: 1px solid var(--rstyle1-gray-elements);
       text-align: center;

@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
 import StyledHeader from './StyledHeader.ts';
+import { useAppSelector } from '../../context/hooks.ts';
 
 type Props = {
   activeMenu: boolean;
@@ -8,12 +9,15 @@ type Props = {
 };
 
 function Header({ activeMenu, setActiveMenu }: Props): React.ReactNode {
+  const favoritesQtd = useAppSelector(state => state.favourites.products.length);
+  const cartQtd = useAppSelector(state => state.cart.products.length);
+
   function handleBurguerMenu(): void {
     setActiveMenu(state => !state);
   }
 
   return (
-    <StyledHeader className="header" id="header">
+    <StyledHeader className="header" id="header" $qtdFav={favoritesQtd} $cartQtd={cartQtd}>
       <nav id="nav_bar" className="navbar">
         <div className="nav_logo">
           <img id="logo" src="/img/icons/logo.png" alt="Logo" />
@@ -38,11 +42,11 @@ function Header({ activeMenu, setActiveMenu }: Props): React.ReactNode {
           <NavLink className="icon icon--like" to="/favorites">
             <img src="/img/icons/favourites_black.png" alt="Like" />
           </NavLink>
-          <NavLink className="icon" to="/cart">
+          <NavLink className="icon icon--cart" to="/cart" >
             <img src="/img/icons/shopping_bag_black.png" alt="Cart" />
           </NavLink>
         </div>
-        <a className="icon burger_menu" href="#burguer" onClick={handleBurguerMenu}>
+        <a className="icon burger_menu" href="/mobileMenu">
           <img src="/img/icons/burger_menu.png" alt="Burger Menu" />
         </a>
       </nav>

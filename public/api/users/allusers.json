@@ -1,0 +1,29 @@
+[
+  {
+    "userId": "user123abc",
+    "userName": "JohnDoe",
+    "passwd": "pass1234"
+  },
+  {
+    "userId": "user456def",
+    "userName": "JaneSmith",
+    "passwd": "pass5678"
+  },
+  {
+    "userId": "user789ghi",
+    "userName": "AliceJones",
+    "passwd": "pass9101"
+  },
+  {
+    "userId": "user101jkl",
+    "userName": "BobBrown",
+    "passwd": "pass1121"
+  },
+  {
+    "userId": "user112mno",
+    "userName": "CarolWhite",
+    "passwd": "pass3141"
+  }
+      
+    
+]
