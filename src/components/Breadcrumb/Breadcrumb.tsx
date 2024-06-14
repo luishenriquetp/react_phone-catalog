@@ -1,6 +1,5 @@
 // src/components/Breadcrumb.tsx
 
-import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import StyledBreadcrumb from './StyledBreadcrumb.ts';
 import Icon from '../Icon/Icon.tsx';

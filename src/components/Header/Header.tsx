@@ -5,16 +5,11 @@ import { useAppSelector } from '../../context/hooks.ts';
 
 type Props = {
   activeMenu: boolean;
-  setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-function Header({ activeMenu, setActiveMenu }: Props): React.ReactNode {
+function Header({ activeMenu }: Props): React.ReactNode {
   const favoritesQtd = useAppSelector(state => state.favourites.products.length);
   const cartQtd = useAppSelector(state => state.cart.products.length);
-
-  function handleBurguerMenu(): void {
-    setActiveMenu(state => !state);
-  }
 
   return (
     <StyledHeader className="header" id="header" $qtdFav={favoritesQtd} $cartQtd={cartQtd}>

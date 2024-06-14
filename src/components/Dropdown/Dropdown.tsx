@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import { useState } from 'react';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
 import StyledDropdown from './StyledDropdown.ts';

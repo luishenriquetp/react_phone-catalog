@@ -7,7 +7,7 @@
     "start": "vite",
     "lint": "npx eslint \"src/**/*.{js,ts,tsx}\" --fix",
     "format": "prettier --write 'src/**/*.{js,jsx,ts,tsx,json,css,scss,md}'",
-    "build": "tsc && vite build",
+    "build": "vite build",
     "preview": "vite preview",
     "prepare": "husky install"
   },
