@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
@@ -9,6 +10,7 @@ import { getProducts } from '../../api/getAll.ts';
 import { IconType } from '../../components/Icon/Icon.ts';
 import Dropdown from '../../components/Dropdown/Dropdown.tsx';
 import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
+import { SkeletonContainer } from '../../components/Skeleton/StyledSkeleton.ts';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
@@ -26,7 +28,7 @@ function PageCatalog() {
   const [pageNumber, setPageNumber] = useState<number>(1);
   const [renderedData, setRenderedData] = useState<Product[]>([]);
   const [sortOption, setSortOption] = useState<string>('newest');
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoading, setIsLoading] = useState<boolean>(true);
   const useEffectExecuted = useRef(false);
 
   useEffect(() => {
@@ -134,27 +136,51 @@ function PageCatalog() {
         <h2 className="top-section__subtitle">{renderedData.length} models</h2>
       </div>
       <div className="select">
-        <div className="select__wrapper">
-          <h1 className="select__label">Sort By</h1>
-          <Dropdown
-            options={sortOptions}
-            onChange={value => setSortOption(value)}
-            defaultValue="newest"
-          />
-        </div>
-        <div className="select__wrapper">
-          <h1 className="select__label">Items on page</h1>
+        {isLoading ? (
+          <SkeletonContainer className="skeleton-container">
+            {[...Array(2)].map((_, index) => (
+              <div key={index} className="skeleton skeleton-card-select">
+                <div className="skeleton skeleton-select" />
+              </div>
+            ))}
+          </SkeletonContainer>
+        ) : (
+          <>
+            <div className="select__wrapper">
+              <h1 className="select__label">Sort By</h1>
+              <Dropdown
+                options={sortOptions}
+                onChange={value => setSortOption(value)}
+                defaultValue="newest"
+              />
+            </div>
+            <div className="select__wrapper">
+              <h1 className="select__label">Items on page</h1>
 
-          <Dropdown
-            options={itemsPerPageOptions}
-            onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
-            defaultValue={4}
-          />
-        </div>
+              <Dropdown
+                options={itemsPerPageOptions}
+                onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
+                defaultValue="4"
+              />
+            </div>
+          </>
+        )}
       </div>
       <div className="list">
-        {contentPage &&
-          contentPage.map(item => <ProductCard key={item.id} product={item} category={category} />)}
+        {isLoading ? (
+          <SkeletonContainer className="skeleton-container">
+            {[...Array(4)].map((_, index) => (
+              <div key={index} className="skeleton skeleton-card">
+                <div className="skeleton skeleton-heading" />
+                <div className="skeleton skeleton-paragraph" />
+                <div className="skeleton skeleton-button" />
+              </div>
+            ))}
+          </SkeletonContainer>
+        ) : (
+          contentPage &&
+          contentPage.map(item => <ProductCard key={item.id} product={item} category={category} />)
+        )}
       </div>
 
       <div className="pagination">

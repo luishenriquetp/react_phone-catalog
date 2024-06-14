@@ -15,13 +15,13 @@ function Header(): React.ReactNode {
             {/* exist a active class in this class adjust  */}
             Home
           </a>
-          <NavLink className="nav_link" to="/phones">
+          <NavLink className="nav_link" to="/shop/phones">
             Phones
           </NavLink>
-          <NavLink className="nav_link" to="/tablets">
+          <NavLink className="nav_link" to="/shop/tablets">
             Tablets
           </NavLink>
-          <NavLink className="nav_link" to="/accessories">
+          <NavLink className="nav_link" to="/shop/accessories">
             Accessories
           </NavLink>
         </div>

@@ -35,7 +35,7 @@ function ProductCard({ product, category }: Prop) {
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
         <div className="product-card__wrapper">
-          <a className="product-card__link" href={`/${category}/${product.itemId}`}>
+          <a className="product-card__link" href={`/shop/${category}/${product.itemId}`}>
             <img className="product-card__image" src={product.image} alt={product.name} />
             <div className="product-card__description">
               <h4 className="product-card__description-title">{product.name}</h4>

@@ -22,6 +22,19 @@ const StyledProductDetailsPage = styled.div`
       }
     }
 
+    &__back-home-btn {
+      display: flex;
+      background-color: transparent;
+      border: none;
+      align-items: flex-end;
+      ${letterStyleSmallTextDesktoAndTable};
+      gap: 4px;
+    }
+
+    &__btn-description {
+      margin: 0;
+    }
+
     &__select-phone-grid {
       position: relative;
       display: grid;

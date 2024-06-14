@@ -43,6 +43,7 @@ html {
 
   body {
     background-color: var(--dark-black);
+    margin: 0;
   }
 
   p {
