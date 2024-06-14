@@ -29,14 +29,13 @@ export const getProductByID = (_ID: string | undefined): Promise<FullProduct> =>
     });
 };
 
-
 export const getSessionData = (idSession: string): Promise<SessionData> => {
   return fetch(`/api/userSessions/${idSession}.json`)
-  .then(response => {
-    if (!response.ok) {
-      throw new Error(`Failed to fetch products: ${response.statusText}`);
-    }
-    return response.json();
-  })
-  .then(data => data[0] as SessionData);
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`Failed to fetch products: ${response.statusText}`);
+      }
+      return response.json();
+    })
+    .then(data => data[0] as SessionData);
 };

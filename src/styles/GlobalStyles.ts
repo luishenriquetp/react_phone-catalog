@@ -38,7 +38,6 @@ export const GlobalStyles = createGlobalStyle`
   }
 
 html {
-    margin-top:64px;
   }
 
   body {

@@ -4,20 +4,24 @@ import React, { useState } from 'react';
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { StyledProductCard } from './StyledProductCard.ts';
-import Icon from '../IconComponent/IconComponent.tsx';
-import { IconType } from '../IconComponent/IconComponent.types.ts';
 import { Product } from '../../types/types.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 import { addProduct } from '../../context/cartContext/cartSlice.ts';
 import { addFavourite, removeFavourite } from '../../context/favoriteContext/favouriteSlice.ts';
+import Icon from '../Icon/Icon.tsx';
+import { IconType } from '../Icon/Icon.ts';
 
 interface Prop {
   product: Product;
 }
 
 function ProductCard({ product }: Prop) {
-  const productIsInCart = useAppSelector(state => state.cart.products.some(e => e.itemId === product.itemId));
-  const isFavoriteProduct = useAppSelector(state => state.favourites.products.some(e => e.itemId === product.itemId));
+  const productIsInCart = useAppSelector(state =>
+    state.cart.products.some(e => e.itemId === product.itemId),
+  );
+  const isFavoriteProduct = useAppSelector(state =>
+    state.favourites.products.some(e => e.itemId === product.itemId),
+  );
   const dispatch: Dispatch<UnknownAction> = useDispatch();
   const [favorite, setFavorite] = useState(isFavoriteProduct);
   const [addToCardOrNot, setAddToCardOrNot] = useState(productIsInCart);
@@ -29,7 +33,7 @@ function ProductCard({ product }: Prop) {
 
   const handleFavoriteClick = () => {
     if (isFavoriteProduct) {
-      dispatch(removeFavourite(product))
+      dispatch(removeFavourite(product));
     } else {
       dispatch(addFavourite(product));
     }

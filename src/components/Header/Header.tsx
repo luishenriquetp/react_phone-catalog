@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import StyledHeader from './StyledHeader.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 
@@ -23,11 +23,11 @@ function Header({ activeMenu, setActiveMenu }: Props): React.ReactNode {
           <img id="logo" src="/img/icons/logo.png" alt="Logo" />
         </div>
         <div className="nav_links">
-          <a href="/" className="nav_link">
+          <Link to="/home" className="nav_link">
             {' '}
             {/* exist a active class in this class adjust  */}
             Home
-          </a>
+          </Link>
           <NavLink className="nav_link" to="/shop/phones">
             Phones
           </NavLink>
