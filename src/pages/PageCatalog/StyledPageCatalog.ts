@@ -157,6 +157,7 @@ const StyledPageCatalog = styled.div`
     margin-bottom: 64px;
     padding-left: 16px;
     padding-right: 16px;
+    min-height: 40px;
 
     @media (min-width: 640px) {
       margin-top: 40px;
@@ -174,15 +175,20 @@ const StyledPageCatalog = styled.div`
       box-sizing: border-box;
       font-size: 14px;
       cursor: pointer;
+      transition: 0.5s;
+      margin-inline: 2px;
 
       &--isarrow {
         margin: 0 16px;
         border: 1px solid #b4bdc3;
+        transition: none;
       }
 
       &--filled {
         background-color: var(--rstyle1-primary);
         color: #ffffff;
+        width: 40px;
+        height: 40px;
       }
 
       &:hover {

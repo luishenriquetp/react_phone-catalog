@@ -171,8 +171,8 @@ function PageCatalog() {
           <SkeletonContainer className="skeleton-container">
             {[...Array(4)].map((_, index) => (
               <div key={index} className="skeleton skeleton-card">
-                <div className="skeleton skeleton-heading" />
-                <div className="skeleton skeleton-paragraph" />
+                <div className="skeleton skeleton-image" />
+                <div className="skeleton skeleton-title" />
                 <div className="skeleton skeleton-button" />
               </div>
             ))}
