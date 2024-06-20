@@ -30,21 +30,15 @@ export const StyledProductSlider = styled.div`
     position: absolute;
     top: 65px;
     right: 5px;
-    padding: 5px;
     gap: 5px;
+
     button {
-      width: 33px;
-      height: 33px;
       border: none;
-      color: transparent;
-      border-radius: 50%;
-      border: 1px gray solid;
-      
+      background-color: transparent;
+
       &:hover {
         background-image: url('./src/IconAssets/ButtonHover.svg');
-      }
-      &.disabled {
-        background-image: url('./src/IconAssets/ButtonDisabled.svg');
+        cursor: pointer;
       }
     }
   }

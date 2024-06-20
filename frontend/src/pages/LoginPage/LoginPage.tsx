@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -82,11 +83,25 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
 
   return (
     <StyledLoginPage className="login">
+      <div className="background">
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+        <span />
+      </div>
       <h1 className="login-title">Nice gadgets login</h1>
       <div className="login-container">
         <form onSubmit={handleSubmit} className="login-form">
           <div className="form-group">
-            <label htmlFor="username">Username:</label>
+            <label className="form-label" htmlFor="username">
+              Username:
+            </label>
             <input
               type="text"
               id="username"
@@ -97,7 +112,9 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
             />
           </div>
           <div className="form-group password-group">
-            <label htmlFor="password">Password:</label>
+            <label className="form-label" htmlFor="password">
+              Password:
+            </label>
             <div className="password-group-container">
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -112,7 +129,15 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
               </span>
             </div>
           </div>
-          <button type="submit">Login</button>
+          <div className="form-buttons">
+            <button className="form-btn" type="submit">
+              Login
+            </button>
+            <span>or</span>
+            <button className="form-btn" type="button">
+              Create account
+            </button>
+          </div>
           {errorMessage && <p className="error">{errorMessage}</p>}
         </form>
         <ToastContainer />

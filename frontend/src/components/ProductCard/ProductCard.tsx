@@ -87,7 +87,11 @@ function ProductCard({ product }: Prop) {
               className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
               onClick={handleFavoriteClick}
             >
-              <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
+              <Icon
+                icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE}
+                size={18}
+                border
+              />
             </button>
           </div>
         </div>
