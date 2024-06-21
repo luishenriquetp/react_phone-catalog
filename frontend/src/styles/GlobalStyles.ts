@@ -37,9 +37,10 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-html {
+  html:has(.burger-menu) {
+    overflow: hidden;
   }
-
+  
   body {
     background-color: var(--rstyle1-gray-background);
     margin: 0;
