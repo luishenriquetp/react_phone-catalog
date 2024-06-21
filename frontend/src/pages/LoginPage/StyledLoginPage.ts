@@ -56,13 +56,15 @@ const StyledLoginPage = styled.div`
     border: 1px solid rgba(255, 255, 255, 0.25);
   }
 
-  .form-group {
+  .form.login-group,
+  .form.password-group {
     margin-bottom: 15px;
     position: relative;
   }
 
   .form-label {
     ${letterStyleBodyTextDesktoAndTable}
+    margin: 0;
   }
 
   .password-group {
@@ -115,7 +117,12 @@ const StyledLoginPage = styled.div`
   }
 
   .password-toggle-icon {
-    margin-left: -30px;
+    position: absolute;
+    top: 30px;
+    right: 20px;
+
+    border: none;
+    background-color: transparent;
     cursor: pointer;
   }
 

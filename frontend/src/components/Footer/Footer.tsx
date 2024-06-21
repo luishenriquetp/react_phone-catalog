@@ -1,5 +1,7 @@
 import React from 'react';
 import StyledFooter from './StyledFooter.ts';
+import Icon from '../Icon/Icon.tsx';
+import { IconType } from '../Icon/Icon.ts';
 
 function Footer(): React.ReactNode {
   return (
@@ -19,9 +21,9 @@ function Footer(): React.ReactNode {
             Rights
           </a>
         </div>
-        <a href="#header" className="footer-item icons">
+        <a href="#home" className="footer-item icons">
           <span>Back to top</span>
-          <img src="/img/icons/back_to_top_button.png" alt="Back to top" />
+          <Icon icon={IconType.ARROW_UP} border fill="black" />
         </a>
       </footer>
     </StyledFooter>

@@ -11,14 +11,15 @@ const fallBack = () => <></>;
 
 interface IconPropsWithBorder extends IconProps {
   border?: boolean;
+  borderColor?: string;
 }
 
-function Icon({ size = 16, icon, border = false, ...svgProps }: IconPropsWithBorder) {
+function Icon({ size = 16, icon, border = false, borderColor, ...svgProps }: IconPropsWithBorder) {
   const SelectedIcon = iconMap[icon] || fallBack;
 
   if (border) {
     return (
-      <StyledIcon size={size}>
+      <StyledIcon size={size} borderColor={borderColor}>
         <SelectedIcon width={size} height={size} {...svgProps} />
       </StyledIcon>
     );

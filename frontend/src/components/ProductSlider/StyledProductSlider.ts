@@ -40,6 +40,10 @@ export const StyledProductSlider = styled.div`
         background-image: url('./src/IconAssets/ButtonHover.svg');
         cursor: pointer;
       }
+
+      &:disabled {
+        cursor: not-allowed;
+      }
     }
   }
 

@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useEffect, useState } from 'react';
 import ProductCard from '../ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
@@ -46,16 +45,33 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
       <div className="main-container">
         <h1>{title}</h1>
         <div className="nav-buttons">
-          <button onClick={handlePrev} disabled={isPrevDisabled} className="btn-left" type="button">
-            <Icon icon={IconType.ARROW_LEFT} fill={isPrevDisabled ? 'grey' : 'black'} border />
+          <button
+            onClick={handlePrev}
+            disabled={isPrevDisabled}
+            className="btn-left"
+            type="button"
+            aria-label="previous-btn"
+          >
+            <Icon
+              icon={IconType.ARROW_LEFT}
+              fill={isPrevDisabled ? 'grey' : 'black'}
+              border
+              borderColor={isPrevDisabled ? 'grey' : 'black'}
+            />
           </button>
           <button
             onClick={handleNext}
             disabled={isNextDisabled}
             className="btn-right"
             type="button"
+            aria-label="next-btn"
           >
-            <Icon icon={IconType.ARROW_RIGHT} fill={isNextDisabled ? 'grey' : 'black'} border />
+            <Icon
+              icon={IconType.ARROW_RIGHT}
+              fill={isNextDisabled ? 'grey' : 'black'}
+              border
+              borderColor={isNextDisabled ? 'grey' : 'black'}
+            />
           </button>
         </div>
         <div className="card-container">

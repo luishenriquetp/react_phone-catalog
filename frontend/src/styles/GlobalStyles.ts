@@ -37,7 +37,8 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-html {
+  html {
+  scroll-behavior: smooth;
   }
 
   body {
