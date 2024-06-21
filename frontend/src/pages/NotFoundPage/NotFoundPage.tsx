@@ -1,15 +1,20 @@
 import React from 'react';
-import StyledNotFoundPage from './StyledNotFoundPage.ts';
+import Lottie from 'lottie-react';
+import animation from './NotFoundAssets/animation.json';
+
+import StyledNotFound from './StyledNotFoundPage.ts';
 
 function NotFoundPage(): React.ReactNode {
+
   return (
-    <StyledNotFoundPage>
-      <div className="error-container">
-        <h1>404</h1>
-        <p>Oops! Página não encontrada.</p>
-        <a href="/">Voltar para a página inicial</a>
-      </div>
-    </StyledNotFoundPage>
+    <>
+      <StyledNotFound className="not_found">
+        <div className="wrapper">
+          <Lottie className="animation" animationData={animation} loop />
+          <h1>Page not found...</h1>
+        </div>
+      </StyledNotFound>
+    </>
   );
 }
 

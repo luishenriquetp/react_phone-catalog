@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import StyledHomePage from './StyledHomePage.ts';
 import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 import { getProducts } from '../../api/getAll.ts';
-import ProductSlider from '../../components/ProductSlider/ProductSlider.tsx';
 
 interface Category {
   name: string;
@@ -72,6 +71,16 @@ function HomePage() {
     });
   }, []);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex === images.length - 1 ? 0 : prevIndex + 1));
+    }, 3000);
+
+    return () => {
+      clearInterval(intervalId);
+    };
+  }, [images.length]);
+
   const handlePrev = () => {
     setCurrentIndex(prevIndex => (prevIndex === 0 ? images.length - 1 : prevIndex - 1));
   };
@@ -135,7 +144,8 @@ function HomePage() {
         </div>
       </div>
       <div className="home-page__sliders-container">
-        <ProductSlider title="Brand New Models" getProducts={getProducts} />
+        <h2 className="home-page__sliders-container-title">Brand new models</h2>
+        <div className="home-page__sliders-container-content">Slider</div>
       </div>
       <div className="home-page__shop">
         <div className="home-page__shop-title">Shop by category</div>
@@ -151,7 +161,8 @@ function HomePage() {
         </div>
       </div>
       <div className="home-page__sliders-container--second-child">
-        <ProductSlider title="Hot Prices" getProducts={getProducts} />
+        <h2 className="home-page__sliders-container-title">Hot prices</h2>
+        <div className="home-page__sliders-container-content">Slider</div>
       </div>
     </StyledHomePage>
   );
