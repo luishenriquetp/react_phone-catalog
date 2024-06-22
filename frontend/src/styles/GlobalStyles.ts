@@ -38,9 +38,9 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   html {
-  scroll-behavior: smooth;
+    scroll-behavior: smooth;
   }
-
+  
   body {
     background-color: var(--rstyle1-gray-background);
     margin: 0;

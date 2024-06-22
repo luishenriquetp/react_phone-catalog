@@ -7,47 +7,28 @@ interface Prop {
 }
 
 const StyledPageBurgerMenu = styled.div<Prop>`
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+  background-color: #fff;
+  top: 0;
+  left: 0;
+  right: 0;
+  pointer-events: all;
+  transition: all 0.5s;
+  overflow: hidden;
+  transform: translateX(0%);
+  height: 100vh;
+  z-index: 98;
+
   a {
     text-decoration: none;
     color: var(--rstyle1-gray-secondary);
   }
 
   .burger-menu {
-    width: 100vw;
-    max-width: 100%;
-    height: 100vh;
-    background-color: #ffffff;
-    overflow: hidden;
-    display: flex;
-    flex-direction: row;
-
-
-    &__header {
-      width: 100vw;
-      height: 100px;
-
-      &-navbar {
-        background-color: #fff;
-        height: 64px;
-        width: 100%;
-        border-bottom: 2px solid #e2e6e9;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0px;
-
-        &-logo {
-          margin-left: 16px;
-        }
-
-        &-icon {
-          display: flex;
-          margin-right: 16px;
-          color: #000000;
-        }
-      }
-    }
-
     &__nav {
       display: flex;
       flex-direction: column;
@@ -55,8 +36,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
       gap: 16px;
       ${letterStyleUpperCase};
       color: var(--rstyle1-gray-secondary);
-      width: 100%;
-      margin-bottom: 20px;
+      margin-top: 72px;
 
       &-link {
         cursor: pointer;
@@ -114,7 +94,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
 
       &--fav-indicator::after {
         content: '${p => String(p.$favQtd)}';
-        display: ${p => !!p.$favQtd ? 'block' : 'none'};
+        display: ${p => (!!p.$favQtd ? 'block' : 'none')};
         color: wheat;
         text-align: center;
         position: absolute;
@@ -129,7 +109,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
 
       &--cart-indicator::after {
         content: '${p => String(p.$cartQtd)}';
-        display: ${p => !!p.$cartQtd ? 'block' : 'none'};
+        display: ${p => (!!p.$cartQtd ? 'block' : 'none')};
         color: wheat;
         text-align: center;
         position: absolute;
@@ -141,6 +121,12 @@ const StyledPageBurgerMenu = styled.div<Prop>`
         width: 20px;
         height: 20px;
       }
+    }
+
+    &__icon {
+      width: 32px;
+      height: 32px;
+      filter: brightness(0) invert(0);
     }
   }
 `;
