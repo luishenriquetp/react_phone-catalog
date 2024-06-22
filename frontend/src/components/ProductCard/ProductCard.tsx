@@ -1,5 +1,3 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable jsx-a11y/control-has-associated-label */
 import React, { useState } from 'react';
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
@@ -86,8 +84,13 @@ function ProductCard({ product }: Prop) {
               type="button"
               className={`product-card__btn-favorite${favorite ? '--clicked' : ''}`}
               onClick={handleFavoriteClick}
+              aria-label="favorite-btn"
             >
-              <Icon icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE} />
+              <Icon
+                icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE}
+                size={18}
+                border
+              />
             </button>
           </div>
         </div>

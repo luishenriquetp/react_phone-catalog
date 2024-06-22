@@ -15,6 +15,7 @@ import Plus from '../../IconAssets/Plus.svg';
 import Search from '../../IconAssets/Search.svg';
 import EmptyCart from '../../IconAssets/Empty-cart.svg';
 import CounterCart from '../../IconAssets/Counter-cart.svg';
+import Config from '../../IconAssets/Config.svg';
 
 export enum IconType {
   ARROW_DOWN = 'arrow-down-icon',
@@ -22,6 +23,7 @@ export enum IconType {
   ARROW_RIGHT = 'arrow-right-icon',
   ARROW_LEFT = 'arrow-left-icon',
   CLOSE = 'close-icon',
+  CONFIG = 'config',
   EMPTY_HEARTLIKE = 'empty-heartlike-icon',
   COUNTER_HEARTLIKE = 'counter-heartlike-icon',
   FILLED_HEARTLIKE = 'filled-heartlike-icon',
@@ -49,6 +51,7 @@ export const iconMap: IconMap = {
   [IconType.ARROW_RIGHT]: ArrowRight,
   [IconType.ARROW_LEFT]: ArrowLeft,
   [IconType.CLOSE]: Close,
+  [IconType.CONFIG]: Config,
   [IconType.EMPTY_HEARTLIKE]: EmptyHeartlike,
   [IconType.COUNTER_HEARTLIKE]: CounterHeartlike,
   [IconType.FILLED_HEARTLIKE]: FilledHeartlike,

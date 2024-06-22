@@ -211,11 +211,9 @@ export const StyledProductCard = styled.div`
     justify-content: center;
     background-color: transparent;
     box-sizing: border-box;
-    border-radius: 50%;
-    border: 1px solid var(--rstyle1-gray-icons-placeholders);
-    padding: 10px;
     margin: 0;
     transition: color 500ms;
+    border: none;
 
     &:hover {
       cursor: pointer;
@@ -224,13 +222,16 @@ export const StyledProductCard = styled.div`
     &--clicked {
       display: flex;
       justify-content: center;
+      align-items: center;
       background-color: transparent;
       box-sizing: border-box;
-      border-radius: 50%;
-      border: 1px solid var(--rstyle1-gray-icons-placeholders);
-      padding: 10px;
+      border: none;
       margin: 0;
       color: var(--rstyle1-secondary-accent);
+
+      &:hover {
+        cursor: pointer;
+      }
     }
   }
 `;

@@ -26,6 +26,7 @@ const StyledFooter = styled.div`
     text-decoration: none;
     display: flex;
     align-items: center;
+    justify-content: center;
   }
 
   #logo {
