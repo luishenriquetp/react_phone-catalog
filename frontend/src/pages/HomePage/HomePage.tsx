@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import StyledHomePage from './StyledHomePage.ts';
 import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 import { getProducts } from '../../api/getAll.ts';
+import ProductSlider from '../../components/ProductSlider/ProductSlider.tsx';
+import Icon from '../../components/Icon/Icon.tsx';
+import { IconType } from '../../components/Icon/Icon.ts';
 
 interface Category {
   name: string;
@@ -106,12 +109,17 @@ function HomePage() {
   };
 
   return (
-    <StyledHomePage className="home-page" data-current-index={currentIndex}>
+    <StyledHomePage id="home" className="home-page" data-current-index={currentIndex}>
       <h1 className="home-page__title">Welcome to Nice Gadgets store!</h1>
       <div className="home-page__banner">
         <div className="home-page__banner-structure">
-          <button onClick={handlePrev} type="button" className="home-page__banner-structure-button">
-            &lt;
+          <button
+            onClick={handlePrev}
+            type="button"
+            className="home-page__banner-structure-button"
+            aria-label="previous-btn"
+          >
+            <Icon icon={IconType.ARROW_LEFT} fill="black" />
           </button>
           <div
             className="home-page__banner-structure-slider"
@@ -130,8 +138,13 @@ function HomePage() {
               </div>
             ))}
           </div>
-          <button onClick={handleNext} type="button" className="home-page__banner-structure-button">
-            &gt;
+          <button
+            onClick={handleNext}
+            type="button"
+            className="home-page__banner-structure-button"
+            aria-label="next-btn"
+          >
+            <Icon icon={IconType.ARROW_RIGHT} fill="black" />
           </button>
         </div>
         <div className="home-page__banner-indicators">

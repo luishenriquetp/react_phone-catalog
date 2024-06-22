@@ -37,8 +37,8 @@ export const GlobalStyles = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  html:has(.burger-menu) {
-    overflow: hidden;
+  html {
+    scroll-behavior: smooth;
   }
   
   body {
