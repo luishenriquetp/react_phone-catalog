@@ -1,6 +1,6 @@
 /* eslint-disable no-param-reassign */
+// Here disable param-reassign beacuse reduxtookit use  immer lib internally.
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Product } from '../../types/types.ts';
 
 interface UserState {
   tokenSession: string;
@@ -15,11 +15,10 @@ const userState = createSlice({
   initialState,
   reducers: {
     setUserSession: (state: UserState, action: PayloadAction<string>) => {
-      state.tokenSession = action.payload
+      state.tokenSession = action.payload;
     },
   },
 });
 
-export const { setUserSession } =
-userState.actions;
+export const { setUserSession } = userState.actions;
 export default userState.reducer;

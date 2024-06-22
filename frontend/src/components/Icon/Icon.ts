@@ -1,5 +1,3 @@
-/* eslint-disable no-shadow */
-import React, { SVGProps } from 'react';
 import ArrowDown from '../../IconAssets/Arrow-down.svg';
 import ArrowUp from '../../IconAssets/Arrow-up.svg';
 import ArrowRight from '../../IconAssets/Arrow-right.svg';
@@ -17,6 +15,7 @@ import EmptyCart from '../../IconAssets/Empty-cart.svg';
 import CounterCart from '../../IconAssets/Counter-cart.svg';
 import Config from '../../IconAssets/Config.svg';
 
+// eslint-disable-next-line no-shadow
 export enum IconType {
   ARROW_DOWN = 'arrow-down-icon',
   ARROW_UP = 'arrow-up-icon',
@@ -36,16 +35,7 @@ export enum IconType {
   COUNTER_CART = 'counter-cart-icon',
 }
 
-export type IconProps = SVGProps<SVGSVGElement> & {
-  size?: number;
-  icon: IconType;
-};
-
-type IconMap = {
-  [key in IconType]: React.FC<SVGProps<SVGSVGElement>> | string;
-};
-
-export const iconMap: IconMap = {
+export const iconMap = {
   [IconType.ARROW_DOWN]: ArrowDown,
   [IconType.ARROW_UP]: ArrowUp,
   [IconType.ARROW_RIGHT]: ArrowRight,

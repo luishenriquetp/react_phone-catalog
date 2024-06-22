@@ -58,5 +58,5 @@ interface User {
 
 export interface SessionData {
   userId: User;
-  data: UserData
+  data: UserData;
 }

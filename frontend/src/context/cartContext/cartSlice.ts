@@ -44,14 +44,22 @@ const cartSlice = createSlice({
       state.totalPrice -= action.payload.price * state.quantity[indxToErase];
       state.quantity.splice(indxToErase, 1);
     },
-    updateAllProducs:  (state: CartState, action: PayloadAction<{products: Product[], qtd: number[], totalAmount: number}>) => {
+    updateAllProducs: (
+      state: CartState,
+      action: PayloadAction<{ products: Product[]; qtd: number[]; totalAmount: number }>,
+    ) => {
       state.products = action.payload.products;
       state.quantity = action.payload.qtd;
-      state.totalPrice = action.payload.totalAmount
+      state.totalPrice = action.payload.totalAmount;
     },
   },
 });
 
-export const { incrementTotalPrice, decreaseTotalPrice, addProduct, removeProduct, updateAllProducs } =
-  cartSlice.actions;
+export const {
+  incrementTotalPrice,
+  decreaseTotalPrice,
+  addProduct,
+  removeProduct,
+  updateAllProducs,
+} = cartSlice.actions;
 export default cartSlice.reducer;

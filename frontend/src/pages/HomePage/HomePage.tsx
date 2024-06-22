@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import StyledHomePage from './StyledHomePage.ts';
 import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 import { getProducts } from '../../api/getAll.ts';
-import ProductSlider from '../../components/ProductSlider/ProductSlider.tsx';
 import Icon from '../../components/Icon/Icon.tsx';
 import { IconType } from '../../components/Icon/Icon.ts';
 

@@ -1,11 +1,12 @@
 // src/components/Breadcrumb.tsx
 
+import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import StyledBreadcrumb from './StyledBreadcrumb.ts';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
 
-function Breadcrumb() {
+function Breadcrumb(): React.ReactNode {
   const location = useLocation();
 
   const splitedLocation = location.pathname.split('/').filter(el => el !== 'shop');

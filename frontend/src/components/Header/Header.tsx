@@ -1,12 +1,10 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useEffect, useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import StyledHeader from './StyledHeader.ts';
 import { useAppSelector } from '../../context/hooks.ts';
 import BurgerMenu from '../BurgerMenu/BurgerMenu.tsx';
 import Icon from '../Icon/Icon.tsx';
-import { IconType } from '../Icon/Icon.types.ts';
+import { IconType } from '../Icon/Icon.ts';
 
 function Header(): React.ReactNode {
   const [activeMenu, setActiveMenu] = useState(false);
@@ -62,13 +60,18 @@ function Header(): React.ReactNode {
             <img src="/img/icons/shopping_bag_black.png" alt="Cart" />
           </NavLink>
         </div>
-        <div className="icon burger_menu" onClick={() => setActiveMenu(state => !state)}>
+        <button
+          className="icon burger_menu"
+          onClick={() => setActiveMenu(state => !state)}
+          type="button"
+          aria-label="open mobile navigation"
+        >
           {activeMenu ? (
             <Icon icon={IconType.CLOSE} fill="black" />
           ) : (
             <Icon icon={IconType.MENU} fill="black" />
           )}
-        </div>
+        </button>
       </nav>
       {activeMenu && <BurgerMenu setActiveMenu={setActiveMenu} />}
     </StyledHeader>

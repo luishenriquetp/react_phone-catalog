@@ -1,11 +1,11 @@
 import styled from 'styled-components';
 
-interface IconProps {
+interface StyledIconProps {
   size: number;
   borderColor?: string;
 }
 
-const StyledIcon = styled.div<IconProps>`
+const StyledIcon = styled.div<StyledIconProps>`
   display: flex;
   align-items: center;
   justify-content: center;

@@ -7,19 +7,20 @@ import { useAppSelector } from '../../context/hooks.ts';
 
 function FavoritesPage(): React.ReactNode {
   const contentPage: Product[] = useAppSelector(state => state.favourites.products);
-  
+
   return (
     <StyledFavoritesPage className="page-catalog">
       <StyledToastContainer />
       <div className="top-section">
         <h1 className="top-section__title">Favourites</h1>
-        <h2 className="top-section__subtitle">{contentPage.length ? contentPage.length : ''} models</h2>
+        <h2 className="top-section__subtitle">
+          {contentPage.length ? contentPage.length : ''} models
+        </h2>
       </div>
       <div className="list">
-        {contentPage &&
-          contentPage.map(item => <ProductCard key={item.id} product={item} />)}
+        {contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)}
       </div>
-      </StyledFavoritesPage>
+    </StyledFavoritesPage>
   );
 }
 

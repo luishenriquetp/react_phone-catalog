@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { letterStyleBodyTextDesktoAndTable } from '../../styles/GlobalStyles';
+import { letterStyleBodyTextDesktoAndTable } from '../../styles/GlobalStyles.ts';
 
 const StyledNotFound = styled.div`
   width: 100%;

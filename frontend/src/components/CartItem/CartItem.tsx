@@ -1,6 +1,5 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
-import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import StyledCartItem from './StyledCartItem.ts';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
@@ -16,9 +15,9 @@ interface Prop {
   quantity: number;
 }
 
-function CartItem(prop: Prop) {
+function CartItem(prop: Prop): React.ReactNode {
   const { product, quantity } = prop;
-  const dispatch: Dispatch<UnknownAction> = useDispatch();
+  const dispatch = useDispatch();
 
   const handleDeleteClicekButton = useCallback(() => {
     dispatch(removeProduct(product));
@@ -41,7 +40,7 @@ function CartItem(prop: Prop) {
           aria-label="remove item cart"
           onClick={handleDeleteClicekButton}
         >
-          <Icon icon={IconType.CLOSE} />
+          <Icon icon={IconType.CLOSE} border />
         </button>
         <img className="top-content__product-image" src={product.image} alt={product.name} />
         <span className="top-content__product-title">{product.name}</span>

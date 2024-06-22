@@ -163,14 +163,13 @@ function PageCatalog() {
           closeButton: false,
         });
       })
-      .catch(error => {
+      .catch(() => {
         toast.error(`Error loading ${category}...`, {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
           closeButton: false,
         });
-        console.error('Error fetching products:', error);
       })
       .finally(() => {
         setIsLoading(false);

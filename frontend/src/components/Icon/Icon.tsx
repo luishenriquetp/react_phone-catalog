@@ -3,11 +3,16 @@
 /* eslint-disable react/react-in-jsx-scope */
 /* eslint-disable react/jsx-no-useless-fragment */
 /* eslint-disable react/jsx-props-no-spreading */
-import React from 'react';
-import { iconMap, IconProps } from './Icon.ts';
+import { SVGProps } from 'react';
+import { IconType, iconMap } from './Icon.ts';
 import StyledIcon from './StyledIcon.ts';
 
 const fallBack = () => <></>;
+
+type IconProps = SVGProps<SVGSVGElement> & {
+  size?: number;
+  icon: IconType;
+};
 
 interface IconPropsWithBorder extends IconProps {
   border?: boolean;

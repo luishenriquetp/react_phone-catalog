@@ -7,7 +7,7 @@ interface FavouriteState {
 }
 
 const initialState: FavouriteState = {
-  products: []
+  products: [],
 };
 
 const favouriteSlice = createSlice({
@@ -31,6 +31,5 @@ const favouriteSlice = createSlice({
   },
 });
 
-export const { addFavourite, removeFavourite, updateAllFavourites } =
-  favouriteSlice.actions;
+export const { addFavourite, removeFavourite, updateAllFavourites } = favouriteSlice.actions;
 export default favouriteSlice.reducer;

@@ -94,7 +94,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
 
       &--fav-indicator::after {
         content: '${p => String(p.$favQtd)}';
-        display: ${p => (!!p.$favQtd ? 'block' : 'none')};
+        display: ${p => (p.$favQtd ? 'block' : 'none')};
         color: wheat;
         text-align: center;
         position: absolute;
@@ -109,7 +109,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
 
       &--cart-indicator::after {
         content: '${p => String(p.$cartQtd)}';
-        display: ${p => (!!p.$cartQtd ? 'block' : 'none')};
+        display: ${p => (p.$cartQtd ? 'block' : 'none')};
         color: wheat;
         text-align: center;
         position: absolute;

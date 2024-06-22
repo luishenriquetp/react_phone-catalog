@@ -3,11 +3,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import StyledLoginPage from './StyledLoginPage.ts';
 
-interface LoginPageProps {
-  // Define here props of this Component if needed
-}
-
-function LoginPage(props: LoginPageProps): React.ReactNode {
+function LoginPage(): React.ReactNode {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -29,7 +25,6 @@ function LoginPage(props: LoginPageProps): React.ReactNode {
           user.userName === mockedUser && user.passwd === mockedPassword,
       );
     } catch (error) {
-      console.error('Failed to fetch user data:', error);
       return false;
     }
   }

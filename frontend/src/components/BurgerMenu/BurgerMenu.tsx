@@ -1,3 +1,4 @@
+import React from 'react';
 import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../context/hooks.ts';
 import StyledPageBurgerMenu from './StyledPageBurgerMenu.ts';
@@ -6,12 +7,12 @@ type Props = {
   setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export function BurgerMenu({ setActiveMenu }: Props) {
+export function BurgerMenu({ setActiveMenu }: Props): React.ReactNode {
   const qtdCart = useAppSelector(state =>
     state.cart.quantity.reduce((acc, e) => {
-      acc += e;
+      const newAcc = acc + e;
 
-      return acc;
+      return newAcc;
     }, 0),
   );
   const qtdFav = useAppSelector(state => state.favourites.products.length);

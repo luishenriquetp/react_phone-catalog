@@ -85,7 +85,7 @@ const StyledHeader = styled.header<Props>`
 
   .icon--like::after {
     content: '${p => String(p.$qtdFav)}';
-    display: ${p => (!!p.$qtdFav ? 'block' : 'none')};
+    display: ${p => (p.$qtdFav ? 'block' : 'none')};
     color: wheat;
     text-align: center;
     position: absolute;
@@ -100,7 +100,7 @@ const StyledHeader = styled.header<Props>`
 
   .icon--cart::after {
     content: '${p => String(p.$cartQtd)}';
-    display: ${p => (!!p.$cartQtd ? 'block' : 'none')};
+    display: ${p => (p.$cartQtd ? 'block' : 'none')};
     color: wheat;
     text-align: center;
     position: absolute;

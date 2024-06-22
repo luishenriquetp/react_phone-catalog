@@ -8,25 +8,20 @@ export const getProducts = (): Promise<Product[]> => {
       }
       return response.json();
     })
-    .then(data => data as Product[])
-    .catch(error => {
-      throw error;
-    });
+    .then(data => data as Product[]);
 };
-
+/* Atention! This method needs to be updated by api end point correctly */
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const getProductByID = (_ID: string | undefined): Promise<FullProduct> => {
+export const getProductByID = (id: string | undefined): Promise<FullProduct> => {
   return fetch('/api/mockProduct.json')
     .then(response => {
       if (!response.ok) {
         throw new Error(`Failed to fetch products: ${response.statusText}`);
       }
+
       return response.json();
     })
-    .then(data => data as FullProduct)
-    .catch(error => {
-      throw error;
-    });
+    .then(data => data as FullProduct);
 };
 
 export const getSessionData = (idSession: string): Promise<SessionData> => {
@@ -35,6 +30,7 @@ export const getSessionData = (idSession: string): Promise<SessionData> => {
       if (!response.ok) {
         throw new Error(`Failed to fetch products: ${response.statusText}`);
       }
+
       return response.json();
     })
     .then(data => data[0] as SessionData);
