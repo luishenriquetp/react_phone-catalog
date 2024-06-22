@@ -5,7 +5,6 @@ import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage.ts
 import Header from './components/Header/Header.tsx';
 import Footer from './components/Footer/Footer.tsx';
 import PageCart from './pages/CartPage/PageCart.tsx';
-import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
 import Breadcrumb from './components/Breadcrumb/Breadcrumb.tsx';
 import PageCatalog from './pages/PageCatalog/PageCatalog.tsx';
 import HomePage from './pages/HomePage/HomePage.tsx';
@@ -17,6 +16,7 @@ import { getSessionData } from './api/getAll.ts';
 import { updateAllFavourites } from './context/favoriteContext/favouriteSlice.ts';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu.tsx';
 import LoginPage from './pages/LoginPage/LoginPage.tsx';
+import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
 
 function App(): React.ReactNode {
   // Initialize Redux Data Context
