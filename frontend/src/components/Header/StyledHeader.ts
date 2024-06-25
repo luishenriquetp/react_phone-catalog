@@ -1,152 +1,181 @@
 import styled from 'styled-components';
+import { letterStyleUpperCase } from '../../styles/GlobalStyles';
 
-interface Props {
-  $qtdFav: number;
-  $cartQtd: number;
-}
+// interface Props {
+//   $qtdFav: number;
+//   $cartQtd: number;
+// }
 
-const StyledHeader = styled.header<Props>`
-  .navbar {
-    top: 0;
-    background-color: #fff;
-    height: 64px;
-    width: 100%;
-    position: fixed;
-    border-bottom: 2px solid #e2e6e9;
-    display: flex;
-    align-items: center;
-    padding: 0px;
-    z-index: 99;
+const StyledHeaderN = styled.header`
+  width: 100%;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 24px;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background-color: #fff;
+  box-sizing: border-box;
+  box-shadow: 0px 1px 0px 0px #E2E6E9;
+  z-index: 99;
+  ${letterStyleUpperCase};
+
+  @media (max-width: 1199px) {
+    height: 48px;
+    gap: 16px;
   }
 
-  .nav_logo {
-    margin-left: 25px;
+  .header_logo {
+    width: 64px;
+    height: 22px;
+    margin: 18px;
+    box-sizing: border-box;
+
+    @media (max-width: 1199px) {
+      margin: 13px 16px;
+    }
   }
 
-  .nav_links {
-    display: flex;
-    flex-grow: 1;
-    align-items: center;
-    margin-left: 64px;
-  }
-
-  .nav_link {
-    margin-right: 64px;
-    text-transform: uppercase;
-    font-family: Mont;
-    font-size: 12px;
-    font-weight: 800;
-    letter-spacing: 0.04em;
-    text-decoration: none;
-    color: black;
-    display: flex;
-    align-items: center;
-    height: 64px;
-    position: relative;
-  }
-
-  .nav_link::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 3px;
-    background-color: transparent;
-    transition: background-color 0.3s;
-  }
-
-  .nav_link.active::after,
-  .nav_link:hover::after {
-    background-color: #000;
-  }
-
-  .nav_icons {
-    display: flex;
-    align-items: center;
-    margin-left: auto;
-  }
-
-  .icon {
-    margin-right: 0;
+  .nav {
+    height: 100%;
     display: flex;
     align-items: center;
     justify-content: center;
-    border-left: 2px solid #e2e6e9;
-    width: 64px;
-    height: 64px;
-    position: relative;
-  }
 
-  .icon img {
-    width: 16px;
-    height: 16px;
-  }
-
-  .icon--like::after {
-    content: '${p => String(p.$qtdFav)}';
-    display: ${p => (p.$qtdFav ? 'block' : 'none')};
-    color: wheat;
-    text-align: center;
-    position: absolute;
-    right: 20%;
-    top: 25%;
-    background-color: purple;
-    border-radius: 50%;
-    border: 3px solid white;
-    width: 25%;
-    height: 25%;
-  }
-
-  .icon--cart::after {
-    content: '${p => String(p.$cartQtd)}';
-    display: ${p => (p.$cartQtd ? 'block' : 'none')};
-    color: wheat;
-    text-align: center;
-    position: absolute;
-    right: 20%;
-    top: 25%;
-    background-color: purple;
-    border-radius: 50%;
-    border: 3px solid white;
-    width: 25%;
-    height: 25%;
-  }
-
-  .burger_menu {
-    display: none;
-  }
-
-  @media (max-width: 1199px) {
-    .navbar {
-      height: 48px;
-    }
-    .nav_links {
-      margin-left: 32px;
-    }
-    .nav_link {
-      margin-right: 32px;
-    }
-
-    .nav_link::after {
-      bottom: 8px;
-    }
-    .icon {
-      width: 48px;
-      height: 48px;
-    }
-  }
-
-  @media (max-width: 639px) {
-    .nav_links,
-    .nav_icons {
+    @media (max-width: 639px) {
       display: none;
     }
-    .burger_menu {
+
+    &__list {
+      line-height: 64px;
+      list-style: none;
       display: flex;
-      margin-left: auto;
+      gap: 64px;
+      margin: 0;
+      padding: 0;
+
+      @media (max-width: 1199px) {
+        line-height: 48px;
+        gap: 32px;
+      }
+    }
+
+   
+
+    &__item {
+      position: relative;
+
+      &:hover::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #0F0F11;
+        transition: background-color 0.3s;
+      }
+
+      &--active ::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #0F0F11;
+        transition: background-color 0.3s;
+      }
+    }
+
+    &__link {
+      height: 100%;
+      text-transform: uppercase;
+      color: var(--rstyle1-gray-primary);
+    }
+  }
+
+  .icons-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+
+    &__btn {
+      height: 100%;
+      width: 64px;
+      cursor: pointer;
+      box-shadow: -1px 0px 0px 0px #E2E6E9;
+      position: relative;
+
+      &--indicator{
+        height: 25%;
+        width: 25%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        bottom: 50%;
+        left: 50%;
+        background-color: purple;
+        font-size: 9px;
+        font-weight: 700;
+        line-height: 11.5px;
+        text-align: center;
+        color: white;
+        border-radius: 50%;
+        border: 2px solid white;
+      }
+
+      &--menu-mobile {
+        display: none;
+      }
+
+      &--cart {
+
+        &--indicator{
+          height: 25%;
+          width: 25%;
+          align-items: center;
+          justify-content: center;
+          position: absolute;
+          bottom: 50%;
+          left: 50%;
+          background-color: purple;
+          font-size: 9px;
+          font-weight: 700;
+          line-height: 11.5px;
+          text-align: center;
+          color: white;
+          border-radius: 50%;
+          border: 2px solid white;
+        }
+      }
+      
+
+      @media (max-width: 1199px) {
+        width: 48px;
+      }
+
+      @media (max-width: 639px) {
+        height: 48px;
+
+        &--menu-mobile {
+          display: block;
+        }
+
+        &--favourite {
+          display: none;
+        }
+
+        &--cart {
+          display: none;
+        }
+      }
     }
   }
 `;
 
-export default StyledHeader;
+export default StyledHeaderN;

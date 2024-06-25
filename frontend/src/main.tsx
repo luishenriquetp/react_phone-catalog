@@ -9,9 +9,7 @@ import store from './context/store.ts';
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
+              <App />
       <GlobalStyles />
     </BrowserRouter>
   </React.StrictMode>,

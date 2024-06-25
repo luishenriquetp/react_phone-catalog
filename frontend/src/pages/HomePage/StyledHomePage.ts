@@ -6,11 +6,8 @@ import {
   letterStyleH2Mobile,
 } from '../../styles/GlobalStyles.ts';
 
-interface StyledHomePageProps {
-  'data-current-index': number;
-}
-
-const StyledHomePage = styled.div<StyledHomePageProps>`
+const StyledHomePage = styled.div`
+  margin: auto;
   .home-page {
     &__title {
       ${letterStyleH1Mobile};
@@ -46,6 +43,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
       }
       &-structure {
         display: flex;
+        align-items: stretch;
         width: 100vw;
         position: relative;
         @media (min-width: 640px) {
@@ -149,6 +147,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
       margin-top: 56px;
       margin-bottom: 56px;
       margin-left: 16px;
+      width: 100%;
       @media (min-width: 640px) {
         margin-left: 24px;
       }
@@ -168,6 +167,7 @@ const StyledHomePage = styled.div<StyledHomePageProps>`
         width: 100%;
         gap: 20px;
         overflow: hidden;
+        
         @media (min-width: 640px) {
           flex-direction: row;
           gap: 16px;

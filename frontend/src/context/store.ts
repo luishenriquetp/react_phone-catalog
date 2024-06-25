@@ -23,7 +23,6 @@ const preloadedState = loadState();
 
 const store = configureStore({
   reducer: rootReducer,
-
   preloadedState,
   middleware: getDefaultMiddleware => getDefaultMiddleware().concat(localStorageMiddleware),
 });

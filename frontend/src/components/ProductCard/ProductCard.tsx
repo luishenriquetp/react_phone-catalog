@@ -1,28 +1,29 @@
 import React, { useState } from 'react';
-import { Dispatch, UnknownAction } from '@reduxjs/toolkit';
 import { useDispatch } from 'react-redux';
 import { StyledProductCard } from './StyledProductCard.ts';
 import { Product } from '../../types/types.ts';
-import { useAppSelector } from '../../context/hooks.ts';
 import { addProduct } from '../../context/cartContext/cartSlice.ts';
 import { addFavourite, removeFavourite } from '../../context/favoriteContext/favouriteSlice.ts';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
+import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import store from '../../context/store.ts';
 
 interface Prop {
   product: Product;
 }
 
-function ProductCard({ product }: Prop) {
-  const productIsInCart = useAppSelector(state =>
-    state.cart.products.some(e => e.itemId === product.itemId),
-  );
-  const isFavoriteProduct = useAppSelector(state =>
-    state.favourites.products.some(e => e.itemId === product.itemId),
-  );
-  const dispatch: Dispatch<UnknownAction> = useDispatch();
+function ProductCard({ product }: Prop): React.ReactNode {
+  const productIsInCart = store.getState().cart.products.some(e => e.itemId === product.itemId);
+
+  const isFavoriteProduct = store.getState().favourites.products.some(e => e.itemId === product.itemId);
+  const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(isFavoriteProduct);
   const [addToCardOrNot, setAddToCardOrNot] = useState(productIsInCart);
+
+  console.log('this is ProductCard render');
+
 
   const handleAddProductToCartClickButton = () => {
     dispatch(addProduct(product));
@@ -44,7 +45,7 @@ function ProductCard({ product }: Prop) {
       {/* {remember to add a link to the correct page} */}
       <StyledProductCard className="product-card">
         <div className="product-card__wrapper">
-          <a className="product-card__link" href={`/shop/${product.category}/${product.itemId}`}>
+          <Link className="product-card__link" to={`/shop/${product.category}/${product.itemId}`}>
             <img className="product-card__image" src={`/${product.image}`} alt={product.name} />
             <div className="product-card__description">
               <h4 className="product-card__description-title">{product.name}</h4>
@@ -70,7 +71,7 @@ function ProductCard({ product }: Prop) {
                 </div>
               </div>
             </div>
-          </a>
+          </Link>
           <div className="product-card__btn-container">
             <button
               type="button"
@@ -89,7 +90,6 @@ function ProductCard({ product }: Prop) {
               <Icon
                 icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE}
                 size={18}
-                border
               />
             </button>
           </div>

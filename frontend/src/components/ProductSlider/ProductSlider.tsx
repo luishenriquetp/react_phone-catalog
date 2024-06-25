@@ -11,6 +11,7 @@ interface ProductSliderProps {
 }
 
 function ProductSlider(prop: ProductSliderProps): React.ReactNode {
+  console.log('this is Slider Render');
   const { getProducts, title } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);

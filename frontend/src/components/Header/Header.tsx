@@ -1,81 +1,78 @@
-import React, { useEffect, useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import React from 'react';
 import StyledHeader from './StyledHeader.ts';
-import { useAppSelector } from '../../context/hooks.ts';
-import BurgerMenu from '../BurgerMenu/BurgerMenu.tsx';
+import { NavLink } from 'react-router-dom';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
+import { useSelector } from 'react-redux';
+import store from '../../context/store.ts';
+import { useAppSelector } from '../../context/hooks.ts';
 
-function Header(): React.ReactNode {
-  const [activeMenu, setActiveMenu] = useState(false);
 
-  const favoritesQtd = useAppSelector(state => state.favourites.products.length);
-  const cartQtd = useAppSelector(state => state.cart.products.length);
-
-  useEffect(() => {
-    const handleResize = () => {
-      const newWidth = window.innerWidth;
-
-      if (newWidth > 639) {
-        if (activeMenu) {
-          setActiveMenu(false);
-        }
-      }
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, [activeMenu]);
+function HeaderN(): React.ReactNode {
+  const cartQtd = useAppSelector(state =>  state.cart.quantity.reduce((acc, el) => acc + el, 0));
+  const favQtd = useAppSelector(state =>  state.favourites.products.length);
 
   return (
-    <StyledHeader className="header" id="header" $qtdFav={favoritesQtd} $cartQtd={cartQtd}>
-      <nav id="nav_bar" className="navbar">
-        <div className="nav_logo">
-          <img id="logo" src="/img/icons/logo.png" alt="Logo" />
-        </div>
-        <div className="nav_links">
-          <Link to="/home" className="nav_link">
-            {' '}
-            {/* exist a active class in this class adjust  */}
-            Home
-          </Link>
-          <NavLink className="nav_link" to="/shop/phones">
-            Phones
-          </NavLink>
-          <NavLink className="nav_link" to="/shop/tablets">
-            Tablets
-          </NavLink>
-          <NavLink className="nav_link" to="/shop/accessories">
-            Accessories
-          </NavLink>
-        </div>
-        <div className="nav_icons">
-          <NavLink className="icon icon--like" to="/favorites">
-            <img src="/img/icons/favourites_black.png" alt="Like" />
-          </NavLink>
-          <NavLink className="icon icon--cart" to="/cart">
-            <img src="/img/icons/shopping_bag_black.png" alt="Cart" />
-          </NavLink>
-        </div>
-        <button
-          className="icon burger_menu"
-          onClick={() => setActiveMenu(state => !state)}
-          type="button"
-          aria-label="open mobile navigation"
-        >
-          {activeMenu ? (
-            <Icon icon={IconType.CLOSE} fill="black" />
-          ) : (
-            <Icon icon={IconType.MENU} fill="black" />
-          )}
-        </button>
+    <StyledHeader className="header">
+      <div className="header_logo">
+        <img id="logo" src="/img/icons/logo.png" alt="Logo" />
+      </div>
+
+      <nav className="header__nav nav">
+        <ul className="nav__list">
+          <li className="nav__item">
+            <NavLink
+              to="/home"
+              className="nav__link"
+            >
+              Home
+            </NavLink>
+          </li>
+
+          <li className="nav__item">
+            <NavLink
+              to="/homeN"
+              className="nav__link"
+            >
+              Phones
+            </NavLink>
+          </li>
+
+          <li className="nav__item">
+            <NavLink
+              to="/homeN"
+              className="nav__link"
+            >
+              Tablets
+            </NavLink>
+          </li>
+
+          <li className="nav__item">
+            <NavLink
+              to="/homeN"
+              className="nav__link"
+            >
+              Accessories
+            </NavLink>
+          </li>
+        </ul>
       </nav>
-      {activeMenu && <BurgerMenu setActiveMenu={setActiveMenu} />}
+
+      <div className="header__icons-container icons-container" >
+        <button className="icons-container__btn">
+        {!!favQtd && <div className="icons-container__btn--indicator">{favQtd}</div>}
+          <Icon icon={IconType.EMPTY_HEARTLIKE}/>
+        </button>
+        <button className="icons-container__btn">
+          {!!cartQtd && <div className="icons-container__btn--indicator">{cartQtd}</div>}
+          <Icon icon={IconType.EMPTY_CART} />
+        </button>
+        <button className="icons-container__btn icons-container__btn--menu-mobile">
+          <Icon icon={IconType.MENU} />
+        </button>
+      </div>
     </StyledHeader>
   );
 }
 
-export default Header;
+export default HeaderN;

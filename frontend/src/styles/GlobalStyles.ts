@@ -33,16 +33,36 @@ export const GlobalStyles = createGlobalStyle`
     src: url('/fonts/Mont-Regular.otf') format('opentype');
   }
 
-  * {
-    box-sizing: border-box;
-  }
-
   html {
     scroll-behavior: smooth;
+    font-family: Mont;
   }
-  
+
   body {
     background-color: var(--rstyle1-gray-background);
+    margin: 0;
+    padding: 0; 
+    font-family: Mont;
+  }
+
+  a {
+    margin: 0;
+    padding: 0;
+    text-decoration: none;
+    color: none;
+  }
+
+  h1 {
+    margin: 0;
+    padding: 0;
+  }
+
+  button {
+    display: block;
+    border: none;
+    background-color: transparent;
+    box-sizing: border-box;
+    padding: 0;
     margin: 0;
   }
 
@@ -57,29 +77,20 @@ export const GlobalStyles = createGlobalStyle`
   }
 
   .container {
-    max-width: min(100vw, 320px);
-    margin: 0 auto;
-    padding-inline: 16px;
+    width: 100%;
+    margin: 64px 0 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-    @media (min-width: 640px) {
-      max-width: min(100vw, 640px);
-      padding-inline: 24px;
-    }
-
-    @media (min-width: 768px) {
-      max-width:min(100vw, 768px);
-    }
-
-    @media (min-width: 1200px) {
-      max-width: min(100vw, 1200px);
-      padding-inline: 32px;
+    @media (max-width: 1199px) {
+      margin-top: 48px;
     }
   } 
 `;
 
 export const letterStyleH1DesktoAndTable = css`
   //styleName: Desktop & Tablet/H1;
-  font-family: Mont;
   font-size: 48px;
   font-weight: 800;
   line-height: 56px;
@@ -89,7 +100,6 @@ export const letterStyleH1DesktoAndTable = css`
 
 export const letterStyleH2DesktoAndTable = css`
   //styleName: Desktop & Tablet/H2;
-  font-family: Mont;
   font-size: 32px;
   font-weight: 800;
   line-height: 41px;
@@ -99,7 +109,6 @@ export const letterStyleH2DesktoAndTable = css`
 
 export const letterStyleH3DesktoAndTable = css`
   //styleName: Desktop & Tablet/H3;
-  font-family: Mont;
   font-size: 22px;
   font-weight: 800;
   line-height: 30.8px;
@@ -108,7 +117,6 @@ export const letterStyleH3DesktoAndTable = css`
 
 export const letterStyleH4DesktoAndTable = css`
   //styleName: Desktop & Tablet/H4;
-  font-family: Mont;
   font-size: 20px;
   font-weight: 700;
   line-height: 25.56px;
@@ -117,7 +125,6 @@ export const letterStyleH4DesktoAndTable = css`
 
 export const letterStyleUpperCase = css`
   //styleName: Uppercase;
-  font-family: Mont;
   font-size: 12px;
   font-weight: 800;
   line-height: 11px;
@@ -127,7 +134,6 @@ export const letterStyleUpperCase = css`
 
 export const letterStyleButtonsDesktoAndTable = css`
   //styleName: Buttons;
-  font-family: Mont;
   font-size: 14px;
   font-weight: 700;
   line-height: 21px;
@@ -136,7 +142,6 @@ export const letterStyleButtonsDesktoAndTable = css`
 
 export const letterStyleBodyTextDesktoAndTable = css`
   //styleName: Body text 14;
-  font-family: Mont;
   font-size: 14px;
   font-weight: 600;
   line-height: 21px;
@@ -145,7 +150,6 @@ export const letterStyleBodyTextDesktoAndTable = css`
 
 export const letterStyleSmallTextDesktoAndTable = css`
   //styleName: Small text 12;
-  font-family: Mont;
   font-size: 12px;
   font-weight: 700;
   line-height: 15.34px;
@@ -154,7 +158,6 @@ export const letterStyleSmallTextDesktoAndTable = css`
 
 export const letterStyleH1Mobile = css`
   //styleName: Mobile/H1;
-  font-family: Mont;
   font-size: 32px;
   font-weight: 800;
   line-height: 41px;
@@ -164,7 +167,6 @@ export const letterStyleH1Mobile = css`
 
 export const letterStyleH2Mobile = css`
   //styleName: Mobile/H2;
-  font-family: Mont;
   font-size: 22px;
   font-weight: 800;
   line-height: 30.8px;
@@ -173,7 +175,6 @@ export const letterStyleH2Mobile = css`
 
 export const letterStyleH3Mobile = css`
   //styleName: Mobile/H3;
-  font-family: Mont;
   font-size: 20px;
   font-weight: 700;
   line-height: 25.56px;
@@ -182,7 +183,6 @@ export const letterStyleH3Mobile = css`
 
 export const letterStyleH4Mobile = css`
   //styleName: Mobile/H4;
-  font-family: Mont;
   font-size: 16px;
   font-weight: 700;
   line-height: 20.45px;

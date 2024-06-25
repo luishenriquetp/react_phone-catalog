@@ -6,6 +6,7 @@ export const StyledProductSlider = styled.div`
     max-width: 1180px; /* 4 cards x 210px each (200px width + 10px margin) */
     overflow: hidden;
     padding-top: 40px;
+    
     h1 {
       display: inline-block;
       font-family: Mont;

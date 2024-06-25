@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import StyledHomePage from './StyledHomePage.ts';
-import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 import { getProducts } from '../../api/getAll.ts';
 import Icon from '../../components/Icon/Icon.tsx';
 import { IconType } from '../../components/Icon/Icon.ts';
 import ProductSlider from '../../components/ProductSlider/ProductSlider.tsx';
+import StyledHomePageN from './StyledHomePageN.ts';
+import SelectCategory from './components/SelectCategory/SelectCategory.tsx';
 
 interface Category {
   name: string;
@@ -17,7 +17,6 @@ interface Image {
   src: string;
 }
 
-// This suposed to be an endpoint api
 const mobileImages: Image[] = [
   { id: 1, src: '/img/banner_320px_1.png' },
   { id: 2, src: '/img/banner_320px_2.png' },
@@ -31,7 +30,7 @@ const desktopImages: Image[] = [
   { id: 3, src: '/img/banner_640px_3.png' },
 ];
 
-function HomePage() { 
+const HomePageN = React.memo(function(): React.ReactNode {
   const [currentIndex, setCurrentIndex] = useState(0);
 
   const [isMobile, setIsMobile] = useState(window.innerWidth <= 639);
@@ -104,52 +103,54 @@ function HomePage() {
   };
 
   return (
-    <StyledHomePage id="home" className="home-page">
+    <StyledHomePageN className='home-page'>
       <h1 className="home-page__title">Welcome to Nice Gadgets store!</h1>
-      <div className="home-page__banner">
-        <div className="home-page__banner-structure">
+
+      <div className="home-page__banner banner">
+        <div className="banner__structure">
           <button
             onClick={handlePrev}
             type="button"
-            className="home-page__banner-structure-button"
+            className="banner__button"
             aria-label="previous-btn"
           >
             <Icon icon={IconType.ARROW_LEFT} fill="black" />
           </button>
           <div
-            className="home-page__banner-structure-slider"
+            className="banner__image-container"
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
           >
             {images.map((item, index) => (
-              <div
+              <img
                 key={item.id}
-                className={`home-page__banner-structure-slider-image ${index === currentIndex ? '--active' : ''}`}
+                src={item.src} alt={`Slide ${item.id}`}
+                className={`banner__image ${index === currentIndex ? '--active' : ''}`}
                 style={{ display: index === currentIndex ? 'block' : 'none' }}
-              >
-                <img src={item.src} alt={`Slide ${item.id}`} style={{ width: '100%' }} />
-              </div>
+              />
             ))}
           </div>
           <button
             onClick={handleNext}
             type="button"
-            className="home-page__banner-structure-button"
+            className="banner__button"
             aria-label="next-btn"
           >
             <Icon icon={IconType.ARROW_RIGHT} fill="black" />
           </button>
         </div>
-        <div className="home-page__banner-indicators">
+
+        <div className="banner__indicators">
           {images.map((item, index) => (
             <div
               key={item.id}
-              className={`home-page__banner-indicators-indicator ${index === currentIndex ? 'home-page__banner-indicators-indicator--active' : ''}`}
+              className={`banner__indicator ${index === currentIndex ? 'banner__indicator--active' : ''}`}
             />
           ))}
         </div>
       </div>
+
       <div className="home-page__sliders-container">
         <ProductSlider title="Brand New Models" getProducts={getProducts} />
       </div>
@@ -169,8 +170,10 @@ function HomePage() {
       <div className="home-page__sliders-container--second-child">
         <ProductSlider title="Brand New Models" getProducts={getProducts} />
       </div>
-    </StyledHomePage>
-  );
-}
 
-export default HomePage;
+
+    </StyledHomePageN>
+  );
+})
+
+export default HomePageN;
