@@ -3,11 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAppSelector } from '../../context/hooks.ts';
 import StyledPageBurgerMenu from './StyledPageBurgerMenu.ts';
 
-type Props = {
-  setActiveMenu: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export function BurgerMenu({ setActiveMenu }: Props): React.ReactNode {
+export function BurgerMenu(): React.ReactNode {
   const qtdCart = useAppSelector(state =>
     state.cart.quantity.reduce((acc, e) => {
       const newAcc = acc + e;
@@ -20,28 +16,16 @@ export function BurgerMenu({ setActiveMenu }: Props): React.ReactNode {
   return (
     <StyledPageBurgerMenu className="burger-menu" $cartQtd={qtdCart} $favQtd={qtdFav}>
       <div className="burger-menu__nav">
-        <Link className="burger-menu__nav-link" to="/home" onClick={() => setActiveMenu(false)}>
+        <Link className="burger-menu__nav-link" to="/home">
           HOME
         </Link>
-        <Link
-          className="burger-menu__nav-link"
-          to="/shop/phones"
-          onClick={() => setActiveMenu(false)}
-        >
+        <Link className="burger-menu__nav-link" to="/shop/phones">
           PHONES
         </Link>
-        <Link
-          className="burger-menu__nav-link"
-          to="/shop/tablets"
-          onClick={() => setActiveMenu(false)}
-        >
+        <Link className="burger-menu__nav-link" to="/shop/tablets">
           TABLETS
         </Link>
-        <Link
-          className="burger-menu__nav-link"
-          to="/shop/accessories"
-          onClick={() => setActiveMenu(false)}
-        >
+        <Link className="burger-menu__nav-link" to="/shop/accessories">
           ACCESSORIES
         </Link>
       </div>

@@ -20,7 +20,7 @@ const categoryMapping: { [key: string]: string } = {
   tablets: 'Tablets',
 };
 
-function PageCatalog() {
+function PageCatalog(): React.ReactNode {
   const { category } = useParams<{ category?: string }>();
   const [quantityPerPage, setQuantityPerPage] = useState<SelectOptions | string>('4');
   const [contentPage, setContentPage] = useState<Product[]>([]);

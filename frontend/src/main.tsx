@@ -7,10 +7,10 @@ import { GlobalStyles } from './styles/GlobalStyles.ts';
 import store from './context/store.ts';
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
-  <React.StrictMode>
-    <BrowserRouter>
-              <App />
+  <BrowserRouter>
+    <Provider store={store}>
+      <App />
       <GlobalStyles />
-    </BrowserRouter>
-  </React.StrictMode>,
+    </Provider>
+  </BrowserRouter>,
 );

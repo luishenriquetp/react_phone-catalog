@@ -1,25 +1,24 @@
 import styled from 'styled-components';
+import { letterStyleH2DesktoAndTable } from '../../styles/GlobalStyles.ts';
 
 export const StyledProductSlider = styled.div`
-  .main-container {
-    position: relative;
-    max-width: 1180px; /* 4 cards x 210px each (200px width + 10px margin) */
-    overflow: hidden;
-    padding-top: 40px;
-    
-    h1 {
-      display: inline-block;
-      font-family: Mont;
-      font-size: 32px;
-      font-weight: 800;
-      line-height: 40px;
-      letter-spacing: -0.01em;
-      text-align: left;
+  position: relative;
+  max-width: 1180px; /* 4 cards x 210px each (200px width + 10px margin) */
+  overflow: hidden;
+  padding-top: 40px;
 
-      @media (max-width: 631px) {
-        font-size: 22px;
-        line-height: 60px;
-      }
+  .product-slider__title-and-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  h2 {
+    ${letterStyleH2DesktoAndTable}
+
+    @media (max-width: 631px) {
+      font-size: 22px;
+      line-height: 60px;
     }
   }
 
@@ -28,9 +27,6 @@ export const StyledProductSlider = styled.div`
     justify-content: center;
     align-items: center;
     background: transparent;
-    position: absolute;
-    top: 65px;
-    right: 5px;
     gap: 5px;
 
     button {

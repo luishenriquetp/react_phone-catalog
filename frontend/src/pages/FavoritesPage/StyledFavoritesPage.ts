@@ -7,7 +7,14 @@ import {
 } from '../../styles/GlobalStyles.ts';
 
 const StyledFavoritesPage = styled.div`
-  margin: 0;
+  margin: auto;
+  width: 100%;
+  max-width: 1136px;
+  padding-inline: 16px;
+
+  @media (min-width: 640px) {
+    padding-inline: 24px;
+  }
 
   .top-section {
     display: flex;
@@ -105,6 +112,7 @@ const StyledFavoritesPage = styled.div`
 
   .list {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     gap: 40px;
 

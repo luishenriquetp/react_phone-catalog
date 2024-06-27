@@ -24,7 +24,7 @@ function Icon({ size = 16, icon, border = false, borderColor, ...svgProps }: Ico
 
   if (border) {
     return (
-      <StyledIcon size={size} borderColor={borderColor}>
+      <StyledIcon size={size} borderColor={borderColor || 'black'}>
         <SelectedIcon width={size} height={size} {...svgProps} />
       </StyledIcon>
     );

@@ -7,24 +7,19 @@ import {
 const StyledCartTotalAmount = styled.div`
   background-color: var(--rstyle1-gray-background);
   border-radius: 16px;
-  width: 286px;
+  width: 100%;
   height: 190px;
   border: 1px solid #e2e6e9;
   display: flex;
   flex-direction: column;
   align-items: center;
 
-  @media (min-width: 640px) and (max-width: 1199px) {
-    width: 592px;
-  }
-
   @media (min-width: 1200px) {
-    width: 368px;
     height: 204px;
   }
 
   .line {
-    width: 238px;
+    width: 100%;
     height: 0px;
     gap: 0px;
     opacity: 0px;
@@ -53,15 +48,14 @@ const StyledCartTotalAmount = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 240px;
     height: 48px;
+    width: 100%;
     background-color: var(--rstyle1-accent);
     border-radius: 48px;
     border: none;
     color: #fff;
 
     @media (min-width: 640px) and (max-width: 1199px) {
-      width: 544px;
       flex-direction: row;
     }
 

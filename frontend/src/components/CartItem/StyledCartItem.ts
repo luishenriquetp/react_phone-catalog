@@ -7,7 +7,6 @@ import {
 const StyledCartItem = styled.div`
   display: flex;
   flex-direction: column;
-  width: 254px;
   padding: 16px;
   border-radius: 16px;
   border: 1px solid var(--rstyle1-gray-elements);

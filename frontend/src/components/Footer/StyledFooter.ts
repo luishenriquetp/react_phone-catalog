@@ -1,11 +1,10 @@
 import styled from 'styled-components';
 
-const StyledFooter = styled.div`
+const StyledFooter = styled.footer`
   .footerlinks {
     bottom: 0;
     background-color: #fff;
     height: 96px;
-    width: 100%;
     position: relative;
     border-top: 2px solid #e2e6e9;
     display: flex;
@@ -83,7 +82,6 @@ const StyledFooter = styled.div`
     .icons {
       width: 100%;
       height: auto;
-      position: relative;
       line-height: normal;
       justify-content: center;
     }
@@ -91,6 +89,7 @@ const StyledFooter = styled.div`
     .icons span {
       display: inline;
       margin-right: 5px;
+      box-sizing: border-box;
     }
   }
 `;

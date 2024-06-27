@@ -5,12 +5,18 @@ import {
 } from '../../styles/GlobalStyles.ts';
 
 const StyledCartPage = styled.div`
+  width: 100%;
+  max-width: 1136px;
+  margin: auto;
   display: flex;
   flex-direction: column;
   background-color: var(--rstyle1-gray-background);
-  padding: 24px 16px 56px;
   gap: 16px;
-  height: 100vh;
+  padding-inline: 32px;
+
+  @media (min-width: 640px) {
+    padding-inline: 24px;
+  }
 
   .cart-items__btn {
     display: flex;
@@ -29,14 +35,15 @@ const StyledCartPage = styled.div`
   .cart-item__products-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
-    gap: 16px;
-    padding-bottom: 16px;
+    gap: 0 16px;
+    width: 100%;
 
-    @media (min-width: 1200px) {
+    @media (min-width: 640px) {
       flex-direction: row;
       align-items: flex-start;
-      justify-content: center;
+    }
+    @media (min-width: 1200px) {
+      flex-direction: row;
     }
   }
 

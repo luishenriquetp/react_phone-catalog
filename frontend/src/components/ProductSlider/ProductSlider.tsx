@@ -11,20 +11,22 @@ interface ProductSliderProps {
 }
 
 function ProductSlider(prop: ProductSliderProps): React.ReactNode {
-  console.log('this is Slider Render');
   const { getProducts, title } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);
 
   const [products, setProducts] = useState<Product[]>([]);
 
+  const visibleCards: number = 4;
+
+  const isPrevDisabled = scrollIndex === 0;
+  const isNextDisabled = scrollIndex >= products.length - visibleCards;
+
   useEffect(() => {
     getProducts().then((fetchAddPhones: Product[]) => {
-      setProducts(fetchAddPhones);
+      setProducts(fetchAddPhones.slice(0, 20));
     });
   }, [getProducts]);
-
-  const visibleCards: number = 4;
 
   const handleNext = (): void => {
     if (scrollIndex < products.length - visibleCards) {
@@ -38,12 +40,9 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
     }
   };
 
-  const isPrevDisabled = scrollIndex === 0;
-  const isNextDisabled = scrollIndex >= products.length - visibleCards;
-
   return (
-    <StyledProductSlider>
-      <div className="main-container">
+    <StyledProductSlider className="product-slider">
+      <div className="product-slider__title-and-buttons">
         <h1>{title}</h1>
         <div className="nav-buttons">
           <button
@@ -75,17 +74,15 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
             />
           </button>
         </div>
-        <div className="card-container">
-          <div
-            className="cards-wrapper"
-            style={{ transform: `translateX(-${scrollIndex * 287}px)` }}
-          >
-            {products.map(item => (
-              <div className="slider_slide">
-                <ProductCard key={item.id} product={item} />
-              </div>
-            ))}
-          </div>
+      </div>
+
+      <div className="card-container">
+        <div className="cards-wrapper" style={{ transform: `translateX(-${scrollIndex * 287}px)` }}>
+          {products.map(item => (
+            <div key={item.id} className="slider_slide">
+              <ProductCard product={item} />
+            </div>
+          ))}
         </div>
       </div>
     </StyledProductSlider>

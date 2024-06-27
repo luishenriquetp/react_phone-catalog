@@ -80,8 +80,9 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     margin: 64px 0 0;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    align-items: center;
+    align-items: start;
 
     @media (max-width: 1199px) {
       margin-top: 48px;

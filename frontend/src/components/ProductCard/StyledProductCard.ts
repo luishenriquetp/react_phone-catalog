@@ -63,10 +63,12 @@ export const StyledProductCard = styled.div`
   }
 
   .product-card__description-title {
+    min-height: 58px;
+    display: flex;
+    align-items: end;
     ${letterStyleBodyTextDesktoAndTable}
     margin: 0;
     margin-bottom: 8px;
-
     color: var(--rstyle1-gray-primary);
   }
 

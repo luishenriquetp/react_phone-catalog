@@ -1,6 +1,6 @@
 import React from 'react';
-import StyledSelectCategory from './StyledSelectCategory.ts';
 import { Link } from 'react-router-dom';
+import StyledSelectCategory from './StyledSelectCategory.ts';
 
 interface CategoryProps {
   images: string;

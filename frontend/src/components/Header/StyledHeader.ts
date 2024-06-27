@@ -1,10 +1,5 @@
 import styled from 'styled-components';
-import { letterStyleUpperCase } from '../../styles/GlobalStyles';
-
-// interface Props {
-//   $qtdFav: number;
-//   $cartQtd: number;
-// }
+import { letterStyleUpperCase } from '../../styles/GlobalStyles.ts';
 
 const StyledHeaderN = styled.header`
   width: 100%;
@@ -18,7 +13,7 @@ const StyledHeaderN = styled.header`
   left: 0;
   background-color: #fff;
   box-sizing: border-box;
-  box-shadow: 0px 1px 0px 0px #E2E6E9;
+  box-shadow: 0px 1px 0px 0px #e2e6e9;
   z-index: 99;
   ${letterStyleUpperCase};
 
@@ -62,8 +57,6 @@ const StyledHeaderN = styled.header`
       }
     }
 
-   
-
     &__item {
       position: relative;
 
@@ -74,7 +67,7 @@ const StyledHeaderN = styled.header`
         bottom: 0;
         width: 100%;
         height: 3px;
-        background-color: #0F0F11;
+        background-color: #0f0f11;
         transition: background-color 0.3s;
       }
 
@@ -85,7 +78,7 @@ const StyledHeaderN = styled.header`
         bottom: 0;
         width: 100%;
         height: 3px;
-        background-color: #0F0F11;
+        background-color: #0f0f11;
         transition: background-color 0.3s;
       }
     }
@@ -107,10 +100,14 @@ const StyledHeaderN = styled.header`
       height: 100%;
       width: 64px;
       cursor: pointer;
-      box-shadow: -1px 0px 0px 0px #E2E6E9;
+      box-shadow: -1px 0px 0px 0px #e2e6e9;
       position: relative;
 
-      &--indicator{
+      @media (max-width: 639px) {
+        display: none;
+      }
+
+      &--indicator {
         height: 25%;
         width: 25%;
         display: flex;
@@ -134,8 +131,7 @@ const StyledHeaderN = styled.header`
       }
 
       &--cart {
-
-        &--indicator{
+        &--indicator {
           height: 25%;
           width: 25%;
           align-items: center;
@@ -153,7 +149,6 @@ const StyledHeaderN = styled.header`
           border: 2px solid white;
         }
       }
-      
 
       @media (max-width: 1199px) {
         width: 48px;
