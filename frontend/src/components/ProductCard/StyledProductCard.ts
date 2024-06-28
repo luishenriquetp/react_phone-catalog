@@ -176,7 +176,9 @@ export const StyledProductCard = styled.div`
     font-weight: 700;
     line-height: 21px;
     text-align: center;
-    transition: box-shadow 300ms;
+    transition:
+      box-shadow 300ms,
+      animation 500ms;
 
     &--clicked {
       height: 40px;
@@ -187,6 +189,7 @@ export const StyledProductCard = styled.div`
       border: 1px solid var(--rstyle1-gray-elements);
       text-align: center;
       padding: 0;
+      animation: gradientAnimation 0.3s ease-in-out forwards;
 
       //styleName: Buttons;
       font-family: Mont;
@@ -205,6 +208,15 @@ export const StyledProductCard = styled.div`
     &:hover {
       cursor: pointer;
       box-shadow: 0px 3px 13px 0px #17203166;
+    }
+  }
+
+  @keyframes gradientAnimation {
+    0% {
+      background: linear-gradient(90deg, var(--rstyle1-accent) 0%, var(--rstyle1-accent) 100%);
+    }
+    100% {
+      background: linear-gradient(90deg, #fff 0%, #fff 100%);
     }
   }
 

@@ -86,6 +86,7 @@ function ProductCard({ product }: Prop): React.ReactNode {
             <Icon
               icon={favorite ? IconType.FILLED_HEARTLIKE : IconType.EMPTY_HEARTLIKE}
               size={18}
+              border
             />
           </button>
         </div>
