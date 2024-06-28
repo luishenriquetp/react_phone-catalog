@@ -10,7 +10,6 @@ import { getProducts } from '../../api/getAll.ts';
 import { IconType } from '../../components/Icon/Icon.ts';
 import Dropdown from '../../components/Dropdown/Dropdown.tsx';
 import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
-import { SkeletonContainer } from '../../components/Skeleton/StyledSkeleton.ts';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
@@ -146,25 +145,21 @@ function PageCatalog(): React.ReactNode {
   ];
 
   useEffect(() => {
+    const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
     setIsLoading(true);
     getProducts()
       .then(fetchedData => {
         const filteredData = fetchedData.filter(e => e.category === category);
         const sortedData = sortProducts(filteredData, sortOption);
+        const paginatedData = sortedData.slice(
+          (pageNumber - 1) * Number(quantityPerPage),
+          pageNumber * Number(quantityPerPage),
+        );
         setRenderedData(sortedData);
-        setContentPage(sortedData);
-
-        const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
-
-        toast.success(`${capitalizedCategory} loaded with success...`, {
-          position: 'top-right',
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeButton: false,
-        });
+        setContentPage(paginatedData);
       })
       .catch(() => {
-        toast.error(`Error loading ${category}...`, {
+        toast.error(`Error loading ${capitalizedCategory}...`, {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -174,7 +169,7 @@ function PageCatalog(): React.ReactNode {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [category, sortOption]);
+  }, [category, pageNumber, quantityPerPage, sortOption]);
 
   if (renderedData.length === 0 && isLoading) {
     return <h1>Loading</h1>;
@@ -190,50 +185,26 @@ function PageCatalog(): React.ReactNode {
         <h2 className="top-section__subtitle">{renderedData.length} models</h2>
       </div>
       <div className="select">
-        {isLoading ? (
-          <SkeletonContainer className="skeleton-container">
-            {[...Array(2)].map((_, index) => (
-              <div key={index} className="skeleton skeleton-card-select">
-                <div className="skeleton skeleton-select" />
-              </div>
-            ))}
-          </SkeletonContainer>
-        ) : (
-          <>
-            <div className="select__wrapper">
-              <h1 className="select__label">Sort By</h1>
-              <Dropdown
-                options={sortOptions}
-                onChange={value => setSortOption(value)}
-                defaultValue="newest"
-              />
-            </div>
-            <div className="select__wrapper">
-              <h1 className="select__label">Items on page</h1>
+        <div className="select__wrapper">
+          <h1 className="select__label">Sort By</h1>
+          <Dropdown
+            options={sortOptions}
+            onChange={value => setSortOption(value)}
+            currentValue={sortOption}
+          />
+        </div>
+        <div className="select__wrapper">
+          <h1 className="select__label">Items on page</h1>
 
-              <Dropdown
-                options={itemsPerPageOptions}
-                onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
-                defaultValue="4"
-              />
-            </div>
-          </>
-        )}
+          <Dropdown
+            options={itemsPerPageOptions}
+            onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
+            currentValue={quantityPerPage}
+          />
+        </div>
       </div>
       <div className="list">
-        {isLoading ? (
-          <SkeletonContainer className="skeleton-container">
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="skeleton skeleton-card">
-                <div className="skeleton skeleton-image" />
-                <div className="skeleton skeleton-title" />
-                <div className="skeleton skeleton-button" />
-              </div>
-            ))}
-          </SkeletonContainer>
-        ) : (
-          contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)
-        )}
+        {contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)}
       </div>
 
       <div className="pagination">

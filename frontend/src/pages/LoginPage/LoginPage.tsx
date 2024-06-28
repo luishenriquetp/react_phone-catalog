@@ -70,6 +70,7 @@ function LoginPage(): React.ReactNode {
 
   return (
     <StyledLoginPage className="login">
+      <ToastContainer />
       <div className="background">
         <span />
         <span />
@@ -134,7 +135,6 @@ function LoginPage(): React.ReactNode {
           </div>
           {errorMessage && <p className="error">{errorMessage}</p>}
         </form>
-        <ToastContainer />
       </div>
     </StyledLoginPage>
   );
