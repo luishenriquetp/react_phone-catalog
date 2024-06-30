@@ -30,20 +30,19 @@ export function BurgerMenu(): React.ReactNode {
         </Link>
       </div>
       <div className="burger-menu__footer">
-        <div className="burger-menu__footer-icon burger-menu__footer--cart-indicator">
-          <Link to="/cart">
-            <img
-              src="/img/icons/Shopping bag (Cart).svg"
-              alt="heart-icon"
-              className="burger-menu__icon"
-            />
-          </Link>
-        </div>
-        <div className="burger-menu__footer-icon burger-menu__footer--fav-indicator">
-          <Link to="/favorites">
-            <img src="/img/icons/favourites_black.png" alt="logo" className="burger-menu__icon" />
-          </Link>
-        </div>
+        <Link to="/cart" className="burger-menu__footer-icon burger-menu__footer--cart-indicator">
+          <img
+            src="/img/icons/Shopping bag (Cart).svg"
+            alt="heart-icon"
+            className="burger-menu__icon"
+          />
+        </Link>
+        <Link
+          to="/favorites"
+          className="burger-menu__footer-icon burger-menu__footer--fav-indicator"
+        >
+          <img src="/img/icons/favourites_black.png" alt="logo" className="burger-menu__icon" />
+        </Link>
       </div>
     </StyledPageBurgerMenu>
   );

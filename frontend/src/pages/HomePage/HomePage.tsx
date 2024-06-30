@@ -40,7 +40,7 @@ function HomePage(): React.ReactNode {
       <h1 className="home-page__title">Welcome to Nice Gadgets store!</h1>
       <Banner />
       <div className="home-page__sliders-container">
-        <ProductSlider title="Brand New Models" getProducts={getProducts} />
+        <ProductSlider title="Brand New Models" getProducts={getProducts} sortBy="newest" />
       </div>
       <div className="home-page__shop">
         <div className="home-page__shop-title">Shop by category</div>
@@ -56,7 +56,7 @@ function HomePage(): React.ReactNode {
         </div>
       </div>
       <div className="home-page__sliders-container">
-        <ProductSlider title="Brand New Models" getProducts={getProducts} />
+        <ProductSlider title="Hot prices" getProducts={getProducts} sortBy="cheapest" />
       </div>
     </StyledHomePage>
   );

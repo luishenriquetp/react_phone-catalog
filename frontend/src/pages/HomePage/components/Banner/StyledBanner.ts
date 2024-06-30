@@ -11,6 +11,15 @@ const StyledBanner = styled.div`
       gap: 0 16px;
       justify-content: center;
       align-items: stretch;
+      margin: 0;
+
+      @media (min-width: 640px) and (max-width: 1199px) {
+        margin: 0 24px;
+      }
+
+      @media (min-width: 1200px) {
+        margin: 0;
+      }
     }
 
     &__button {

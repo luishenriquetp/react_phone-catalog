@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
@@ -10,6 +10,7 @@ import { getProducts } from '../../api/getAll.ts';
 import { IconType } from '../../components/Icon/Icon.ts';
 import Dropdown from '../../components/Dropdown/Dropdown.tsx';
 import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb.tsx';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
@@ -32,6 +33,16 @@ function PageCatalog(): React.ReactNode {
   const useEffectExecuted = useRef(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const sortByParam = queryParams.get('sortBy') || 'newest';
+    const itemsPerPageParam = queryParams.get('itemsPerPage') || '4';
+
+    setSortOption(sortByParam);
+    setQuantityPerPage(itemsPerPageParam as SelectOptions);
+  }, [location.search]);
 
   useEffect(() => {
     setPageNumber(1);
@@ -179,6 +190,7 @@ function PageCatalog(): React.ReactNode {
 
   return (
     <StyledPageCatalog className="page-catalog">
+      <Breadcrumb />
       <StyledToastContainer />
       <div className="top-section">
         <h1 className="top-section__title">{categoryTitle}</h1>
@@ -189,7 +201,9 @@ function PageCatalog(): React.ReactNode {
           <h1 className="select__label">Sort By</h1>
           <Dropdown
             options={sortOptions}
-            onChange={value => setSortOption(value)}
+            onChange={value => {
+              navigate(`?sortBy=${value}&itemsPerPage=${quantityPerPage}`);
+            }}
             currentValue={sortOption}
           />
         </div>
@@ -198,7 +212,9 @@ function PageCatalog(): React.ReactNode {
 
           <Dropdown
             options={itemsPerPageOptions}
-            onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
+            onChange={(value: string) => {
+              navigate(`?sortBy=${sortOption}&itemsPerPage=${value}`);
+            }}
             currentValue={quantityPerPage}
           />
         </div>

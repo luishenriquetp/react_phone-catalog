@@ -12,7 +12,7 @@ function FavoritesPage(): React.ReactNode {
       <div className="top-section">
         <h1 className="top-section__title">Favourites</h1>
         <h2 className="top-section__subtitle">
-          {contentPage.length ? contentPage.length : ''} models
+          {contentPage.length ? contentPage.length : 0} items
         </h2>
       </div>
       <div className="list">

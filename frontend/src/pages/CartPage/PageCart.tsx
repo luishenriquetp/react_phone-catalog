@@ -12,7 +12,7 @@ function PageCart(): React.ReactNode {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsLoading(false);
-    }, 2000);
+    }, 1000);
 
     return () => clearTimeout(timer);
   }, []);
@@ -23,9 +23,13 @@ function PageCart(): React.ReactNode {
 
       <div className="cart-item__products-wrapper">
         <div className="cart-item__products-content">
-          {productsData.map((product, idx) => (
-            <CartItem key={product.id} product={product} quantity={quantity[idx]} />
-          ))}
+          {isLoading || (
+            <>
+              {productsData.map((product, idx) => (
+                <CartItem key={product.id} product={product} quantity={quantity[idx]} />
+              ))}
+            </>
+          )}
         </div>
         {isLoading || <CartTotalAmount />}
       </div>

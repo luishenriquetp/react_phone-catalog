@@ -18,7 +18,6 @@ const StyledLoginPage = styled.div`
     text-align: center;
     border-radius: 48px;
     background: rgba(255, 255, 255, 0.5);
-    /* background: red; */
     backdrop-filter: blur(10px);
     border: 1px solid rgba(255, 255, 255, 0.25);
     padding: 25px 5px;

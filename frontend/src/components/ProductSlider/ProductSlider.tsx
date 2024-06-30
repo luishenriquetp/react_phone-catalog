@@ -8,10 +8,11 @@ import { IconType } from '../Icon/Icon.ts';
 interface ProductSliderProps {
   getProducts: () => Promise<Product[]>;
   title: string;
+  sortBy: 'newest' | 'cheapest';
 }
 
 function ProductSlider(prop: ProductSliderProps): React.ReactNode {
-  const { getProducts, title } = prop;
+  const { getProducts, title, sortBy } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);
 
@@ -23,10 +24,16 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
   const isNextDisabled = scrollIndex >= products.length - visibleCards;
 
   useEffect(() => {
-    getProducts().then((fetchAddPhones: Product[]) => {
-      setProducts(fetchAddPhones.slice(0, 20));
+    getProducts().then((fetchedProducts: Product[]) => {
+      if (sortBy === 'newest') {
+        fetchedProducts.sort((a, b) => new Date(b.year).getTime() - new Date(a.year).getTime());
+      } else if (sortBy === 'cheapest') {
+        fetchedProducts.sort((a, b) => a.price - b.price);
+      }
+
+      setProducts(fetchedProducts.slice(0, 20));
     });
-  }, [getProducts]);
+  }, [getProducts, sortBy]);
 
   const handleNext = (): void => {
     if (scrollIndex < products.length - visibleCards) {
@@ -43,7 +50,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
   return (
     <StyledProductSlider className="product-slider">
       <div className="product-slider__title-and-buttons">
-        <h1>{title}</h1>
+        <h1 className="product-slider__title">{title}</h1>
         <div className="nav-buttons">
           <button
             onClick={handlePrev}

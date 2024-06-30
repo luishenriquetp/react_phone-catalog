@@ -13,17 +13,19 @@ export const StyledProductCard = styled.div`
   background-color: #fff;
   border: 1px solid #e2e6e9;
   border-radius: 8px;
-  width: 272px;
+  width: 100%;
+  max-width: 288px;
   height: 440px;
   padding-bottom: 32px;
 
-  @media (min-width: 768px) {
+  @media (min-width: 640px) and (max-width: 1199px) {
     width: 229px;
     height: 506px;
   }
 
   @media (min-width: 1200px) {
     width: 272px;
+    height: 506px;
   }
 
   .product-card__link {

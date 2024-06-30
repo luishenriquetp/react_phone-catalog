@@ -7,25 +7,35 @@ import {
 const StyledCartTotalAmount = styled.div`
   background-color: var(--rstyle1-gray-background);
   border-radius: 16px;
-  width: 100%;
+  width: 288px;
   height: 190px;
   border: 1px solid #e2e6e9;
   display: flex;
   flex-direction: column;
   align-items: center;
 
+  @media (min-width: 640px) and (max-width: 1199px) {
+    width: 592px;
+  }
+
   @media (min-width: 1200px) {
-    height: 204px;
+    width: 368px;
   }
 
   .line {
-    width: 100%;
+    width: 240px;
     height: 0px;
-    gap: 0px;
-    opacity: 0px;
     margin: 16px 0;
 
     color: var(--rstyle1-gray-elements);
+
+    @media (min-width: 640px) and (max-width: 1199px) {
+      width: 544px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 321px;
+    }
   }
 
   .cart-total__titles {
@@ -49,18 +59,25 @@ const StyledCartTotalAmount = styled.div`
     align-items: center;
     justify-content: center;
     height: 48px;
-    width: 100%;
+    width: 84%;
     background-color: var(--rstyle1-accent);
     border-radius: 48px;
     border: none;
     color: #fff;
+    transition: box-shadow 300ms;
 
     @media (min-width: 640px) and (max-width: 1199px) {
       flex-direction: row;
+      width: 95%;
+    }
+
+    @media (min-width: 1200px) {
+      width: 90%;
     }
 
     &:hover {
       cursor: pointer;
+      box-shadow: 0px 3px 13px 0px #17203166;
     }
   }
 `;

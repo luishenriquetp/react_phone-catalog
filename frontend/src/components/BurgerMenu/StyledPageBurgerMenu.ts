@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { letterStyleUpperCase } from '../../styles/GlobalStyles.ts';
+import { letterStyleH2Mobile } from '../../styles/GlobalStyles.ts';
 
 interface Prop {
   $favQtd: number;
@@ -13,14 +13,14 @@ const StyledPageBurgerMenu = styled.div<Prop>`
   justify-content: space-between;
 
   background-color: #fff;
-  top: 0;
+  top: 50px;
   left: 0;
   right: 0;
   pointer-events: all;
   transition: all 0.5s;
   overflow: hidden;
   transform: translateX(0%);
-  height: 100vh;
+  height: 94vh;
   z-index: 98;
 
   a {
@@ -34,11 +34,11 @@ const StyledPageBurgerMenu = styled.div<Prop>`
       flex-direction: column;
       align-items: center;
       gap: 16px;
-      ${letterStyleUpperCase};
-      color: var(--rstyle1-gray-secondary);
       margin-top: 72px;
 
       &-link {
+        ${letterStyleH2Mobile};
+        color: var(--rstyle1-gray-secondary);
         cursor: pointer;
         position: relative;
         padding-bottom: 8px;
@@ -72,6 +72,7 @@ const StyledPageBurgerMenu = styled.div<Prop>`
       display: flex;
       justify-content: space-between;
       align-items: center;
+      z-index: 1;
 
       &-icon {
         cursor: pointer;
@@ -80,27 +81,22 @@ const StyledPageBurgerMenu = styled.div<Prop>`
         width: 50%;
         justify-content: center;
         align-items: center;
-        padding: 24px 0;
         position: relative;
 
         &:first-child {
           border-right: 1px solid var(--rstyle1-gray-elements);
-        }
-
-        &:hover::after {
-          width: 100%;
         }
       }
 
       &--fav-indicator::after {
         content: '${p => String(p.$favQtd)}';
         display: ${p => (p.$favQtd ? 'block' : 'none')};
-        color: wheat;
+        color: #fff;
         text-align: center;
         position: absolute;
-        right: 30%;
+        right: 34%;
         bottom: 50%;
-        background-color: purple;
+        background-color: var(--rstyle1-accent);
         border-radius: 50%;
         border: 3px solid white;
         width: 20px;
@@ -110,16 +106,17 @@ const StyledPageBurgerMenu = styled.div<Prop>`
       &--cart-indicator::after {
         content: '${p => String(p.$cartQtd)}';
         display: ${p => (p.$cartQtd ? 'block' : 'none')};
-        color: wheat;
+        color: #fff;
         text-align: center;
         position: absolute;
-        right: 30%;
+        right: 34%;
         bottom: 50%;
-        background-color: purple;
+        background-color: var(--rstyle1-accent);
         border-radius: 50%;
         border: 3px solid white;
         width: 20px;
         height: 20px;
+        z-index: 0;
       }
     }
 
