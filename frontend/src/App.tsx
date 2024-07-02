@@ -1,6 +1,6 @@
 import 'react-toastify/dist/ReactToastify.css';
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 import ProductDetailsPage from './pages/ProductDetailsPage/ProductDetailsPage.tsx';
 import Footer from './components/Footer/Footer.tsx';
 import PageCart from './pages/CartPage/PageCart.tsx';
@@ -10,15 +10,16 @@ import NotFoundPage from './pages/NotFoundPage/NotFoundPage.tsx';
 import Header from './components/Header/Header.tsx';
 import HomePage from './pages/HomePage/HomePage.tsx';
 import BurgerMenu from './components/BurgerMenu/BurgerMenu.tsx';
-import Breadcrumb from './components/Breadcrumb/Breadcrumb.tsx';
+import LoginPage from './pages/LoginPage/LoginPage.tsx';
 
 function App(): React.ReactNode {
+  const location = useLocation();
+  const hideHeaderFooter = location.pathname === '/login';
   return (
     <div id="App">
-      <Header />
+      {!hideHeaderFooter && <Header />}
 
       <main className="container">
-        <Breadcrumb />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/home" element={<HomePage />} />
@@ -29,10 +30,11 @@ function App(): React.ReactNode {
           <Route path="/cart" element={<PageCart />} />
           <Route path="/favorites" element={<FavoritesPage />} />
           <Route path="/mobileMenu" element={<BurgerMenu />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>
-      <Footer />
+      {!hideHeaderFooter && <Footer />}
     </div>
   );
 }

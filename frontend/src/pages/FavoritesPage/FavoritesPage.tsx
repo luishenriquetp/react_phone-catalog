@@ -1,6 +1,5 @@
 import React from 'react';
 import StyledFavoritesPage from './StyledFavoritesPage.ts';
-import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
 import { useAppSelector } from '../../context/hooks.ts';
@@ -10,11 +9,10 @@ function FavoritesPage(): React.ReactNode {
 
   return (
     <StyledFavoritesPage className="page-catalog">
-      <StyledToastContainer />
       <div className="top-section">
         <h1 className="top-section__title">Favourites</h1>
         <h2 className="top-section__subtitle">
-          {contentPage.length ? contentPage.length : ''} models
+          {contentPage.length ? contentPage.length : 0} items
         </h2>
       </div>
       <div className="list">

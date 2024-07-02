@@ -29,6 +29,32 @@ function LoginPage(): React.ReactNode {
     }
   }
 
+  async function mockCreateAccountApi(
+    mockedUser: string,
+    mockedPassword: string,
+  ): Promise<boolean> {
+    const newUser = { userName: mockedUser, passwd: mockedPassword };
+    const fileName = `${mockedUser}_${mockedPassword}.json`;
+    const filePath = `/api/users/${fileName}`;
+
+    try {
+      const response = await fetch(filePath, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(newUser),
+      });
+
+      if (!response.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return true;
+    } catch (error) {
+      return false;
+    }
+  }
+
   function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);
   }
@@ -55,9 +81,8 @@ function LoginPage(): React.ReactNode {
         closeButton: false,
       });
       setTimeout(() => {
-        // Redirect to home page
         navigate('/home');
-      }, 1000); // Delay to allow toast to show
+      }, 1000);
     } else {
       toast.error('Invalid username or password', {
         position: 'bottom-center',
@@ -68,8 +93,29 @@ function LoginPage(): React.ReactNode {
     }
   }
 
+  async function handleCreateAccount() {
+    const isCreated = await mockCreateAccountApi(username, password);
+
+    if (isCreated) {
+      toast.success('Account created successfully!', {
+        position: 'bottom-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeButton: false,
+      });
+    } else {
+      toast.error('Account creation failed', {
+        position: 'bottom-center',
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeButton: false,
+      });
+    }
+  }
+
   return (
     <StyledLoginPage className="login">
+      <ToastContainer />
       <div className="background">
         <span />
         <span />
@@ -128,13 +174,12 @@ function LoginPage(): React.ReactNode {
               Login
             </button>
             <span>or</span>
-            <button className="form-btn" type="button">
+            <button className="form-btn" type="button" onClick={handleCreateAccount}>
               Create account
             </button>
           </div>
           {errorMessage && <p className="error">{errorMessage}</p>}
         </form>
-        <ToastContainer />
       </div>
     </StyledLoginPage>
   );

@@ -10,7 +10,6 @@ const StyledFavoritesPage = styled.div`
   margin: auto;
   width: 100%;
   max-width: 1136px;
-  padding-inline: 16px;
 
   @media (min-width: 640px) {
     padding-inline: 24px;

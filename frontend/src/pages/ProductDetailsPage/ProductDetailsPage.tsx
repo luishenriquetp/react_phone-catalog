@@ -439,7 +439,7 @@ function ProductDetailsPage() {
           </article>
         </section>
       </StyledProductDetailsPage>
-      <ProductSlider title="You may also like!" getProducts={getProducts} />
+      <ProductSlider title="You may also like!" getProducts={getProducts} sortBy="newest" />
     </>
   );
 }

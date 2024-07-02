@@ -33,16 +33,30 @@ export const GlobalStyles = createGlobalStyle`
     src: url('/fonts/Mont-Regular.otf') format('opentype');
   }
 
-  html {
-    scroll-behavior: smooth;
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
     font-family: Mont;
+    background-color: var(--rstyle1-gray-background);
+    display: flex;
+    flex-direction: column;
+    scroll-behavior: smooth;
   }
 
   body {
-    background-color: var(--rstyle1-gray-background);
-    margin: 0;
-    padding: 0; 
-    font-family: Mont;
+    display: flex;
+    flex-direction: column;
+  }
+
+  #App {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  main {
+    flex: 1;
   }
 
   a {
@@ -78,14 +92,19 @@ export const GlobalStyles = createGlobalStyle`
 
   .container {
     width: 100%;
-    margin: 64px 0 0;
+    margin: 48px 0;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: start;
-
-    @media (max-width: 1199px) {
-      margin-top: 48px;
+    align-items: center;
+    position: relative;
+    
+    @media (min-width: 640px) and (max-width: 1199px) {
+      margin: 48px 0;
+    }
+    
+    @media (min-width: 1200px) {
+      margin: 64px 0 80px;
     }
   } 
 `;

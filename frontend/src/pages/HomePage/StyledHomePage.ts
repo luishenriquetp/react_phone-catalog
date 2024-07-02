@@ -11,50 +11,32 @@ const StyledHomePage = styled.div`
   max-width: 1136px;
   min-width: 320px;
 
-  @media (min-width: 640px) {
-    margin-inline: 24px;
-  }
-
-  @media (min-width: 1200px) {
-    margin: 0 auto;
-  }
-
   .home-page {
     &__title {
       ${letterStyleH1Mobile};
       padding-top: 24px;
       margin-bottom: 24px;
-      margin-left: 16px;
       margin-right: 16px;
 
       @media (min-width: 640px) {
         ${letterStyleH1DesktoAndTable};
         margin-bottom: 32px;
         padding-top: 32px;
-        margin-left: 24px;
         margin-right: 0;
       }
 
       @media (min-width: 1199px) {
         margin-bottom: 56px;
         padding-top: 56px;
-        margin-left: 32px;
       }
     }
 
     &__sliders-container {
       margin: 0;
-      margin-bottom: 56px;
-      margin-left: 16px;
-      height: 500px;
+      height: 60vh;
 
-      @media (min-width: 640px) {
-        margin-bottom: 64px;
-        margin-left: 24px;
-      }
-      @media (min-width: 1199px) {
-        margin-bottom: 80px;
-        margin-left: 32px;
+      @media (min-width: 1200px) {
+        height: 65vh;
       }
 
       &-title {
@@ -79,9 +61,7 @@ const StyledHomePage = styled.div`
     }
 
     &__shop {
-      margin-top: 56px;
-      margin-bottom: 56px;
-      margin-inline: auto;
+      margin: 56px 16px;
       &-title {
         ${letterStyleH2Mobile};
         margin-bottom: 24px;

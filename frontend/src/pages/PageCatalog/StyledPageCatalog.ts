@@ -10,27 +10,24 @@ const StyledPageCatalog = styled.div`
   margin: auto;
   width: 100%;
   max-width: 1136px;
-  padding-inline: 16px;
-
-  @media (min-width: 640px) {
-    padding-inline: 24px;
-  }
 
   .top-section {
     display: flex;
     flex-direction: column;
-    padding-top: 64px;
+    padding-top: 24px;
     padding-left: 16px;
     padding-right: 16px;
 
     @media (min-width: 640px) {
+      padding-top: 40px;
       padding-right: 24px;
       padding-left: 24px;
     }
 
     @media (min-width: 1200px) {
+      padding-top: 40px;
       padding-right: 32px;
-      padding-left: 32px;
+      padding-left: 0;
     }
 
     &__title {
@@ -53,19 +50,17 @@ const StyledPageCatalog = styled.div`
 
   .select {
     display: flex;
+    justify-content: center;
     gap: 16px;
-    /* padding-left: 16px; */
-    /* padding-right: 16px; */
     margin-bottom: 24px;
 
-    @media (min-width: 640px) {
-      /* padding-right: 24px; */
-      /* padding-left: 24px; */
+    @media (min-width: 640px) and (max-width: 1199px) {
+      justify-content: start;
+      margin-left: 3%;
     }
 
     @media (min-width: 1200px) {
-      /* padding-right: 32px; */
-      /* padding-left: 32px; */
+      justify-content: start;
     }
 
     &__wrapper {
@@ -113,6 +108,7 @@ const StyledPageCatalog = styled.div`
   .list {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     gap: 40px;
 
     @media (min-width: 640px) {

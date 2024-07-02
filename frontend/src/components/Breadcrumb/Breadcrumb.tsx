@@ -20,6 +20,10 @@ function Breadcrumb(): React.ReactNode {
     return null;
   }
 
+  if (pathnames.includes('home')) {
+    return null;
+  }
+
   return (
     <StyledBreadcrumb className="breadcrumb-nav">
       <ol className="breadcrumb-nav__list">

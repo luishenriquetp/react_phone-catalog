@@ -3,13 +3,22 @@ import styled from 'styled-components';
 const StyledBreadcrumb = styled.nav`
   display: flex;
   align-items: center;
+  align-self: start;
   .breadcrumb-nav__list {
     display: flex;
-    margin: 25px 40px 32px;
+    margin: 24px 16px;
     padding: 0;
     gap: 8px;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-end;
+
+    @media (min-width: 640px) and (max-width: 1199px) {
+      margin: 24px;
+    }
+
+    @media (min-width: 1200px) {
+      margin: 24px 16px 24px 0;
+    }
   }
 
   .breadcrumb-nav__list-item {

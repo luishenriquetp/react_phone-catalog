@@ -11,6 +11,7 @@ const StyledCartItem = styled.div`
   border-radius: 16px;
   border: 1px solid var(--rstyle1-gray-elements);
   background-color: #fff;
+  width: 254px;
 
   @media (min-width: 640px) and (max-width: 1199px) {
     width: 558px;
@@ -95,7 +96,7 @@ const StyledCartItem = styled.div`
 
     &:disabled {
       border: 1px solid var(--rstyle1-gray-elements);
-      cursor: default;
+      cursor: not-allowed;
     }
   }
 

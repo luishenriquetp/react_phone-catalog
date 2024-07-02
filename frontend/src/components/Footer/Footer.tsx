@@ -21,7 +21,7 @@ function Footer(): React.ReactNode {
             Rights
           </a>
         </div>
-        <a href="#home" className="footer-item icons">
+        <a href="#App" className="footer-item icons">
           <span>Back to top</span>
           <Icon icon={IconType.ARROW_UP} border fill="black" />
         </a>

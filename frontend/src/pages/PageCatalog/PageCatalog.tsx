@@ -2,7 +2,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useRef, useState } from 'react';
 import { toast } from 'react-toastify';
-import { useNavigate, useParams } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import StyledPageCatalog from './StyledPageCatalog.ts';
 import ProductCard from '../../components/ProductCard/ProductCard.tsx';
 import { Product } from '../../types/types.ts';
@@ -10,7 +10,7 @@ import { getProducts } from '../../api/getAll.ts';
 import { IconType } from '../../components/Icon/Icon.ts';
 import Dropdown from '../../components/Dropdown/Dropdown.tsx';
 import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
-import { SkeletonContainer } from '../../components/Skeleton/StyledSkeleton.ts';
+import Breadcrumb from '../../components/Breadcrumb/Breadcrumb.tsx';
 
 export type SelectOptions = '4' | '8' | '16' | 'all';
 
@@ -33,6 +33,16 @@ function PageCatalog(): React.ReactNode {
   const useEffectExecuted = useRef(false);
 
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const queryParams = new URLSearchParams(location.search);
+    const sortByParam = queryParams.get('sortBy') || 'newest';
+    const itemsPerPageParam = queryParams.get('itemsPerPage') || '4';
+
+    setSortOption(sortByParam);
+    setQuantityPerPage(itemsPerPageParam as SelectOptions);
+  }, [location.search]);
 
   useEffect(() => {
     setPageNumber(1);
@@ -146,25 +156,21 @@ function PageCatalog(): React.ReactNode {
   ];
 
   useEffect(() => {
+    const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
     setIsLoading(true);
     getProducts()
       .then(fetchedData => {
         const filteredData = fetchedData.filter(e => e.category === category);
         const sortedData = sortProducts(filteredData, sortOption);
+        const paginatedData = sortedData.slice(
+          (pageNumber - 1) * Number(quantityPerPage),
+          pageNumber * Number(quantityPerPage),
+        );
         setRenderedData(sortedData);
-        setContentPage(sortedData);
-
-        const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
-
-        toast.success(`${capitalizedCategory} loaded with success...`, {
-          position: 'top-right',
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeButton: false,
-        });
+        setContentPage(paginatedData);
       })
       .catch(() => {
-        toast.error(`Error loading ${category}...`, {
+        toast.error(`Error loading ${capitalizedCategory}...`, {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,
@@ -174,7 +180,7 @@ function PageCatalog(): React.ReactNode {
       .finally(() => {
         setIsLoading(false);
       });
-  }, [category, sortOption]);
+  }, [category, pageNumber, quantityPerPage, sortOption]);
 
   if (renderedData.length === 0 && isLoading) {
     return <h1>Loading</h1>;
@@ -184,56 +190,37 @@ function PageCatalog(): React.ReactNode {
 
   return (
     <StyledPageCatalog className="page-catalog">
+      <Breadcrumb />
       <StyledToastContainer />
       <div className="top-section">
         <h1 className="top-section__title">{categoryTitle}</h1>
         <h2 className="top-section__subtitle">{renderedData.length} models</h2>
       </div>
       <div className="select">
-        {isLoading ? (
-          <SkeletonContainer className="skeleton-container">
-            {[...Array(2)].map((_, index) => (
-              <div key={index} className="skeleton skeleton-card-select">
-                <div className="skeleton skeleton-select" />
-              </div>
-            ))}
-          </SkeletonContainer>
-        ) : (
-          <>
-            <div className="select__wrapper">
-              <h1 className="select__label">Sort By</h1>
-              <Dropdown
-                options={sortOptions}
-                onChange={value => setSortOption(value)}
-                defaultValue="newest"
-              />
-            </div>
-            <div className="select__wrapper">
-              <h1 className="select__label">Items on page</h1>
+        <div className="select__wrapper">
+          <h1 className="select__label">Sort By</h1>
+          <Dropdown
+            options={sortOptions}
+            onChange={value => {
+              navigate(`?sortBy=${value}&itemsPerPage=${quantityPerPage}`);
+            }}
+            currentValue={sortOption}
+          />
+        </div>
+        <div className="select__wrapper">
+          <h1 className="select__label">Items on page</h1>
 
-              <Dropdown
-                options={itemsPerPageOptions}
-                onChange={(value: string) => setQuantityPerPage(value as SelectOptions)}
-                defaultValue="4"
-              />
-            </div>
-          </>
-        )}
+          <Dropdown
+            options={itemsPerPageOptions}
+            onChange={(value: string) => {
+              navigate(`?sortBy=${sortOption}&itemsPerPage=${value}`);
+            }}
+            currentValue={quantityPerPage}
+          />
+        </div>
       </div>
       <div className="list">
-        {isLoading ? (
-          <SkeletonContainer className="skeleton-container">
-            {[...Array(4)].map((_, index) => (
-              <div key={index} className="skeleton skeleton-card">
-                <div className="skeleton skeleton-image" />
-                <div className="skeleton skeleton-title" />
-                <div className="skeleton skeleton-button" />
-              </div>
-            ))}
-          </SkeletonContainer>
-        ) : (
-          contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)
-        )}
+        {contentPage && contentPage.map(item => <ProductCard key={item.id} product={item} />)}
       </div>
 
       <div className="pagination">

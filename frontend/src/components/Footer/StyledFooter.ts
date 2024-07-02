@@ -26,6 +26,10 @@ const StyledFooter = styled.footer`
     display: flex;
     align-items: center;
     justify-content: center;
+
+    &:hover {
+      color: var(--rstyle1-gray-primary);
+    }
   }
 
   #logo {
@@ -39,8 +43,6 @@ const StyledFooter = styled.footer`
   }
 
   .icons {
-    margin-left: auto;
-    margin-right: 0;
     display: flex;
     align-items: center;
     justify-content: flex-end;

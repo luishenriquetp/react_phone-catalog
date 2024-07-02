@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { letterStyleH2DesktoAndTable } from '../../styles/GlobalStyles.ts';
+import { letterStyleH2Mobile } from '../../styles/GlobalStyles.ts';
 
 export const StyledProductSlider = styled.div`
   position: relative;
@@ -10,15 +10,28 @@ export const StyledProductSlider = styled.div`
   .product-slider__title-and-buttons {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 30vw;
+    margin: 0 16px 24px;
+
+    @media (min-width: 640px) and (max-width: 1199px) {
+      justify-content: space-between;
+    }
+    @media (min-width: 1200px) {
+      justify-content: space-between;
+    }
   }
 
-  h2 {
-    ${letterStyleH2DesktoAndTable}
+  .product-slider__title {
+    width: 130px;
+    ${letterStyleH2Mobile}
 
-    @media (max-width: 631px) {
-      font-size: 22px;
-      line-height: 60px;
+    @media (min-width: 640px) and (max-width: 1199px) {
+      width: 300px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 300px;
     }
   }
 
@@ -27,7 +40,7 @@ export const StyledProductSlider = styled.div`
     justify-content: center;
     align-items: center;
     background: transparent;
-    gap: 5px;
+    gap: 16px;
 
     button {
       border: none;
@@ -48,6 +61,12 @@ export const StyledProductSlider = styled.div`
     display: flex;
     overflow: hidden;
     max-width: 1180px;
+
+    margin: 0 16px;
+
+    @media (min-width: 1200px) {
+      margin: 0;
+    }
   }
 
   .cards-wrapper {
@@ -57,6 +76,15 @@ export const StyledProductSlider = styled.div`
 
   .slider_slide {
     margin-right: 10px;
+    width: 212px;
+
+    @media (min-width: 640px) and (max-width: 1199px) {
+      width: 237px;
+    }
+
+    @media (min-width: 1200px) {
+      width: 272px;
+    }
   }
 `;
 

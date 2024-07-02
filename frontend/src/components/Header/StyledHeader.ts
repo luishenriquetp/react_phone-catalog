@@ -59,6 +59,13 @@ const StyledHeaderN = styled.header`
 
     &__item {
       position: relative;
+      transition:
+        hover,
+        background-color 300ms;
+
+      &:hover {
+        cursor: pointer;
+      }
 
       &:hover::after {
         content: '';
@@ -68,7 +75,6 @@ const StyledHeaderN = styled.header`
         width: 100%;
         height: 3px;
         background-color: #0f0f11;
-        transition: background-color 0.3s;
       }
 
       &--active ::after {
@@ -79,7 +85,6 @@ const StyledHeaderN = styled.header`
         width: 100%;
         height: 3px;
         background-color: #0f0f11;
-        transition: background-color 0.3s;
       }
     }
 
@@ -116,7 +121,8 @@ const StyledHeaderN = styled.header`
         position: absolute;
         bottom: 50%;
         left: 50%;
-        background-color: purple;
+        color: #fff;
+        background-color: var(--rstyle1-accent);
         font-size: 9px;
         font-weight: 700;
         line-height: 11.5px;
