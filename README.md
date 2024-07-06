@@ -32,7 +32,7 @@ The purpose is to create a portfolio webb application, as well as developing tea
    - **Contribuição:** ....
    - **Códigos principais:** ...
 
-4. **Rafael Wesley** - [GitHub](https://github.com/rwlp)
+4. **Rafael Wesley** - [GitHub](https://github.com/rwlp) <img src="https://avatars.githubusercontent.com/u/151199792?v=4" alt="Descrição da Imagem" width="600"/>
    - **About:** Hello World! I am the project's tech-lead and I use all my knowledge in Full Stack and mobile development with Kotlin/Java, to guide and learn from this unique experience.
    - **Contribuição:** My main responsibilities in this project are: reviewing codes, managing code versioning (via github), deploy automation, database config and supporting the team technically in their tasks.
    - **Códigos principais:** (add links)
