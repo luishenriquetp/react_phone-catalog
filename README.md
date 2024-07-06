@@ -1,9 +1,10 @@
 # React Phone Catalog
 
-## Descrição
-Fullstack de um e-commerce da MateAcademy Brasil ... 
+## Description
+This is a project of FullStack training at [MateAcademy Brasil](https://mate.academy/pt-br). Is an e-commerce with frontend and backend. 
+The purpose is to create a portfolio webb application, as well as developing teamwork skills, with code versioning via github.
 
-## Tecnologias Utilizadas
+## Technologies
 
 - React
 - Redux
@@ -11,12 +12,7 @@ Fullstack de um e-commerce da MateAcademy Brasil ...
 - Node.js
 - Express
 - PostgreSQL
-- ...
-
-## Estrutura do Projeto
-
-- `frontend/` - Código do frontend em React.
-- `backend/` - Código do backend em Node.js/Express.
+- [Render]([https://](https://render.com/)) for deploy.
 
 ## Participantes do Projeto
 
@@ -37,11 +33,11 @@ Fullstack de um e-commerce da MateAcademy Brasil ...
    - **Códigos principais:** ...
 
 4. **Rafael Wesley** - [GitHub](https://github.com/rwlp)
-   - **About:** ...
-   - **Contribuição:** ....
-   - **Códigos principais:** ...
+   - **About:** Hello World! I am the project's tech-lead and I use all my knowledge in Full Stack and mobile development with Kotlin/Java, to guide and learn from this unique experience.
+   - **Contribuição:** My main responsibilities in this project are: reviewing codes, managing code versioning (via github), deploy automation, database config and supporting the team technically in their tasks.
+   - **Códigos principais:** (add links)
 
-4. **Rodrigo Pane** - [GitHub](https://github.com/ropanefarias)
+5. **Rodrigo Pane** - [GitHub](https://github.com/ropanefarias)
    - **About:** ...
    - **Contribuição:** ....
    - **Códigos principais:** ...
@@ -51,17 +47,16 @@ Fullstack de um e-commerce da MateAcademy Brasil ...
 ### Pré-requisitos
 
 - Node.js
-- Podman
 - PostgreSQL
 
-### Passos para rodar o frontend
+### Passos para rodar o frontend em sua maquina local
 
 1. Clone o repositório: `git clone https://github.com/br-fs-feb24-BinaryBosses/react_phone-catalog.git`
 2. Navegue até a pasta do frontend: `cd repositorio/frontend`
 3. Instale as dependências: `npm install`
 4. Inicie o servidor de desenvolvimento: `npm start`
 
-### Passos para rodar o backend
+### Passos para rodar o backend em sua maquina local
 
 1. Navegue até a pasta do backend: `cd repositorio/backend`
 2. Instale as dependências: `npm install`
