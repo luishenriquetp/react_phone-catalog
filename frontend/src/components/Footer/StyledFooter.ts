@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 const StyledFooter = styled.footer`
-  .footerlinks {
+  .footer__links {
     bottom: 0;
     background-color: #fff;
     height: 96px;
@@ -13,7 +13,7 @@ const StyledFooter = styled.footer`
     justify-content: space-between;
   }
 
-  .footer-item {
+  .footer__item {
     margin-right: 64px;
     text-transform: uppercase;
     font-family: Mont;
@@ -32,17 +32,17 @@ const StyledFooter = styled.footer`
     }
   }
 
-  #logo {
+  #footer__logo {
     margin-left: 25px;
   }
 
-  .center-links {
+  .footer__center-links {
     display: flex;
     justify-content: center;
     flex-grow: 1;
   }
 
-  .icons {
+  .footer__icons {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -50,45 +50,45 @@ const StyledFooter = styled.footer`
     line-height: 0;
   }
 
-  .icons img {
+  .footer__icons img {
     width: 32px;
     height: 32px;
   }
 
-  .icons span {
+  .footer__icons span {
     margin-right: 5px;
   }
 
   @media (max-width: 639px) {
-    .footerlinks {
+    .footer__links {
       height: 257px;
       padding: 32px 0 0 16px;
     }
 
-    .footerlinks,
-    .footerlinks div.center-links {
+    .footer__links,
+    .footer__links .footer__center-links {
       flex-direction: column;
       align-items: flex-start;
     }
 
-    .footer-item,
-    .center-links {
+    .footer__item,
+    .footer__center-links {
       margin: 0 0 16px 0;
       line-height: 1.5;
     }
 
-    #logo {
+    #footer__logo {
       margin-left: 0;
     }
 
-    .icons {
+    .footer__icons {
       width: 100%;
       height: auto;
       line-height: normal;
       justify-content: center;
     }
 
-    .icons span {
+    .footer__icons span {
       display: inline;
       margin-right: 5px;
       box-sizing: border-box;
