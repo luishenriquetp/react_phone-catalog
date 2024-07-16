@@ -14,6 +14,7 @@ import Search from '../../IconAssets/Search.svg';
 import EmptyCart from '../../IconAssets/Empty-cart.svg';
 import CounterCart from '../../IconAssets/Counter-cart.svg';
 import Config from '../../IconAssets/Config.svg';
+import LoginDoor from '../../IconAssets/LoginDoor.svg';
 
 // eslint-disable-next-line no-shadow
 export enum IconType {
@@ -33,6 +34,7 @@ export enum IconType {
   SEARCH = 'search-icon',
   EMPTY_CART = 'empty-cart-icon',
   COUNTER_CART = 'counter-cart-icon',
+  LOGIN_DOOR = 'login-door',
 }
 
 export const iconMap = {
@@ -52,4 +54,5 @@ export const iconMap = {
   [IconType.SEARCH]: Search,
   [IconType.EMPTY_CART]: EmptyCart,
   [IconType.COUNTER_CART]: CounterCart,
+  [IconType.LOGIN_DOOR]: LoginDoor,
 };

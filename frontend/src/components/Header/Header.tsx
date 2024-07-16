@@ -47,6 +47,15 @@ function HeaderN(): React.ReactNode {
       <div className="header__icons-container icons-container">
         <button
           className="icons-container__btn"
+          onClick={() => navigateTo('/')}
+          type="button"
+          aria-label="Go to login page"
+        >
+          {!!favQtd && <div className="icons-container__btn--indicator">{favQtd}</div>}
+          <Icon icon={IconType.LOGIN_DOOR} />
+        </button>
+        <button
+          className="icons-container__btn"
           onClick={() => navigateTo('/favorites')}
           type="button"
           aria-label="Go to favorites page"
