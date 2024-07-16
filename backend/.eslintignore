@@ -1,2 +1,11 @@
 node_modules/
 dist/
+prisma/
+package.json
+package-lock.json
+tsconfig.json
+.eslintignore
+Dockerfile
+backup.sql
+package-lock.json
+package.json
