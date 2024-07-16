@@ -71,7 +71,6 @@ export const StyledProductSlider = styled.div`
 
   .cards-wrapper {
     display: flex;
-    transition: transform 0.3s ease-in-out;
   }
 
   .slider_slide {

@@ -15,13 +15,11 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
   const { getProducts, title, sortBy } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);
-
+  const [allProducts, setAllProducts] = useState<Product[]>([]);
   const [products, setProducts] = useState<Product[]>([]);
 
-  const visibleCards: number = 4;
-
   const isPrevDisabled = scrollIndex === 0;
-  const isNextDisabled = scrollIndex >= products.length - visibleCards;
+  const isNextDisabled = scrollIndex >= allProducts.length - 4;
 
   useEffect(() => {
     getProducts().then((fetchedProducts: Product[]) => {
@@ -31,19 +29,28 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
         fetchedProducts.sort((a, b) => a.price - b.price);
       }
 
-      setProducts(fetchedProducts.slice(0, 20));
+      setAllProducts(fetchedProducts);
+      setProducts(fetchedProducts.slice(0, 4));
     });
   }, [getProducts, sortBy]);
 
   const handleNext = (): void => {
-    if (scrollIndex < products.length - visibleCards) {
-      setScrollIndex(scrollIndex + 1);
+    if (scrollIndex < allProducts.length - 4) {
+      setScrollIndex(prev => {
+        const newIndex = prev + 4;
+        setProducts(allProducts.slice(newIndex, newIndex + 4));
+        return newIndex;
+      });
     }
   };
 
   const handlePrev = (): void => {
     if (scrollIndex > 0) {
-      setScrollIndex(scrollIndex - 1);
+      setScrollIndex(prev => {
+        const newIndex = prev - 4;
+        setProducts(allProducts.slice(newIndex, newIndex + 4));
+        return newIndex;
+      });
     }
   };
 
@@ -84,7 +91,7 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
       </div>
 
       <div className="card-container">
-        <div className="cards-wrapper" style={{ transform: `translateX(-${scrollIndex * 287}px)` }}>
+        <div className="cards-wrapper">
           {products.map(item => (
             <div key={item.id} className="slider_slide">
               <ProductCard product={item} />
