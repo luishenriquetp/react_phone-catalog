@@ -12,7 +12,7 @@ productsRouter.get("/allProducts", async (_req, res) => {
     message: "ok",
     res,
     data: allData,
-    status: 200,
+    statusCode: 200,
   });
 });
 

@@ -2,14 +2,14 @@ import { Response } from "express";
 
 export type ResponseType = {
   message?: string;
-  status?: number;
+  statusCode?: number;
   data?: unknown;
   res: Response;
 };
 
 class StandardResponse {
   static responseWrapper(arg: ResponseType) {
-    const { message, status, data, res } = arg;
+    const { message, statusCode: status, data, res } = arg;
     res.status(status ?? 404).json({
       message,
       status,
@@ -19,5 +19,3 @@ class StandardResponse {
 }
 
 export default StandardResponse;
-
-// Object in arg of responseWrapper :FIXME
