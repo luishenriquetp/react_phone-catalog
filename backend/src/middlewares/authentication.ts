@@ -20,6 +20,7 @@ function authMiddleware(
   try {
     const decodedToken = jwt.verify(token, JWT_SECRET) as { userId: string };
     req.userId = decodedToken.userId;
+
     return next();
   } catch (error) {
     throw new AppError("Not valid Token Auth", 400);

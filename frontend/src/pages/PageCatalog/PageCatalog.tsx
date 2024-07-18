@@ -160,6 +160,7 @@ function PageCatalog(): React.ReactNode {
     setIsLoading(true);
     getProducts()
       .then(fetchedData => {
+
         const filteredData = fetchedData.filter(e => e.category === category);
         const sortedData = sortProducts(filteredData, sortOption);
         const paginatedData = sortedData.slice(
@@ -169,7 +170,8 @@ function PageCatalog(): React.ReactNode {
         setRenderedData(sortedData);
         setContentPage(paginatedData);
       })
-      .catch(() => {
+      .catch((error ) => {
+        console.log(error)
         toast.error(`Error loading ${capitalizedCategory}...`, {
           position: 'top-right',
           autoClose: 3000,

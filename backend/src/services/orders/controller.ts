@@ -2,6 +2,7 @@ import express, { Request } from "express";
 import StandardResponse from "../../utils/StandardResponse";
 import OrdersService from "./services";
 import authMiddleware from "../../middlewares/authentication";
+import { PrismaClient } from "@prisma/client";
 
 const ordersRouter = express.Router();
 const ordersService = new OrdersService();
@@ -23,6 +24,20 @@ ordersRouter.post(
     });
   },
 );
+
+ordersRouter.post("/addFav", authMiddleware, async (req: Request & { userId?: string }, res) => {
+  const {userId, productId} = req.body;
+  const client = new PrismaClient();
+
+  console.log(req.userId, productId);
+
+  await client.favorite.create({
+    data: {
+      userId: "811ad54b-bd4d-4077-a5a9-306b65d06353",
+      productId,
+    }
+  })
+})
 
 ordersRouter.post(
   "/insertItemInOrder",

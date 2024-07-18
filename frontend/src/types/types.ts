@@ -2,11 +2,9 @@ type Description = {
   title: string;
   text: string[];
 };
-
-export type FullProduct = {
+export type Product = {
   id: string;
   category: string;
-  namespaceId: string;
   name: string;
   capacityAvailable: string[];
   capacity: string;
@@ -15,6 +13,7 @@ export type FullProduct = {
   colorsAvailable: string[];
   color: string;
   images: string[];
+  image: string;
   description?: Description[];
   screen: string;
   resolution: string;
@@ -23,40 +22,11 @@ export type FullProduct = {
   camera?: string;
   zoom?: string;
   cell: string[];
-};
-
-export type Product = {
-  id: number;
-  category: string;
-  itemId: string;
-  name: string;
-  fullPrice: number;
-  price: number;
-  screen: string;
-  capacity: string;
-  color: string;
-  ram: string;
   year: number;
-  image: string;
 };
 
-interface CartData {
-  productsInCart: Product[];
-  quantityOfProducts: number[];
-  totalAmount: number;
-}
-
-interface UserData {
-  favorites: Product[];
-  cartData: CartData;
-}
-
-interface User {
-  userId: string;
-  data: UserData;
-}
-
-export interface SessionData {
-  userId: User;
-  data: UserData;
+export interface UserData {
+  tokenSession: string;
+  name: string;
+  email: string
 }

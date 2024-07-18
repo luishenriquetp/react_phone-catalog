@@ -14,11 +14,11 @@ interface Prop {
 }
 
 function ProductCard({ product }: Prop): React.ReactNode {
-  const productIsInCart = store.getState().cart.products.some(e => e.itemId === product.itemId);
+  const productIsInCart = store.getState().cart.products.some(e => e.id === product.id);
 
   const isFavoriteProduct = store
     .getState()
-    .favourites.products.some(e => e.itemId === product.itemId);
+    .favourites.products.some(e => e.id === product.id);
   const dispatch = useDispatch();
   const [favorite, setFavorite] = useState(isFavoriteProduct);
   const [addToCardOrNot, setAddToCardOrNot] = useState(productIsInCart);
@@ -41,13 +41,13 @@ function ProductCard({ product }: Prop): React.ReactNode {
   return (
     <StyledProductCard className="product-card">
       <div className="product-card__wrapper">
-        <Link className="product-card__link" to={`/shop/${product.category}/${product.itemId}`}>
+        <Link className="product-card__link" to={`/shop/${product.category}/${product.id}`}>
           <img className="product-card__image" src={`/${product.image}`} alt={product.name} />
           <div className="product-card__description">
             <h4 className="product-card__description-title">{product.name}</h4>
             <div className="product-card__description-price-wrapper">
-              <h3 className="product-card__description-price-discount">{`$${product.price}`}</h3>
-              <h3 className="product-card__description-price">{`$${product.fullPrice}`}</h3>
+              <h3 className="product-card__description-price-discount">{`$${product.priceDiscount}`}</h3>
+              <h3 className="product-card__description-price">{`$${product.priceRegular}`}</h3>
             </div>
           </div>
           <hr className="product-card__custom-line" />

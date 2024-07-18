@@ -4,7 +4,7 @@ import ProductServices from "./services";
 
 const productsRouter = express.Router();
 
-productsRouter.get("/allProducts", async (_req, res) => {
+productsRouter.get("/allProducts",async (_req, res) => {
   const services = new ProductServices();
   const allData = await services.getAllProducts();
 

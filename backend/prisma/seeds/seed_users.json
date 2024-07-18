@@ -1,17 +1,17 @@
 [
   {
-    "name": "João Silva",
-    "email": "joao@example.com",
-    "password": "senha123"
+    "name": "Rafael Wesley",
+    "email": "opa@email.com",
+    "password": "$2b$10$ywFx49xRquj..Vf.x/JGs.OL4e00nUZPtamOO5jah644YjYUbDKFS"
   },
   {
-    "name": "Maria Souza",
-    "email": "maria@example.com",
-    "password": "senha456"
+    "name": "Joana Wesley",
+    "email": "joana@email.com",
+    "password": "$2b$10$Y4aR5dx2IrUNSjM93rDb2.IriKrHeZB6W0C.av0NbiBeWGvhMjnBS"
   },
   {
-    "name": "Pedro Oliveira",
-    "email": "pedro@example.com",
-    "password": "senha789"
+    "name": "Joana Pedro",
+    "email": "pedro@email.com",
+    "password": "$2b$10$vxux7dM0aYNEv3eyuulrUeOlWWwv/u3JLdmgahUJJShG6Br3wstq."
   }
 ]
