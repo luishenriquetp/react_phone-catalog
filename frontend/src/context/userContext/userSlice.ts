@@ -8,7 +8,7 @@ interface UserState {
   email: string;
 }
 
-const initialState: UserState = {
+export const userStateInitialState: UserState = {
   tokenSession: '',
   name: '',
   email: ''
@@ -16,10 +16,12 @@ const initialState: UserState = {
 
 const userState = createSlice({
   name: 'userState',
-  initialState,
+  initialState: userStateInitialState,
   reducers: {
     setUserDataSession: (state: UserState, action: PayloadAction<{tokenSession: string, name: string, email: string}>) => {
-      state = action.payload;
+      state.email = action.payload.email;
+      state.name = action.payload.name;
+      state.tokenSession = action.payload.tokenSession;
     }
   },
 });

@@ -15,6 +15,7 @@ import LoginPage from './pages/LoginPage/LoginPage.tsx';
 function App(): React.ReactNode {
   const location = useLocation();
   const hideHeaderFooter = location.pathname === '/login';
+
   return (
     <div id="App">
       {!hideHeaderFooter && <Header />}

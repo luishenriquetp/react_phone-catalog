@@ -1,19 +1,19 @@
 import React, { useState } from 'react';
-import { ToastContainer, toast } from 'react-toastify';
 import { useNavigate } from 'react-router-dom';
 import StyledLoginPage from './StyledLoginPage.ts';
 import { authUser } from '../../api/getAll.ts';
 import { useAppDispatch } from '../../context/hooks.ts';
 import { setUserDataSession } from '../../context/userContext/userSlice.ts';
+import { toast } from 'react-toastify';
+import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
+
 
 function LoginPage(): React.ReactNode {
   const [email, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
-  const [errorMessage, setErrorMessage] = useState('');
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
-
 
   function handleUsernameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setUsername(event.target.value);
@@ -27,25 +27,20 @@ function LoginPage(): React.ReactNode {
     setShowPassword(prevShowPassword => !prevShowPassword);
   }
 
-  async function handleSubmit(event: React.FormEvent) {
+  function handleSubmit(event: React.FormEvent) {
     event.preventDefault();
-    setErrorMessage('');
 
-    authUser({email, password})
+    authUser({email, password} )
       .then(data => {
         dispatch(setUserDataSession(data));
-        toast.success(`Loading successfull...`, {
-          position: 'bottom-center',
-          autoClose: 1000,
-          hideProgressBar: false,
-          closeButton: false,
-        });
         navigate('/home');
       })
-      .catch(error => {
-        toast.error(error, {
-          position: 'bottom-center',
-          autoClose: 2000,
+      .then(() => {
+      })
+      .catch((error) => {
+        toast.error(error.message, {
+          position: 'top-right',
+          autoClose: 3000,
           hideProgressBar: false,
           closeButton: false,
         });
@@ -54,7 +49,7 @@ function LoginPage(): React.ReactNode {
 
   return (
     <StyledLoginPage className="login">
-      <ToastContainer />
+      <StyledToastContainer />
       <div className="background">
         <span />
         <span />
@@ -113,7 +108,6 @@ function LoginPage(): React.ReactNode {
               Login
             </button>
           </div>
-          {errorMessage && <p className="error">{errorMessage}</p>}
         </form>
       </div>
     </StyledLoginPage>

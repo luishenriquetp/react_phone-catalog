@@ -25,10 +25,14 @@ usersRouter.post("/createUser", async (req, res, next) => {
 
 usersRouter.post("/authenticateUser", async (req, res) => {
   const { email, password } = req.body;
+  const dataAditional = await usersService.authenticateUser(email, password);
 
-  const token = await usersService.authenticateUser(email, password);
-
-  res.json({ token });
+  StandardResponse.responseWrapper({
+    message: "ok",
+    res,
+    data: {email, ...dataAditional},
+    statusCode: 200,
+  });
 });
 
 usersRouter.get(

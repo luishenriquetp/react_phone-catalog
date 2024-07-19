@@ -3,12 +3,20 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import StyledHeader from './StyledHeader.ts';
 import Icon from '../Icon/Icon.tsx';
 import { IconType } from '../Icon/Icon.ts';
-import { useAppSelector } from '../../context/hooks.ts';
+import { useAppDispatch, useAppSelector } from '../../context/hooks.ts';
+import { setUserDataSession, userStateInitialState } from '../../context/userContext/userSlice.ts';
 
-function HeaderN(): React.ReactNode {
+function Header(): React.ReactNode {
   const cartQtd = useAppSelector(state => state.cart.quantity.reduce((acc, el) => acc + el, 0));
   const favQtd = useAppSelector(state => state.favourites.products.length);
+  const isLogged = useAppSelector(state => state.user.tokenSession);
+  const dispatch = useAppDispatch();
   const navigateTo = useNavigate();
+
+  const handdlingLogoutButtonClick = () => {
+    dispatch(setUserDataSession(userStateInitialState));
+    navigateTo('/login');
+  }
 
   return (
     <StyledHeader className="header">
@@ -45,15 +53,15 @@ function HeaderN(): React.ReactNode {
       </nav>
 
       <div className="header__icons-container icons-container">
-        <button
+        {isLogged && <button
           className="icons-container__btn"
-          onClick={() => navigateTo('/')}
+          onClick={() => handdlingLogoutButtonClick()}
           type="button"
           aria-label="Go to login page"
         >
-          {!!favQtd && <div className="icons-container__btn--indicator">{favQtd}</div>}
           <Icon icon={IconType.LOGIN_DOOR} />
-        </button>
+        </button>}
+        
         <button
           className="icons-container__btn"
           onClick={() => navigateTo('/favorites')}
@@ -85,4 +93,4 @@ function HeaderN(): React.ReactNode {
   );
 }
 
-export default HeaderN;
+export default Header;

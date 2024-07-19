@@ -30,16 +30,16 @@ export const authUser = (data: {email: string, password: string}) => fetch(`${BA
   method: "POST",
   headers: {
     'Content-Type': 'application/json',
-    'Authorization': 'Bearer seuTokenDeAutenticacao', // Adicione seu token de autenticação aqui
   },
   body: JSON.stringify(data)})
     .then(response => {
       if(!response.ok) {
-        throw new Error('Fail to authentication');
+        throw new Error('No Message');
       }
 
       return response.json();
     })
-    .then(data => {
-      return data.data as UserData;
+    .then(respondedData => {
+      console.log(respondedData, 'fdajkdakjfçakdjfçakjfç');
+      return respondedData.data as UserData;
     });
