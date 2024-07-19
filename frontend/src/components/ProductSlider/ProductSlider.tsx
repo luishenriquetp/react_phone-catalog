@@ -8,14 +8,12 @@ import { IconType } from '../Icon/Icon.ts';
 interface ProductSliderProps {
   getProducts: () => Promise<Product[]>;
   title: string;
-  sortBy: 'newest' | 'cheapest';
 }
 
 function ProductSlider(prop: ProductSliderProps): React.ReactNode {
-  const { getProducts, title, sortBy } = prop;
+  const { getProducts, title } = prop;
 
   const [scrollIndex, setScrollIndex] = useState<number>(0);
-
   const [products, setProducts] = useState<Product[]>([]);
 
   const visibleCards: number = 4;
@@ -24,16 +22,10 @@ function ProductSlider(prop: ProductSliderProps): React.ReactNode {
   const isNextDisabled = scrollIndex >= products.length - visibleCards;
 
   useEffect(() => {
-    getProducts().then((fetchedProducts: Product[]) => {
-      if (sortBy === 'newest') {
-        fetchedProducts.sort((a, b) => new Date(b.year).getTime() - new Date(a.year).getTime());
-      } else if (sortBy === 'cheapest') {
-        fetchedProducts.sort((a, b) => a.price - b.price);
-      }
-
-      setProducts(fetchedProducts.slice(0, 20));
+    getProducts().then(response => {
+      setProducts(response || []);
     });
-  }, [getProducts, sortBy]);
+  }, [getProducts]);
 
   const handleNext = (): void => {
     if (scrollIndex < products.length - visibleCards) {

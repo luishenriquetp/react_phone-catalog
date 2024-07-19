@@ -5,29 +5,29 @@ import {
 } from '../../../../styles/GlobalStyles.ts';
 
 const StyledSelectCategory = styled.div`
-  margin: 0;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  gap: 20px;
   cursor: pointer;
 
   @media (min-width: 640px) {
-    width: 100%;
+    flex-direction: row;
+    gap: 16px;
   }
 
   .category {
+    &-item {
+      width: 100%;
+    }
+
     &__image {
+      width: 100%;
+      height: 100%;
       border-radius: 8px;
       margin-bottom: 24px;
-
-      @media (min-width: 640px) {
-        width: 100%;
-        height: 100%;
-      }
-
-      @media (min-width: 1199px) {
-        width: 100%;
-        height: 100%;
-      }
     }
 
     &__name {

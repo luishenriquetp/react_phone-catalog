@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import AppError from "../errors/AppError";
 import StandardResponse from "../utils/StandardResponse";
 
-function errorHandling(err: unknown, _req: Request, res: Response, next: NextFunction) {
+function errorHandling(err: unknown, _req: Request, res: Response, _next: NextFunction) {
   if (err instanceof AppError) {
     StandardResponse.responseWrapper({
       res,

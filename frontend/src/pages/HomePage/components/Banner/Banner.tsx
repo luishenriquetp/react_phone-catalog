@@ -14,7 +14,6 @@ const mobileImages: Image[] = [
   { id: 3, src: '/img/banner_320px_3.png' },
 ];
 
-// This suposed to be an endpoint api
 const desktopImages: Image[] = [
   { id: 1, src: '/img/banner_640px_1.png' },
   { id: 2, src: '/img/banner_640px_2.png' },

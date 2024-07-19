@@ -3,7 +3,6 @@ import rootReducer from './rootReducer.ts';
 
 const localStorageMiddleware: Middleware = store => next => action => {
   const result = next(action);
-  console.log(store.getState(), 'auqirfe ');
   localStorage.setItem('reduxState', JSON.stringify(store.getState()));
   return result;
 };

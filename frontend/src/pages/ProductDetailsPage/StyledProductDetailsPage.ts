@@ -10,6 +10,17 @@ import {
 } from '../../styles/GlobalStyles.ts';
 
 const StyledProductDetailsPage = styled.div`
+  margin-inline: 16px;
+
+  @media (min-width: 640px) {
+    margin-inline: 24px;
+  }
+
+  @media (min-width: 1200px) {
+    max-width: 1136px;
+    margin: 0 auto;
+  }
+
   .product-details-page {
     &__title {
       margin: 0;
@@ -167,6 +178,7 @@ const StyledProductDetailsPage = styled.div`
 
       &-colors {
         display: flex;
+        flex-wrap: wrap;
         gap: 8px;
         margin-bottom: 24px;
       }
@@ -202,6 +214,9 @@ const StyledProductDetailsPage = styled.div`
           background-color: #1d242d;
         }
         &--spacegray {
+          background-color: #4c4c4c;
+        }
+        &--space-gray {
           background-color: #4c4c4c;
         }
         &--silver {
@@ -268,6 +283,7 @@ const StyledProductDetailsPage = styled.div`
 
         &-memo {
           display: flex;
+          flex-wrap: wrap;
           gap: 8px;
 
           &-option {
@@ -485,6 +501,18 @@ const StyledProductDetailsPage = styled.div`
           }
         }
       }
+    }
+  }
+
+  .product-slider {
+    position: relative;
+    max-width: 1180px; /* 4 cards x 210px each (200px width + 10px margin) */
+    overflow: hidden;
+    padding-top: 40px;
+    width: 100%;
+
+    &__title-and-buttons {
+      justify-content: space-between;
     }
   }
 `;

@@ -7,7 +7,7 @@ import { useAppDispatch, useAppSelector } from '../../context/hooks.ts';
 import { setUserDataSession, userStateInitialState } from '../../context/userContext/userSlice.ts';
 
 function Header(): React.ReactNode {
-  const cartQtd = useAppSelector(state => state.cart.quantity.reduce((acc, el) => acc + el, 0));
+  const cartQtd = useAppSelector(state => state.cart.orderItems.reduce((acc, el) => acc + el.quantity, 0));
   const favQtd = useAppSelector(state => state.favourites.products.length);
   const isLogged = useAppSelector(state => state.user.tokenSession);
   const dispatch = useAppDispatch();
@@ -15,6 +15,8 @@ function Header(): React.ReactNode {
 
   const handdlingLogoutButtonClick = () => {
     dispatch(setUserDataSession(userStateInitialState));
+    localStorage.clear();
+    
     navigateTo('/login');
   }
 
@@ -62,7 +64,7 @@ function Header(): React.ReactNode {
           <Icon icon={IconType.LOGIN_DOOR} />
         </button>}
         
-        <button
+        {isLogged && <button
           className="icons-container__btn"
           onClick={() => navigateTo('/favorites')}
           type="button"
@@ -70,8 +72,9 @@ function Header(): React.ReactNode {
         >
           {!!favQtd && <div className="icons-container__btn--indicator">{favQtd}</div>}
           <Icon icon={IconType.EMPTY_HEARTLIKE} />
-        </button>
-        <button
+        </button> }
+        
+        {isLogged && <button
           className="icons-container__btn"
           onClick={() => navigateTo('/cart')}
           type="button"
@@ -80,7 +83,8 @@ function Header(): React.ReactNode {
           {!!cartQtd && <div className="icons-container__btn--indicator">{cartQtd}</div>}
           <Icon icon={IconType.EMPTY_CART} />
         </button>
-        <button
+}
+        {isLogged && <button
           className="icons-container__btn icons-container__btn--menu-mobile"
           onClick={() => navigateTo('/mobileMenu')}
           type="button"
@@ -88,6 +92,15 @@ function Header(): React.ReactNode {
         >
           <Icon icon={IconType.MENU} />
         </button>
+}
+        {!isLogged && <button
+          className="icons-container__btn"
+          onClick={() => navigateTo('/login')}
+          type="button"
+          aria-label="Log in"
+        >
+          <Icon icon={IconType.CONFIG} />
+        </button>}
       </div>
     </StyledHeader>
   );

@@ -30,3 +30,11 @@ export interface UserData {
   name: string;
   email: string
 }
+
+export interface OrderItem {
+  id: string;
+  orderId: string;
+  productId: string;
+  quantity: number;
+  totalPrice: number;
+}

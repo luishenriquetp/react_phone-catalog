@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import StyledLoginPage from './StyledLoginPage.ts';
-import { authUser } from '../../api/getAll.ts';
+import { authUser, getActiveCart, getAllFavorites } from '../../api/getAll.ts';
 import { useAppDispatch } from '../../context/hooks.ts';
 import { setUserDataSession } from '../../context/userContext/userSlice.ts';
 import { toast } from 'react-toastify';
 import StyledToastContainer from '../../components/ToastContainer/StyledToastContainer.ts';
+import { updateAllFavourites } from '../../context/favoriteContext/favouriteSlice.ts';
+import { updateAllProducs } from '../../context/cartContext/cartSlice.ts';
 
 
 function LoginPage(): React.ReactNode {
@@ -33,6 +35,20 @@ function LoginPage(): React.ReactNode {
     authUser({email, password} )
       .then(data => {
         dispatch(setUserDataSession(data));
+        getAllFavorites(data.tokenSession)
+        .then(data => {
+          dispatch(updateAllFavourites(data))
+          dispatch(updateAllProducs({orderItemsArray: []}));
+        });
+
+        getActiveCart(data.tokenSession)
+          .then(data => {
+          if (!data) {
+            return []
+          }
+            dispatch(updateAllProducs({orderItemsArray: data}));
+
+        });
         navigate('/home');
       })
       .then(() => {

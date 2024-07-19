@@ -33,11 +33,6 @@ const StyledHomePage = styled.div`
 
     &__sliders-container {
       margin: 0;
-      height: 60vh;
-
-      @media (min-width: 1200px) {
-        height: 65vh;
-      }
 
       &-title {
         ${letterStyleH2Mobile};
@@ -62,6 +57,7 @@ const StyledHomePage = styled.div`
 
     &__shop {
       margin: 56px 16px;
+
       &-title {
         ${letterStyleH2Mobile};
         margin-bottom: 24px;

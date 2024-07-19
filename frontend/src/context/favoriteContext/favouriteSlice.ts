@@ -15,14 +15,14 @@ const favouriteSlice = createSlice({
   initialState,
   reducers: {
     addFavourite: (state: FavouriteState, action: PayloadAction<Product>) => {
-      const isInFavoriteYet = state.products.findIndex(e => e.itemId === action.payload.itemId);
+      const isInFavoriteYet = state.products.findIndex(e => e.id === action.payload.id);
 
       if (isInFavoriteYet === -1) {
         state.products.push(action.payload);
       }
     },
     removeFavourite: (state: FavouriteState, action: PayloadAction<Product>) => {
-      const indxToErase = state.products.findIndex(e => e.itemId === action.payload.itemId);
+      const indxToErase = state.products.findIndex(e => e.id === action.payload.id);
       state.products.splice(indxToErase, 1);
     },
     updateAllFavourites: (state: FavouriteState, action: PayloadAction<Product[]>) => {

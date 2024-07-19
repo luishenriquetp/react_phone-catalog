@@ -137,7 +137,7 @@ function PageCatalog(): React.ReactNode {
       case 'alphabetically':
         return products.sort((a, b) => a.name.localeCompare(b.name));
       case 'cheapest':
-        return products.sort((a, b) => a.price - b.price);
+        return products.sort((a, b) => a.priceDiscount - b.priceDiscount);
       default:
         return products;
     }
@@ -156,9 +156,8 @@ function PageCatalog(): React.ReactNode {
   ];
 
   useEffect(() => {
-    const capitalizedCategory = category!.charAt(0).toUpperCase() + category!.slice(1);
     setIsLoading(true);
-    getProducts()
+    getProducts(category!)
       .then(fetchedData => {
 
         const filteredData = fetchedData.filter(e => e.category === category);
@@ -171,8 +170,7 @@ function PageCatalog(): React.ReactNode {
         setContentPage(paginatedData);
       })
       .catch((error ) => {
-        console.log(error)
-        toast.error(`Error loading ${capitalizedCategory}...`, {
+        toast.error(`${error.message}...`, {
           position: 'top-right',
           autoClose: 3000,
           hideProgressBar: false,

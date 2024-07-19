@@ -15,4 +15,6 @@ app.use(router);
 
 app.use(errorHandling);
 
-app.listen(PORT, () => {});
+app.listen(PORT, () => {
+  console.log('listem on Port: ', PORT);
+});
